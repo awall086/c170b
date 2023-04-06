@@ -22,7 +22,7 @@
                     <command>nasal</command>
                     <script>aircraft.livery.dialog.toggle()</script>
                 </binding>
-            </item> 
+            </item> -->
 
             <item>
                 <label>Aircraft Options</label>
@@ -30,7 +30,7 @@
                     <command>dialog-show</command>
                     <dialog-name>aircraft-dialog</dialog-name>
                 </binding>
-            </item> -->
+            </item> 
 			
             <item>
                 <label>------------------</label>

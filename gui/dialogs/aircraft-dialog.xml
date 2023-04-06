@@ -30,6 +30,7 @@
         </text>
         <empty><stretch>true</stretch></empty>
 
+
         <button>
             <legend/>
             <key>Esc</key>
@@ -42,5 +43,84 @@
 	</group>
 	<hrule/>
 
+<group>
+	<layout>hbox</layout>
+	<padding>6</padding>
+    <checkbox>
+		<halign>left</halign>
+		<label>Place left safety cone</label>
+		<live>true</live>
+        <property>/sim/coneL/enable</property>
+        <enable>
+            <less-than>
+                <property>velocities/groundspeed-kt</property>
+                <value>0.1</value>
+            </less-than>
+        </enable>
+        <binding>
+            <command>property-toggle</command>
+            <property>/sim/coneL/enable</property>
+        </binding>
+        <binding>
+            <command>dialog-update</command>
+        </binding>
+    </checkbox>	
 
+    <checkbox>
+        <halign>left</halign>
+        <label>Place right safety cone</label>
+        <live>true</live>
+        <property>/sim/coneR/enable</property>
+        <enable>
+            <less-than>
+                <property>velocities/groundspeed-kt</property>
+                <value>0.1</value>
+            </less-than>
+        </enable>
+        <binding>
+            <command>property-toggle</command>
+            <property>/sim/coneR/enable</property>
+        </binding>
+        <binding>
+            <command>dialog-update</command>
+        </binding>
+    </checkbox>
+</group>
+<hrule/>
+
+<group>
+	<layout>vbox</layout>
+	<padding>6</padding>
+	<checkbox>
+                <halign>left</halign>
+                <label>Show/Hide Chocks</label>
+                    <property>/sim/model/c170b/chocks</property>
+                <live>true</live>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>/sim/model/c170b/chocks</property>
+                </binding>
+	<binding>
+                    <command>dialog-update</command>
+                </binding>
+	</checkbox>
+</group>
+        <hrule/>
+<group>
+	<layout>vbox</layout>
+	<padding>6</padding>
+	<checkbox>
+                <halign>left</halign>
+                <label>Show/Hide External power</label>
+                    <property>/controls/electric/external-power</property>
+                <live>true</live>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>/controls/electric/external-power</property>
+                </binding>
+	<binding>
+                    <command>dialog-update</command>
+                </binding>
+	</checkbox>
+</group>
 </PropertyList>
