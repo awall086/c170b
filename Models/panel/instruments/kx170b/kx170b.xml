@@ -1,6 +1,486 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PropertyList>
 
+    <params>
+        <comm-serviceable>instrumentation/comm[0]/serviceable</comm-serviceable>
+        <nav-serviceable>instrumentation/nav[0]/serviceable</nav-serviceable>
+        <power-nav>instrumentation/nav[0]/power-btn</power-nav>
+        <power-comm>instrumentation/comm[0]/power-btn</power-comm>
+        <comm-frq-selected>instrumentation/comm[0]/frequencies/selected-mhz</comm-frq-selected>
+        <comm-dial-khz>instrumentation/comm[0]/frequencies/dial-khz</comm-dial-khz>
+        <comm-dial-mhz>instrumentation/comm[0]/frequencies/dial-mhz</comm-dial-mhz>
+        <comm-volume>instrumentation/comm[0]/volume-selected</comm-volume>
+        <comm-test>instrumentation/comm[0]/test-btn</comm-test>
+        <nav-frq-selected>instrumentation/nav[0]/frequencies/selected-mhz</nav-frq-selected>
+        <nav-dial-khz>instrumentation/nav[0]/frequencies/dial-khz</nav-dial-khz>
+        <nav-dial-mhz>instrumentation/nav[0]/frequencies/dial-mhz</nav-dial-mhz>
+        <nav-volume>instrumentation/nav[0]/volume</nav-volume>
+        <nav-audio>instrumentation/nav[0]/ident-audible</nav-audio>
+    </params>
+
     <path>kx170b.ac</path>
+
+  <!-- Comm part -->
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>CommUse10M</object-name>
+    <property alias="../../params/comm-frq-selected"/>
+    <step>10</step>
+    <factor>0.01</factor>
+    <bias>0.0001</bias>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>CommUse1M</object-name>
+    <property alias="../../params/comm-frq-selected"/>
+    <step>1</step>
+    <factor>0.1</factor>
+    <bias>0.0001</bias>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>CommUse100K</object-name>
+    <property alias="../../params/comm-frq-selected"/>
+    <step>0.1</step>
+    <factor>1</factor>
+    <bias>0.0001</bias>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+   <animation>
+        <type>textranslate</type>
+        <object-name>CommUse10K</object-name>
+        <property alias="../../params/comm-frq-selected"/>
+        <step>0.01</step>
+        <factor>10</factor>
+        <bias>0.0001</bias>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+  <!-- actions -->
+
+  <animation>
+    <type>knob</type>
+    <object-name>CommVolume</object-name>
+    <property alias="../../params/comm-volume"/>
+    <factor>-280</factor>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+    <center>
+      <x-m>0.013666</x-m>
+      <y-m>-0.086176</y-m>
+      <z-m>-0.031932</z-m>
+    </center>
+    <action>
+      <binding>
+        <command>property-adjust</command>
+        <property alias="../../../../params/comm-volume"/>
+        <factor>0.1</factor>
+        <min>0.0</min>
+        <max>1.0</max>
+        <wrap>false</wrap>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>c170b.click("kx170b-dial")</script>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>comm-volume</tooltip-id>
+        <label>Volume: %3d%%</label>
+        <property alias="../../../../params/comm-volume"/>
+        <mapping>percent</mapping>
+      </binding>
+    </hovered>
+  </animation>
+	
+  <animation>
+    <type>knob</type>
+    <object-name>CommKHz</object-name>
+    <property alias="/params/comm-dial-khz"/>
+    <factor>-0.25</factor>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+    <center>
+      <x-m>0.013731</x-m>
+      <y-m>-0.032662</y-m>
+      <z-m>-0.000095</z-m>
+    </center>
+    <action>
+      <binding>
+        <condition>
+          <property alias="../../../../../params/power-comm"/>
+        </condition>
+        <command>property-adjust</command>
+        <property alias="/params/comm-frq-selected"/>
+        <factor>0.025</factor>
+        <min>0.0</min>
+        <max>1.0</max>
+        <resolution>0.025</resolution>
+        <wrap>true</wrap>
+        <mask>decimal</mask>
+      </binding>
+      <binding>
+        <command>property-adjust</command>
+        <property alias="/params/comm-dial-khz"/>
+        <factor>4</factor>
+        <min>0</min>
+        <max>360</max>
+        <wrap>true</wrap>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>c170b.click("kx170b-dial")</script>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>CommMHz</object-name>
+    <property alias="/params/comm-dial-mhz"/>
+    <factor>-0.25</factor>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+    <center>
+      <x-m>0.013731</x-m>
+      <y-m>-0.032662</y-m>
+      <z-m>-0.000095</z-m>
+    </center>
+    <action>
+      <binding>
+        <condition>
+          <property alias="../../../../../params/power-comm"/>
+        </condition>
+        <command>property-adjust</command>
+        <property alias="/params/comm-frq-selected"/>
+        <factor>1</factor>
+        <min>118.0</min>
+        <max>137.0</max>
+        <wrap>true</wrap>
+        <mask>integer</mask>
+      </binding>
+      <binding>
+        <command>property-adjust</command>
+        <property alias="/params/comm-dial-mhz"/>
+        <factor>4</factor>
+        <min>0</min>
+        <max>360</max>
+        <wrap>true</wrap>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>c170b.click("kx170b-dial")</script>
+      </binding>
+    </action>
+  </animation>
+
+
+
+
+  <!-- Nav part -->
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>NavUse10M</object-name>
+    <property alias="../../params/nav-frq-selected"/>
+    <step>10</step>
+    <factor>0.01</factor>
+    <bias>0.0001</bias>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>NavUse1M</object-name>
+    <property alias="../../params/nav-frq-selected"/>
+    <step>1</step>
+    <factor>0.1</factor>
+    <bias>0.0001</bias>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>NavUse100K</object-name>
+    <property alias="../../params/nav-frq-selected"/>
+    <step>0.1</step>
+    <factor>1</factor>
+    <bias>0.0001</bias>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>NavUse10K</object-name>
+    <property alias="../../params/nav-frq-selected"/>
+    <step>0.01</step>
+    <factor>10</factor>
+    <bias>0.0001</bias>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+<!-- actions -->
+
+  <animation>
+    <type>knob</type>
+    <object-name>NavVolume</object-name>
+    <property alias="../../params/nav-volume"/>
+    <factor>-280</factor>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+    <center>
+      <x-m>0.013666</x-m>
+      <y-m>0.015005</y-m>
+      <z-m>-0.031932</z-m>
+    </center>
+    <action>
+      <binding>
+        <command>property-adjust</command>
+        <property alias="../../../../params/nav-volume"/>
+        <factor>0.1</factor>
+        <min>0.0</min>
+        <max>1.0</max>
+        <wrap>false</wrap>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>c170b.click("kx170b-dial")</script>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>nav-volume</tooltip-id>
+        <label>Volume: %3d%%</label>
+        <property alias="../../../../params/nav-volume"/>
+        <mapping>percent</mapping>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>NavKHz</object-name>
+    <property alias="/params/nav-dial-khz"/>
+    <factor>-0.25</factor>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+    <center>
+      <x-m>0.013726</x-m>
+      <y-m>0.068794</y-m>
+      <z-m>-0.000095</z-m>
+    </center>
+    <action>
+      <binding>
+        <condition>
+          <property alias="../../../../../params/power-comm"/>
+        </condition>
+        <command>property-adjust</command>
+        <property alias="/params/nav-frq-selected"/>
+        <factor>0.05</factor>
+        <min>0.0</min>
+        <max>1.0</max>
+        <resolution>0.050</resolution>
+        <wrap>true</wrap>
+        <mask>decimal</mask>
+      </binding>
+      <binding>
+        <command>property-adjust</command>
+        <property alias="/params/nav-dial-khz"/>
+        <factor>4</factor>
+        <min>0</min>
+        <max>360</max>
+        <wrap>true</wrap>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>c170b.click("kx170b-dial")</script>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>NavMHz</object-name>
+    <property alias="/params/nav-dial-mhz"/>
+    <factor>-0.25</factor>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+    <center>
+      <x-m>0.013726</x-m>
+      <y-m>0.068794</y-m>
+      <z-m>-0.000095</z-m>
+    </center>
+    <action>
+      <binding>
+        <condition>
+          <property alias="../../../../../params/power-comm"/>
+        </condition>
+        <command>property-adjust</command>
+        <property alias="/params/nav-frq-selected"/>
+        <factor>1</factor>
+        <min>108.0</min>
+        <max>118.0</max>
+        <wrap>true</wrap>
+        <mask>integer</mask>
+      </binding>
+      <binding>
+        <command>property-adjust</command>
+        <property alias="/params/nav-dial-mhz"/>
+        <factor>4</factor>
+        <min>0</min>
+        <max>360</max>
+        <wrap>true</wrap>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>c170b.click("kx170b-dial")</script>
+      </binding>
+    </action>
+  </animation>
+
+<animation>
+    <type>rotate</type>
+    <object-name>COMM_NAV_Dial3C</object-name>
+    <property alias="/params/power-comm"/>
+    <factor>-30</factor>
+    <axis>
+        <x>0.87</x>
+        <y>0.0</y>
+        <z>0.13</z>
+    </axis>
+    <center>
+      <x-m>0.008281</x-m>
+      <y-m>-0.032773</y-m>
+      <z-m>-0.00004</z-m>
+    </center>
+</animation>
+<animation>
+   <type>pick</type>
+   <object-name>COMM_NAV_Dial3C</object-name>
+   <visible>true</visible>
+   <action>
+     <button>0</button>
+     <repeatable>false</repeatable>
+     <binding>
+       <command>property-toggle</command>
+       <property alias="/params/power-comm"/>
+     </binding>
+     <binding>
+         <command>nasal</command>
+         <script>c170b.click("beacon")</script>
+     </binding>
+   </action>
+   <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>comm-switch</tooltip-id>
+      <label>Comm Radio: %s</label>
+      <mapping>on-off</mapping>
+      <property alias="/params/power-nav"/>
+   </binding>
+   </hovered>
+</animation>
+
+<animation>
+    <type>rotate</type>
+    <object-name>COMM_NAV_Dial3N</object-name>
+    <property alias="/params/power-nav"/>
+    <factor>-30</factor>
+    <axis>
+        <x>0.87</x>
+        <y>0.0</y>
+        <z>0.13</z>
+    </axis>
+    <center>
+      <x-m>0.008281</x-m>
+      <y-m>0.068828</y-m>
+      <z-m>-0.00004</z-m>
+    </center>
+</animation>
+<animation>
+   <type>pick</type>
+   <object-name>COMM_NAV_Dial3N</object-name>
+   <visible>true</visible>
+   <action>
+     <button>0</button>
+     <repeatable>false</repeatable>
+     <binding>
+       <command>property-toggle</command>
+       <property alias="/params/power-nav"/>
+     </binding>
+     <binding>
+         <command>nasal</command>
+         <script>c170b.click("beacon")</script>
+     </binding>
+   </action>
+   <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>nav-switch</tooltip-id>
+      <label>Nav Radio: %s</label>
+      <mapping>on-off</mapping>
+      <property alias="/params/power-comm"/>
+   </binding>
+   </hovered>
+</animation>
 
 </PropertyList>
