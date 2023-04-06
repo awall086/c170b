@@ -70,6 +70,25 @@
         <object-name>beacon_glass</object-name>
     </effect>
 
+   <!-- exterior effects -->
+    <!-- Normal shader effect. Separate effects required for each normal map texture -->
+   <effect>
+        <inherits-from>Aircraft/c170b/Models/Effects/exterior/bumpspec-1</inherits-from>
+        <object-name>left_aileron</object-name>
+        <object-name>left_flap</object-name>
+        <object-name>right_flap</object-name>
+        <object-name>right_aileron</object-name>
+        <object-name>wings</object-name>
+        <object-name>elevator</object-name>
+        <object-name>Estabilizador</object-name>
+        <object-name>rudder</object-name>
+        <object-name>Deriva</object-name>
+        <object-name>Fuselaje</object-name>
+        <object-name>Door_L</object-name>
+        <object-name>Door_R</object-name>		
+    </effect>
+
+
 <!--    <effect>    
         <inherits-from>Effects/glass</inherits-from>
         <object-name>glass_int</object-name>
@@ -93,25 +112,6 @@
 			<green>1.0</green>
 			<blue>1.0</blue>
 		</diffuse>
-	</animation>
-
-	<animation>
-		<type>material</type>
-		<object-name>Alas</object-name>
-		<object-name>Fuselaje</object-name>
-		<object-name>Door_R</object-name>
-		<object-name>Door_L</object-name>
-        <shininess>116</shininess>
-        <specular>
-            <r>1</r>
-            <g>1</g>
-            <b>1</b>
-        </specular>
-        <ambient>
-            <r>1</r>
-            <g>1</g>
-            <b>1</b>
-        </ambient>
 	</animation>
 
 <!-- Instruments -->
@@ -189,6 +189,17 @@
       <x-m>1.925</x-m>
       <y-m>0.242 </y-m>
       <z-m>0.305</z-m>
+      <pitch-deg>-8</pitch-deg>
+   </offsets>
+</model>
+
+<!-- VOR -->
+<model>
+   <path>Aircraft/c170b/models/panel/instruments/vor/vor.xml</path>
+   <offsets>
+      <x-m>1.9175</x-m>
+      <y-m>0.1163 </y-m>
+      <z-m>0.3137</z-m>
       <pitch-deg>-8</pitch-deg>
    </offsets>
 </model>
@@ -341,7 +352,7 @@
      </binding>
      <binding>
          <command>nasal</command>
-         <script>c152.click("master-bat")</script>
+         <script>c170b.click("master-bat")</script>
      </binding>
    </action>
    <hovered>
@@ -381,7 +392,7 @@
      </binding>
 <!--     <binding>
        <command>nasal</command>
-       <script>c152.click("magneto-forward")</script>
+       <script>c170b.click("magneto-forward")</script>
      </binding> -->
      <mod-up>
        <binding>
@@ -391,7 +402,7 @@
        </binding>
 <!--       <binding>
          <command>nasal</command>
-         <script>c152.click("magneto-back")</script>
+         <script>c170b.click("magneto-back")</script>
        </binding> -->
      </mod-up> 
    </action>
@@ -554,7 +565,7 @@
      </binding>
      <binding>
        <command>nasal</command>
-       <script>c152.click("nav-lights")</script>
+       <script>c170b.click("nav-lights")</script>
      </binding>
    </action>
    <hovered>
@@ -594,7 +605,7 @@
      </binding>
      <binding>
        <command>nasal</command>
-       <script>c152.click("nav-lights")</script>
+       <script>c170b.click("nav-lights")</script>
      </binding>
    </action>
    <hovered>
@@ -633,7 +644,7 @@
      </binding>
      <binding>
          <command>nasal</command>
-         <script>c152.click("beacon")</script>
+         <script>c170b.click("beacon")</script>
      </binding>
    </action>
    <hovered>
@@ -652,36 +663,36 @@
         <name>Pilot</name>
         <path>Human/female-pilot.xml</path>
         <offsets>
-            <x-m> 2.2 </x-m>
-            <y-m> -0.251 </y-m>
-            <z-m> 0 </z-m>
+            <x-m> 2.8 </x-m>
+            <y-m> -0.27 </y-m>
+            <z-m> -1.16 </z-m>
         </offsets>
     </model>
     <model>
         <name>Copilot</name>
         <path>Human/male-copilot.xml</path>
         <offsets>
-            <x-m> 0.2 </x-m>
+            <x-m> 2.8 </x-m>
             <y-m> 0.251 </y-m>
-            <z-m> -1.4 </z-m>
+            <z-m> -1.16 </z-m>
         </offsets>
     </model>
     <model>
         <name>LeftPassenger</name>
         <path>Human/male-copilot.xml</path>
         <offsets>
-            <x-m> 0.9 </x-m>
-            <y-m> -0.2 </y-m>
-            <z-m> -1.45 </z-m>
+            <x-m> 3.5 </x-m>
+            <y-m> -0.27 </y-m>
+            <z-m> -1.26 </z-m>
         </offsets>
     </model>
     <model>
         <name>RightPassenger</name>
         <path>Human/male-copilot.xml</path>
         <offsets>
-            <x-m> 0.9 </x-m>
-            <y-m> 0.2 </y-m>
-            <z-m> -1.45 </z-m>
+            <x-m> 3.5 </x-m>
+            <y-m> 0.27 </y-m>
+            <z-m> -1.26 </z-m>
         </offsets>
     </model>
 
@@ -835,6 +846,68 @@
         <z>0.0</z>
     </axis>
 </animation>
+
+<!-- Rudder Pedals -->
+
+<animation>
+    <name>right_pedals</name>
+    <object-name>Pedal1</object-name>
+    <object-name>Pedal1_1</object-name>
+    <object-name>Pedal3</object-name>
+    <object-name>Pedal3_1</object-name>
+</animation>
+
+<animation>
+    <name>left_pedals</name>
+    <object-name>Pedal2</object-name>
+    <object-name>Pedal2_1</object-name>
+    <object-name>Pedal4</object-name>
+    <object-name>Pedal4_1</object-name>
+</animation>
+
+<animation>
+    <type>translate</type>
+    <object-name>right_pedals</object-name>
+    <property>controls/flight/rudder</property>
+    <factor>0.07</factor>
+    <axis>
+        <x>1.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+    </axis>
+</animation>
+
+<animation>
+    <type>translate</type>
+    <object-name>left_pedals</object-name>
+    <property>controls/flight/rudder</property>
+    <factor>-0.07</factor>
+    <axis>
+        <x>1.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+    </axis>
+</animation>
+
+
+<animation>
+    <type>rotate</type>
+    <object-name>Flaps_Handle</object-name>
+    <object-name>Flaps_Cover</object-name>
+    <property>controls/flight/flaps</property>
+    <factor>20.0</factor>
+    <axis>
+        <x>0</x>
+        <y>1</y>
+        <z>0</z>
+    </axis>
+    <center>
+        <x-m>2.1599</x-m>
+        <y-m>0.049433</y-m>
+        <z-m>-0.39036</z-m>
+    </center>
+</animation>
+
 
 <!-- Landing Gear -->
 
@@ -1013,6 +1086,27 @@
    </binding>
    </hovered>
 </animation>
+
+    <model>
+        <name>chocks</name>
+        <path>Exterior/chocks/chocks.xml</path>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.0</y-m>
+            <z-m>0.0</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>external-power</name>
+        <path>Exterior/external-power/external-power.xml</path>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.0</y-m>
+            <z-m>0.0</z-m>
+        </offsets>
+    </model>
+
 
 <animation>
    <type>pick</type>
