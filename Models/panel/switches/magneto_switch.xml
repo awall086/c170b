@@ -19,18 +19,18 @@
        <max>3</max>
      </binding>
    </action>
-<!--   <increase>
+  <increase>
      <binding>
        <command>nasal</command>
-       <script>c152.click("magneto-forward")</script>
+       <script>c170b.click("magneto-forward")</script>
      </binding>
    </increase>
    <decrease>
      <binding>
        <command>nasal</command>
-       <script>c152.click("magneto-back")</script>
+       <script>c170b.click("magneto-back")</script>
      </binding>
-   </decrease> -->
+   </decrease>
    <hovered>
      <binding>
        <command>set-tooltip</command>
