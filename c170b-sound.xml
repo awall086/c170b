@@ -2,55 +2,55 @@
  
 <PropertyList>
 
- <fx>
+	<fx>
  
-  <crank>
-   <name>engstart</name>
-   <path>Sounds/engstart.wav</path>
-   <property>engines/engine/cranking</property>
-   <position>
-    <x>-1.0</x>
-    <y>0.0</y>
-    <z>0.0</z>
-   </position>
-   <volume>
-    <offset>0.4</offset>
-   </volume>
-  </crank>
+		<crank>
+			<name>engstart</name>
+			<path>Sounds/engstart.wav</path>
+			<property>engines/engine/cranking</property>
+			<position>
+				<x>-1.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</position>
+			<volume>
+				<offset>0.4</offset>
+			</volume>
+		</crank>
 
-  <crank>
-   <name>crank</name>
-   <mode>looped</mode>
-   <path>Sounds/cranking.wav</path>
-   <condition>
-    <property>engines/engine/cranking</property>
-    <not>
-     <property>engines/engine/running</property>
-    </not>
-   </condition>
-   <position>
-    <x>-1.0</x>
-    <y>0.0</y>
-    <z>0.0</z>
-   </position>
-   <volume>
-    <offset>0.5</offset>
-   </volume>
-  </crank>
+		<crank>
+			<name>crank</name>
+			<mode>looped</mode>
+			<path>Sounds/cranking.wav</path>
+			<condition>
+				<property>engines/engine/cranking</property>
+				<not>
+					<property>engines/engine/running</property>
+				</not>
+			</condition>
+			<position>
+				<x>-1.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</position>
+			<volume>
+				<offset>0.5</offset>
+			</volume>
+		</crank>
 
-  <crank>
-   <name>cough</name>
-   <path>Sounds/coughing.wav</path>
-   <property>engines/engine/running</property>
-   <position>
-    <x>-1.0</x>
-    <y>0.0</y>
-    <z>0.0</z>
-   </position>
-   <volume>
-    <offset>0.3</offset>
-   </volume>
-  </crank>
+		<crank>
+			<name>cough</name>
+			<path>Sounds/coughing.wav</path>
+			<property>engines/engine/running</property>
+			<position>
+				<x>-1.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</position>
+			<volume>
+				<offset>0.3</offset>
+			</volume>
+		</crank>
 
   <engine>
     <name>engine</name>
@@ -180,7 +180,7 @@
    <max-dist>20.0</max-dist>
   </flap>
 
-  <wind>
+<!--  <wind>
    <name>wind</name>
    <mode>looped</mode>
    <path>Sounds/wind.wav</path>
@@ -208,7 +208,7 @@
     <factor>0.0035</factor>
     <offset>1.25</offset>
    </pitch>
-  </wind>
+  </wind> -->
         
         <switch>
             <name>click-master-bat-switch</name>
@@ -232,7 +232,7 @@
             <mode>once</mode>
             <path>Sounds/click.wav</path>
             <condition>
-                <property>/sim/model/c152/sound/click-landing-light</property>
+                <property>/sim/model/c170b/sound/click-landing-light</property>
             </condition>
             <position>
                 <x>-0.3660</x>
@@ -248,7 +248,7 @@
             <mode>once</mode>
             <path>Sounds/click.wav</path>
             <condition>
-                <property>/sim/model/c152/sound/click-taxi-light</property>
+                <property>/sim/model/c170b/sound/click-taxi-light</property>
             </condition>
             <position>
                 <x>-0.3660</x>
@@ -264,7 +264,7 @@
             <mode>once</mode>
             <path>Sounds/click.wav</path>
             <condition>
-                <property>/sim/model/c152/sound/click-nav-lights</property>
+                <property>/sim/model/c170b/sound/click-nav-lights</property>
             </condition>
             <position>
                 <x>-0.3660</x>
@@ -280,7 +280,7 @@
             <mode>once</mode>
             <path>Sounds/click.wav</path>
             <condition>
-                <property>/sim/model/c152/sound/click-beacon</property>
+                <property>/sim/model/c170b/sound/click-beacon</property>
             </condition>
             <position>
                 <x>-0.3660</x>
@@ -296,7 +296,7 @@
             <mode>once</mode>
             <path>Sounds/click.wav</path>
             <condition>
-                <property>/sim/model/c152/sound/click-strobe</property>
+                <property>/sim/model/c170b/sound/click-strobe</property>
             </condition>
             <position>
                 <x>-0.3660</x>
@@ -312,7 +312,7 @@
             <mode>once</mode>
             <path>Sounds/click.wav</path>
             <condition>
-                <property>/sim/model/c152/sound/click-pitot-heat</property>
+                <property>/sim/model/c170b/sound/click-pitot-heat</property>
             </condition>
             <position>
                 <x>-0.3660</x>
@@ -328,7 +328,7 @@
             <mode>once</mode>
             <path>Sounds/click3.wav</path>
             <condition>
-                <property>/sim/model/c152/sound/click-audio</property>
+                <property>/sim/model/c170b/sound/click-audio</property>
             </condition>
             <position>
                 <x>-0.3660</x>
@@ -340,11 +340,11 @@
         </switch>
 
         <dial>
-            <name>dial-rt385a-1-dial</name>
+            <name>click-kx170b-dial</name>
             <mode>once</mode>
             <path>Sounds/scroll.wav</path>
             <condition>
-                <property>/sim/model/c152/sound/click-rt385a-1-dial</property>
+                <property>/sim/model/c170b/sound/click-kx170b-dial</property>
             </condition>
             <position>
                 <x>-0.3660</x>
@@ -363,7 +363,7 @@
             <mode>once</mode>
             <path>Sounds/keys2.wav</path>
             <condition>
-                <property>/sim/model/c152/sound/click-magneto-forward</property>
+                <property>/sim/model/c170b/sound/click-magneto-forward</property>
             </condition>
             <position>
                 <x>-0.3660</x>
@@ -379,7 +379,7 @@
             <mode>once</mode>
             <path>Sounds/keys.wav</path>
             <condition>
-                <property>/sim/model/c152/sound/click-magneto-back</property>
+                <property>/sim/model/c170b/sound/click-magneto-back</property>
             </condition>
             <position>
                 <x>-0.3660</x>

@@ -39,6 +39,23 @@
 		
 			<c170b>
 				<mw_fairing type="bool">true</mw_fairing>
+				<chocks type="bool">true</chocks>
+                 <!-- Event sounds -->
+				<sound>
+					<click-master-bat type="bool">false</click-master-bat>
+					<click-master-alt type="bool">false</click-master-alt>
+					<click-landing-light type="bool">false</click-landing-light>
+					<click-taxi-light type="bool">false</click-taxi-light>
+					<click-nav-lights type="bool">false</click-nav-lights>
+					<click-strobe type="bool">false</click-strobe>
+					<click-beacon type="bool">false</click-beacon>
+					<click-pitot-heat type="bool">false</click-pitot-heat>
+					<click-magneto-forward type="bool">false</click-magneto-forward>
+					<click-magneto-back type="bool">false</click-magneto-back>
+					<click-flaps type="bool">false</click-flaps>
+					<click-kx170b-dial type="bool">false</click-kx170b-dial>
+				</sound>
+
 			</c170b>
 
             <crew>
@@ -58,7 +75,6 @@
 
             <!-- Human models persistent menu choice -->
             <occupants type="bool">true</occupants>
-
 
 		</model>			
 
@@ -92,6 +108,13 @@
             <property-rule n="101">
                 <path archive="y">Aircraft/c170b/Systems/lights.xml</path>
             </property-rule>            
+            <property-rule n="102">
+                <path archive="y">Aircraft/c170b/Systems/pax.xml</path>
+            </property-rule>
+			<property-rule n="103">
+                <name>FiltersOnly</name>
+                <path>Systems/instruments.xml</path>
+            </property-rule>
 	</systems>
 
     <sound>
@@ -129,21 +152,41 @@
         <weight>
             <name type="string">Pilot</name>
             <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[0]"/>
+            <arm-in alias="/fdm/jsbsim/inertia/pointmass-location-X-inches[0]"/>
             <min-lb type="double">0.0</min-lb>
             <max-lb type="double">300.0</max-lb>
         </weight>
         <weight>
             <name type="string">Co-Pilot</name>
             <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]"/>
+            <arm-in alias="/fdm/jsbsim/inertia/pointmass-location-X-inches[0]"/>
+            <min-lb type="double">0.0</min-lb>
+            <max-lb type="double">300.0</max-lb>
+        </weight>
+        <weight>
+            <name type="string">Left Passenger</name>
+            <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]"/>
+            <arm-in alias="/fdm/jsbsim/inertia/pointmass-location-X-inches[0]"/>
+            <min-lb type="double">0.0</min-lb>
+            <max-lb type="double">300.0</max-lb>
+        </weight>
+        <weight>
+            <name type="string">Right Passenger</name>
+            <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[3]"/>
+            <arm-in alias="/fdm/jsbsim/inertia/pointmass-location-X-inches[0]"/>
             <min-lb type="double">0.0</min-lb>
             <max-lb type="double">300.0</max-lb>
         </weight>
         <weight>
             <name type="string">Baggage</name>
-            <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]"/>
+            <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[4]"/>
+            <arm-in alias="/fdm/jsbsim/inertia/pointmass-location-X-inches[0]"/>
             <min-lb type="double">0.0</min-lb>
-            <max-lb type="double">120.0</max-lb> <!-- WARNING: Max baggage "by the book" is 120lbs or less! -->
+            <max-lb type="double">150.0</max-lb>
+            <!-- WARNING: Max baggage "by the book" is 120lbs or less! -->
         </weight>
+        <pax-state type="int">0</pax-state>
+        <securing-state type="int">0</securing-state>
     </payload>
 
     <controls>
@@ -222,7 +265,7 @@
 			<file>Aircraft/c170b/AircraftConfig/acconfig.nas</file>
 		</acconfig>	
     </nasal>
-
+	
     <systems>
         <c170b>
 			<electrical>
@@ -243,7 +286,16 @@
             </inputs>
  
 		</transponder>
-    </instrumentation>
+		
+		<nav>
+			<power-btn type="int">0</power-btn>			
+		</nav>
+
+		<comm>
+			<power-btn type="int">0</power-btn>			
+		</comm>
+		
+ </instrumentation>
 	
 </PropertyList>
   

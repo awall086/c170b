@@ -86,7 +86,7 @@
         </pointmass>
 
         <pointmass name="Co-Pilot">
-            <weight unit="LBS"> 180 </weight>
+            <weight unit="LBS"> 0 </weight>
             <location name="POINTMASS" unit="IN">
                 <x> 103 </x>
                 <y> 10.20 </y>
