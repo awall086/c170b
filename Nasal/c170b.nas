@@ -88,6 +88,60 @@ var ident_light_timer = maketimer(0.1, func {
 });
 ident_light_timer.start();
 
+############################################
+# Static objects: left and right safety cone
+############################################
+
+var StaticModel = {
+    new: func (name, file) {
+        var m = {
+            parents: [StaticModel],
+            model: nil,
+            model_file: file,
+        object_name: name
+        };
+
+        setlistener("/sim/" ~ name ~ "/enable", func (node) {
+            if (node.getBoolValue()) {
+                m.add();
+            }
+            else {
+                m.remove();
+            }
+        });
+
+        return m;
+    },
+
+    add: func {
+        var manager = props.globals.getNode("/models", 1);
+        var i = 0;
+        for (; 1; i += 1) {
+            if (manager.getChild("model", i, 0) == nil) {
+                break;
+            }
+        }
+        var position = geo.aircraft_position().set_alt(getprop("/position/ground-elev-m"));
+        if (me.object_name == "anchorbuoy") {
+            me.model = geo.put_model(me.model_file, getprop("/fdm/jsbsim/mooring/anchor-lat"), getprop("/fdm/jsbsim/mooring/anchor-lon"), getprop("/position/ground-elev-m"), getprop("/orientation/heading-deg"));
+        } else {
+            me.model = geo.put_model(me.model_file, position, getprop("/orientation/heading-deg"));
+        }
+    },
+
+    remove: func {
+        if (me.model != nil) {
+            me.model.remove();
+            me.model = nil;
+        }
+    }
+};
+
+StaticModel.new("coneR", "Aircraft/c170b/Models/Exterior/safety-cone/safety-cone_R.xml");
+StaticModel.new("coneL", "Aircraft/c170b/Models/Exterior/safety-cone/safety-cone_L.xml");
+
+
+
 
 ##########################################
 # Click Sounds
