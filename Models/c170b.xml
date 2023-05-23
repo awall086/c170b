@@ -4,31 +4,6 @@
 
 <path>c170b.ac</path>
 
-    <!-- The human models depend on some properties (sim/model/crew/).
-         Since the properties never change, we can just directly add it
-         to the /ai/model/multiplay[i] tree.
-    -->
-    <multiplay>
-        <sim>
-            <model>
-                <crew>
-                    <pilot n="0">
-                        <pose include="Aircraft/c172p/Models/Human/pose-pilot.xml"/>
-                        <character>0</character>
-                        <outfit>0</outfit>
-                        <equipment>0</equipment>
-                    </pilot>
-                    <pilot n="1">
-                        <pose include="Aircraft/c172p/Models/Human/pose-copilot.xml"/>
-                        <character>0</character>
-                        <outfit>0</outfit>
-                        <equipment>0</equipment>
-                    </pilot>
-                </crew>
-            </model>
-        </sim>
-    </multiplay>
-
     <nasal>
         <load>
 
@@ -50,22 +25,39 @@
                 pilot.setBoolValue(bits.test(state, 3));
             }, 1, 0);
 
+            var livery_update = aircraft.livery_update.new(
+            "Aircraft/c170b/Models/Liveries", 10,
+            func { print("c170b livery update") });
+
         </load>
         <unload>
-        </unload>
+            livery_update.stop();
+        </unload> 
     </nasal> 
 
-    <effect>
-        <inherits-from>Effects/model-transparent</inherits-from>
-        <object-name>propellerF</object-name>
-        <object-name>propellerR</object-name>
-		<object-name>glass</object-name>
-		<object-name>glass_int</object-name>
-    </effect>
+    <params>
+        <doors>
+            <left>
+                <property>sim/multiplay/generic/float[1]</property>
+            </left>
+            <right>
+                <property>sim/multiplay/generic/float[0]</property>
+            </right>
+        </doors>
+        <windows>
+            <left>sim/multiplay/generic/float[3]</left>
+            <right>sim/multiplay/generic/float[4]</right>
+        </windows>
+    </params>
+
+
 
     <effect>
-        <inherits-from>effects/exterior/exterior-glass-reflection</inherits-from>
-        <object-name>glass</object-name>
+		<inherits-from>Aircraft/c170b/Models/Effects/c170b-glass</inherits-from>
+        <inherits-from>effects/exterior/exterior-glass-reflection</inherits-from> 
+		<object-name>glass</object-name>
+        <object-name>left_window_ext</object-name>
+        <object-name>right_window_ext</object-name>		
         <object-name>light_cover</object-name>
         <object-name>beacon_glass</object-name>
     </effect>
@@ -89,18 +81,157 @@
     </effect>
 
 
-<!--    <effect>    
-        <inherits-from>Effects/glass</inherits-from>
-        <object-name>glass_int</object-name>
-    </effect> -->
+    <effect>
+		<inherits-from>Aircraft/c170b/Models/Effects/interior/c170b-interior-compartment</inherits-from>
+        <object-name>Panel</object-name>
+        <object-name>Panel_2</object-name>
+        <object-name>Panel_3</object-name>
+        <object-name>Subpanel</object-name>
+        <object-name>Subpanel_2</object-name>
+        <object-name>Glove</object-name>
+        <object-name>Glove.001</object-name>
+        <object-name>Yoke_L</object-name>
+        <object-name>Yoke_R</object-name>
+        <object-name>Yoke_L_1</object-name>
+		<object-name>Yoke_L_2</object-name>
+        <object-name>Yoke_R_1</object-name>
+		<object-name>Yoke_R_2</object-name>
+        <object-name>Yoke_mount_L</object-name>
+        <object-name>Yoke_mount_R</object-name>
+        <object-name>throttle</object-name>	
+        <object-name>throttle_1</object-name>
+        <object-name>Carb_Heat</object-name>	
+        <object-name>Carb_Heat_1</object-name>		
+        <object-name>Cabin_Heat</object-name>	
+        <object-name>Cabin_Heat_1</object-name>
+        <object-name>Cabin_Air</object-name>	
+        <object-name>Cabin_Air_1</object-name>
+        <object-name>mixture</object-name>	
+        <object-name>mixture_1</object-name>
+        <object-name>starter</object-name>	
+        <object-name>starter_1</object-name>
+        <object-name>Eng_Primer</object-name>	
+        <object-name>Eng_Primer_1</object-name>
+        <object-name>Lighter</object-name>	
+        <object-name>Lighter_1</object-name>
+        <object-name>beacon_light</object-name>	
+        <object-name>beacon_light_1</object-name>
+        <object-name>beacon_light_2</object-name>
+        <object-name>master</object-name>	
+        <object-name>master_1</object-name>
+        <object-name>master_2</object-name>		
+        <object-name>strobe_light</object-name>	
+        <object-name>strobe_light_1</object-name>
+        <object-name>strobe_light_2</object-name>		
+        <object-name>radio_light</object-name>	
+        <object-name>radio_light_1</object-name>
+        <object-name>radio_light_2</object-name>		
+		<object-name>panel_lights</object-name>
+        <object-name>park_brake</object-name>	
+        <object-name>park_brake_1</object-name>
+        <object-name>nav_lights</object-name>	
+        <object-name>nav_lights_1</object-name>
+        <object-name>nav_lights_2</object-name>		
+        <object-name>taxi-landing</object-name>	
+        <object-name>taxi-landing_1</object-name>
+        <object-name>taxi-landing_2</object-name>
+        <object-name>Subpanel_2_Etiquetas</object-name>
+    </effect>
 
+    <effect>
+		<inherits-from>Aircraft/c170b/Models/Effects/interior/c170b-interior-compartment</inherits-from>
+        <object-name>Interior</object-name>
+		<object-name>door_R_int</object-name>
+		<object-name>door_L_int</object-name>
+		<object-name>Door_Latch_R</object-name>
+		<object-name>Door_Latch_L</object-name>
+		<object-name>Door_Handle_R</object-name>
+		<object-name>Door_Handle_L</object-name> 
+		<object-name>Seat_L</object-name>
+		<object-name>Seat_R</object-name>
+		<object-name>Rear_Seat</object-name>  		
+		<object-name>Window_L_Latch1</object-name>
+		<object-name>Window_L_Latch2</object-name>
+		<object-name>Window_L_Latch3</object-name>
+		<object-name>Window_L_Latch4</object-name>
+		<object-name>Window_L_Latch5</object-name>
+        <object-name>Window_R_Latch1</object-name>
+		<object-name>Window_R_Latch2</object-name>
+		<object-name>Window_R_Latch3</object-name>
+		<object-name>Window_R_Latch4</object-name>
+		<object-name>Window_R_Latch5</object-name>	
+    </effect>
 
+    <effect>
+        <inherits-from>Effects/model-transparent</inherits-from>
+        <object-name>propellerF</object-name>
+        <object-name>propellerR</object-name>
+		<object-name>glass</object-name>
+		<object-name>glass_int</object-name>
+        <object-name>left_window_ext</object-name>
+        <object-name>right_window_ext</object-name>	
+        <object-name>left_window_int</object-name>
+        <object-name>right_window_int</object-name>
+    </effect>
+	
+	<animation>
+		<type>noshadow</type>
+		<object-name>glass</object-name>
+		<object-name>NAV1_Glass</object-name>
+		<object-name>Artificial_Hor_Gl</object-name>
+		<object-name>Airspeed_Gl</object-name>
+		<object-name>VVI_Glass</object-name>
+		<object-name>glass_int</object-name>
+        <object-name>left_window_ext</object-name>
+        <object-name>right_window_ext</object-name>	
+        <object-name>left_window_int</object-name>
+        <object-name>right_window_int</object-name>			
+		<object-name>strobe-light-left</object-name>
+		<object-name>strobe-light-right</object-name>
+        <object-name>propellerF</object-name>
+        <object-name>propellerR</object-name>
+	</animation>
+
+    <!-- Liveries (W.I.P.)-->
+
+    <animation>
+        <type>material</type>
+        <object-name>left_aileron</object-name>
+        <object-name>left_flap</object-name>
+        <object-name>right_flap</object-name>
+        <object-name>right_aileron</object-name>
+        <object-name>wings</object-name>
+        <object-name>elevator</object-name>
+        <object-name>Estabilizador</object-name>
+        <object-name>rudder</object-name>
+        <object-name>Deriva</object-name>
+        <object-name>Fuselaje</object-name>
+        <object-name>Door_L</object-name>
+        <object-name>Door_R</object-name>
+        <object-name>fairing_l</object-name>
+        <object-name>fairing_r</object-name>
+        <property-base>sim/model/livery/</property-base>
+        <texture-prop>texture</texture-prop>
+        <texture>c170b-1.png</texture>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>Panel</object-name>
+        <object-name>Panel_2</object-name>	
+        <object-name>Panel_3</object-name>
+        <property-base>sim/model/livery/</property-base>
+        <texture-prop>texture2</texture-prop>
+        <texture>c170b-2.png</texture>
+    </animation>
 
 
 	<animation>
 		<type>material</type>
 		<object-name>cone</object-name>
 		<object-name>cone_slow</object-name>
+		<object-name>Yoke_L_1</object-name>
+		<object-name>Yoke_R_1</object-name>
 		<shininess>128</shininess>
 		<specular>
 			<red>0.5</red>
@@ -132,8 +263,8 @@
    <path>Aircraft/c170b/models/panel/instruments/asi/asi.xml</path>
    <offsets>
       <x-m>1.925</x-m>
-      <y-m>-0.360 </y-m>
-      <z-m>0.275</z-m>
+      <y-m>-0.3597 </y-m>
+      <z-m>0.274</z-m>
       <pitch-deg>-8</pitch-deg>
    </offsets>
 </model>
@@ -153,9 +284,9 @@
 <model>
    <path>Aircraft/c170b/models/panel/instruments/tc/tc.xml</path>
    <offsets>
-	  <x-m>1.9356</x-m>
+	  <x-m>1.9400</x-m>
       <y-m>-0.3682 </y-m>
-      <z-m>0.1657</z-m>m
+      <z-m>0.1657</z-m>
       <pitch-deg>-8</pitch-deg>
    </offsets>
 </model>
@@ -175,9 +306,9 @@
 <model>
    <path>Aircraft/c170b/models/panel/instruments/vsi/vsi.xml</path>
    <offsets>
-      <x-m>1.929</x-m>
-      <y-m>-0.462 </y-m>
-      <z-m>0.234</z-m>
+      <x-m>1.9303</x-m>
+      <y-m>-0.4604 </y-m>
+      <z-m>0.2345</z-m>
       <pitch-deg>-8</pitch-deg>
    </offsets>
 </model>
@@ -186,8 +317,8 @@
 <model>
    <path>Aircraft/c170b/models/panel/instruments/rpm/rpm.xml</path>
    <offsets>
-      <x-m>1.925</x-m>
-      <y-m>0.242 </y-m>
+      <x-m>1.9225</x-m>
+      <y-m>0.2405 </y-m>
       <z-m>0.305</z-m>
       <pitch-deg>-8</pitch-deg>
    </offsets>
@@ -197,8 +328,8 @@
 <model>
    <path>Aircraft/c170b/models/panel/instruments/vor/vor.xml</path>
    <offsets>
-      <x-m>1.9175</x-m>
-      <y-m>0.1163 </y-m>
+      <x-m>1.9184</x-m>
+      <y-m>0.1169 </y-m>
       <z-m>0.3137</z-m>
       <pitch-deg>-8</pitch-deg>
    </offsets>
@@ -219,10 +350,10 @@
 <model>
    <path>Aircraft/c170b/models/panel/instruments/oil/oil_press.xml</path>
    <offsets>
-      <x-m>1.927</x-m>
-      <y-m>0.335 </y-m>
-      <z-m>0.258</z-m>
-      <pitch-deg>-4</pitch-deg>
+      <x-m>1.9276</x-m>
+      <y-m>0.3352 </y-m>
+      <z-m>0.2561</z-m>
+      <pitch-deg>-5</pitch-deg>
    </offsets>
 </model>
 
@@ -231,8 +362,8 @@
    <path>Aircraft/c170b/models/panel/instruments/oil/oil_temp.xml</path>
    <offsets>
       <x-m>1.937</x-m>
-      <y-m>0.335 </y-m>
-      <z-m>0.180</z-m>
+      <y-m>0.3359 </y-m>
+      <z-m>0.1785</z-m>
       <pitch-deg>-5</pitch-deg>
    </offsets>
 </model>
@@ -253,8 +384,8 @@
    <path>Aircraft/c170b/models/panel/instruments/vac/vac.xml</path>
    <offsets>
       <x-m>1.932</x-m>
-      <y-m>0.411 </y-m>
-      <z-m>0.249</z-m>
+      <y-m>0.4115 </y-m>
+      <z-m>0.2488</z-m>
       <pitch-deg>-5</pitch-deg>
    </offsets>
 </model>
@@ -263,9 +394,9 @@
 <model>
    <path>Aircraft/c170b/models/panel/instruments/fuel/fuelp.xml</path>
    <offsets>
-      <x-m>1.938</x-m>
-      <y-m>0.411 </y-m>
-      <z-m>0.169</z-m>
+      <x-m>1.9395</x-m>
+      <y-m>0.4125 </y-m>
+      <z-m>0.1695</z-m>
       <pitch-deg>-5</pitch-deg>
    </offsets>
 </model>
@@ -325,46 +456,78 @@
 </model>
 
 
+<!-- Garmin GPSMap 196 -->
+	<model> 
+		<path>Aircraft/c170b/models/panel/instruments/garmin196/garmin196.xml</path>
+		<offsets> 
+			<x-m>1.91044</x-m>
+			<y-m>0.0</y-m>
+			<z-m>0.46</z-m>
+		</offsets>
+	</model>
+
+<!-- Left Fuel Tank Indicator -->
+	<model>
+		<path>Aircraft/c170b/models/panel/instruments/fuel/fuel_L.xml</path>
+		<offsets>
+			<x-m>2.83167</x-m>
+			<y-m>-0.4979 </y-m>
+			<z-m>0.6792</z-m>
+			<heading-deg>90</heading-deg>
+		</offsets>
+	</model>
+
+<!-- Right Fuel Tank Indicator -->
+	<model>
+		<path>Aircraft/c170b/models/panel/instruments/fuel/fuel_R.xml</path>
+		<offsets>
+			<x-m>2.83167</x-m>
+			<y-m>0.4879 </y-m>
+			<z-m>0.6812</z-m>
+			<heading-deg>-90</heading-deg>
+		</offsets>
+	</model>
+	
 <!-- Switches -->
 
 <!--	battery switch		-->
-<animation>
-    <type>translate</type>
-    <object-name>Master</object-name>
-    <property>controls/switches/master-bat</property>
-    <factor>0.025</factor>
-    <axis>
-        <x>0.87</x>
-        <y>0.0</y>
-        <z>0.13</z>
-    </axis>
-</animation>
-<animation>
-   <type>pick</type>
-   <object-name>Master</object-name>
-   <visible>true</visible>
-   <action>
-     <button>0</button>
-     <repeatable>false</repeatable>
-     <binding>
-       <command>property-toggle</command>
-       <property>controls/switches/master-bat</property>
-     </binding>
-     <binding>
-         <command>nasal</command>
-         <script>c170b.click("master-bat")</script>
-     </binding>
-   </action>
-   <hovered>
-    <binding>
-      <command>set-tooltip</command>
-      <tooltip-id>Master-switch</tooltip-id>
-      <label>Master Batt: %s</label>
-      <mapping>on-off</mapping>
-      <property>controls/switches/master-bat</property>
-   </binding>
-   </hovered>
-</animation>        
+	<animation>
+		<type>translate</type>
+		<object-name>master</object-name>
+		<property>controls/switches/master-bat</property>
+		<factor>0.025</factor>
+		<axis>
+			<x>0.87</x>
+			<y>0.0</y>
+			<z>0.13</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>master</object-name>
+		<visible>true</visible>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>controls/switches/master-bat</property>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>c170b.click("master-bat")</script>
+			</binding>
+		</action>
+		<hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>Master-switch</tooltip-id>
+				<label>Master Batt: %s</label>
+				<mapping>on-off</mapping>
+				<property>controls/switches/master-bat</property>
+			</binding>
+		</hovered>
+	</animation>        
 
 <!--	starter switch		-->
 <animation>
@@ -416,17 +579,17 @@
 </animation>        
 
 <!--  Mixture -->
-<animation>
-    <type>translate</type>
-    <object-name>mixture</object-name>
-    <property>controls/engines/engine/mixture</property>
-    <factor>0.045</factor>
-    <axis>
-        <x>0.87</x>
-        <y>0.0</y>
-        <z>0.13</z>
-    </axis>
-</animation>
+	<animation>
+		<type>translate</type>
+		<object-name>mixture</object-name>
+		<property>controls/engines/engine/mixture</property>
+		<factor>-0.045</factor>
+		<axis>
+			<x>0.87</x>
+			<y>0.0</y>
+			<z>0.13</z>
+		</axis>
+	</animation>
     <animation>
         <type>slider</type>
         <object-name>mixture</object-name>
@@ -436,7 +599,7 @@
             <binding>
                 <command>property-adjust</command>
                 <property>controls/engines/engine/mixture</property>
-                <factor>-0.05</factor>
+                <factor>0.05</factor>
                 <min>0</min>
                 <max>1</max>
                 <wrap>0</wrap>
@@ -528,21 +691,89 @@
         </hovered>
     </animation>
 
+    <!-- Carb Heat -->
+    <animation>
+        <type>slider</type>
+		<drag-direction>vertical</drag-direction>
+        <object-name>Carb_Heat</object-name>
+        <property>/controls/engines/engine[0]/carburetor-heat</property>
+        <factor>0.05</factor>
+        <axis>
+            <x>0.87</x>
+            <y>0.0</y>
+            <z>0.13</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>/controls/engines/engine[0]/carburetor-heat</property>
+				<min>0.0</min>
+				<max>1.0</max>
+				<factor>-0.05</factor>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <label>Carburator Heat: %3d%%</label>
+                <measure-text>Carburator Heat: 100%</measure-text>
+                <tooltip-id>carburetor-heat</tooltip-id>
+                <mapping>percent</mapping>
+                <property>controls/engines/engine[0]/carburetor-heat</property>
+            </binding> 
+        </hovered>
+    </animation>
+
+
 <!-- Magneto Key -->
-<model>
-   <path>Aircraft/c170b/models/panel/switches/magneto_switch.xml</path>
-   <offsets>
-      <x-m>1.966</x-m>
-      <y-m>0.009 </y-m>
-      <z-m>0.034</z-m>
-      <pitch-deg>-5</pitch-deg>
-   </offsets>
-</model>
+	<model>
+		<path>Aircraft/c170b/models/panel/switches/magneto_switch.xml</path>
+		<offsets>
+			<x-m>1.966</x-m>
+			<y-m>0.009 </y-m>
+			<z-m>0.034</z-m>
+			<pitch-deg>-5</pitch-deg>
+		</offsets>
+	</model>
+
+<!-- Engine Primer -->
+    <animation>
+        <type>translate</type>
+        <object-name>Eng_Primer</object-name>
+        <property>/controls/engines/engine/primer-lever</property>
+        <factor>0.03</factor>
+        <axis>
+            <x>0.87</x>
+            <y>0.0</y>
+            <z>0.13</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>Eng_Primer</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>nasal</command>
+                <script>c170b.pumpPrimer();</script>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>primer</tooltip-id>
+                <label>Engine primer (%1d)</label>
+                <property>controls/engines/engine/primer</property>
+            </binding>
+        </hovered>
+    </animation>
 
 <!--	Navigation Lights switch		-->
 <animation>
     <type>translate</type>
-    <object-name>Nav_Lights</object-name>
+    <object-name>nav_lights</object-name>
     <property>controls/lighting/nav-lights-switch</property>
     <factor>0.025</factor>
     <axis>
@@ -551,10 +782,9 @@
         <z>0.13</z>
     </axis>
 </animation>
-
 <animation>
    <type>pick</type>
-   <object-name>Nav_Lights</object-name>
+   <object-name>nav_lights</object-name>
    <visible>true</visible>
    <action>
      <button>0</button>
@@ -620,50 +850,492 @@
 </animation>
 
 <!--	Beacon Lights switch		-->
-<animation>
-    <type>translate</type>
-    <object-name>beacon_light</object-name>
-    <property>controls/lighting/beacon-switch</property>
-    <factor>0.025</factor>
-    <axis>
-        <x>0.87</x>
-        <y>0.0</y>
-        <z>0.13</z>
-    </axis>
-</animation>
-<animation>
-   <type>pick</type>
-   <object-name>beacon_light</object-name>
-   <visible>true</visible>
-   <action>
-     <button>0</button>
-     <repeatable>false</repeatable>
-     <binding>
-       <command>property-toggle</command>
-       <property>controls/lighting/beacon-switch</property>
-     </binding>
-     <binding>
-         <command>nasal</command>
-         <script>c170b.click("beacon")</script>
-     </binding>
-   </action>
-   <hovered>
-    <binding>
-      <command>set-tooltip</command>
-      <tooltip-id>Beacon-switch</tooltip-id>
-      <label>Beacon Light: %s</label>
-      <mapping>on-off</mapping>
-      <property>controls/lighting/beacon-switch</property>
-   </binding>
-   </hovered>
-</animation>
+	<animation>
+		<type>translate</type>
+		<object-name>beacon_light</object-name>
+		<property>controls/lighting/beacon-switch</property>
+		<factor>0.025</factor>
+		<axis>
+			<x>0.87</x>
+			<y>0.0</y>
+			<z>0.13</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>beacon_light</object-name>
+		<visible>true</visible>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>controls/lighting/beacon-switch</property>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>c170b.click("beacon")</script>
+			</binding>
+		</action>
+		<hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>Beacon-switch</tooltip-id>
+				<label>Beacon Light: %s</label>
+				<mapping>on-off</mapping>
+				<property>controls/lighting/beacon-switch</property>
+			</binding>
+		</hovered>
+	</animation>
+
+<!--	Radio Lights switch		-->
+	<animation>
+		<type>translate</type>
+		<object-name>radio_light</object-name>
+		<property>controls/lighting/radio-switch</property>
+		<factor>0.025</factor>
+		<axis>
+			<x>0.87</x>
+			<y>0.0</y>
+			<z>0.13</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>radio_light</object-name>
+		<visible>true</visible>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>controls/lighting/radio-switch</property>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>c170b.click("beacon")</script>
+			</binding>
+		</action>
+		<hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>Radio-switch</tooltip-id>
+				<label>Radio Stack Light: %s</label>
+				<mapping>on-off</mapping>
+				<property>controls/lighting/radio-switch</property>
+			</binding>
+		</hovered>
+	</animation>
+
+<!--	Panel switch		-->
+	<animation>
+		<type>rotate</type>
+		<object-name>panel_lights</object-name>
+		<property>sim/rendering/als-secondary-lights/use-flashlight</property>
+		<factor>0.025</factor>
+		<axis>
+			<x>0.0</x>
+			<y>0.0</y>
+			<z>1.0</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>panel_lights</object-name>
+		<visible>true</visible>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>sim/rendering/als-secondary-lights/use-flashlight</property>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>c170b.click("beacon")</script>
+			</binding>
+		</action>
+		<hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>Panel-switch</tooltip-id>
+				<label>Panel Lights: %s</label>
+				<mapping>on-off</mapping>
+				<property>sim/rendering/als-secondary-lights/use-flashlight</property>
+			</binding>
+		</hovered>
+	</animation>
+
+<!--	Taxi/Landing Light switch		-->
+
+	<animation>
+		<type>translate</type>
+		<object-name>taxi-landing</object-name>
+		<property>controls/lighting/taxi-landing-switch</property>
+		<factor>0.0125</factor>
+		<axis>
+			<x>0.87</x>
+			<y>0.0</y>
+			<z>0.13</z>
+		</axis>
+	</animation>
+    <animation>
+        <type>knob</type>
+        <object-name>taxi-landing</object-name>
+        <visible>true</visible>
+        <drag-scale-px>-20</drag-scale-px>
+        <action>
+            <binding>
+                <command>property-cycle</command>
+                <property>controls/lighting/taxi-landing-switch</property>
+                <wrap>0</wrap>
+                <value>0</value>
+                <!-- OFF -->
+                <value>1</value>
+                <!-- Taxi On -->
+                <value>2</value>
+                <!-- Landing On -->
+            </binding>
+			<binding>
+				<command>nasal</command>
+				<script>c170b.click("taxi-landing")</script>
+			</binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>taxi-landing-state-btn</tooltip-id>
+                <label>Lights: %s</label>
+                <property>controls/lighting/taxi-landing-switch</property>
+                <mapping>nasal</mapping>
+                <script>
+                    var m = arg[0];
+                    if(m == 1) return 'Taxi ON Landing OFF';
+                    if(m == 2) return 'Taxi ON Landing ON';
+                    return 'OFF';
+                </script>
+            </binding>
+        </hovered>
+    </animation>
+
+
+	<animation>
+		<type>rotate</type>
+		<object-name>fuel_selector</object-name>
+		<property>controls/fuel/fuel-selector</property>
+		<factor>-90</factor>
+		<axis>
+			<x>0.0</x>
+			<y>0.0</y>
+			<z>1.0</z>
+		</axis>
+		<center>
+			<x-m>2.28114</x-m>
+			<y-m> 0</y-m>
+			<z-m>-0.39</z-m>
+		</center>
+	</animation>
+    <animation>
+        <type>knob</type>
+        <object-name>fuel_selector</object-name>
+        <visible>true</visible>
+        <drag-scale-px>20</drag-scale-px>
+        <action>
+            <binding>
+                <command>property-cycle</command>
+                <property>controls/fuel/fuel-selector</property>
+                <wrap>1</wrap>
+                <value>0</value>
+                <!-- OFF -->
+                <value>1</value>
+                <!-- left tank -->
+                <value>2</value>
+                <!-- Both Tank -->
+                <value>3</value>
+                <!-- Right Tank -->
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>fuel-selector-state-btn</tooltip-id>
+                <label>Fuel Tank Selected: %s</label>
+                <property>controls/fuel/fuel-selector</property>
+                <mapping>nasal</mapping>
+                <script>
+                    var m = arg[0];
+                    if(m == 1) return 'Left Fuel Tank Selected';
+                    if(m == 2) return 'Both Fuel Tank Selected';
+					if(m == 3) return 'Right Fuel Tank Selected';
+                    return 'OFF';
+                </script>
+            </binding>
+        </hovered>
+    </animation>
+
+
+ 
+    <!-- Left Window -->
+
+	<animation>
+        <type>pick</type>
+        <object-name>Window_L_Latch3</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>nasal</command>
+                <script>c170b.leftWindow.toggle();</script>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>window-handle-l</tooltip-id>
+                <label>Open/Close Left Window</label>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>window_L_arm</object-name>
+        <object-name>left_window_int</object-name>
+        <object-name>left_window_ext</object-name>
+        <object-name>Window_L_Latch3</object-name>
+        <object-name>Window_L_Latch1</object-name>			
+        <object-name>Window_L_Latch5</object-name>		
+        <property alias="/params/windows/left"/>
+        <interpolation>
+            <entry>
+                <ind>0.0</ind>
+                <dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>0.5</ind>
+                <dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>1</ind>
+                <dep>-25.0</dep>
+            </entry>
+        </interpolation>
+		<axis>
+			<x1-m>2.4737</x1-m>
+			<y1-m>-0.5545</y1-m>
+			<z1-m>0.5521</z1-m>
+			<x2-m>3.2158</x2-m>
+			<y2-m>-0.5298</y2-m>
+			<z2-m>0.5341</z2-m>
+		</axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>Window_L_Latch3</object-name>
+        <object-name>Window_L_Latch1</object-name>		
+        <property alias="/params/windows/left"/>
+        <interpolation>
+            <entry>
+                <ind>0.0</ind>
+                <dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>0.2</ind>
+                <dep>130.0</dep>
+            </entry>
+            <entry>
+                <ind>0.5</ind>
+                <dep>130.0</dep>
+            </entry>
+            <entry>
+                <ind>0.7</ind>
+                <dep>130.0</dep>
+            </entry> 
+            <entry>
+                <ind>1</ind>
+                <dep>100.0</dep>
+            </entry>
+        </interpolation>
+		<axis>
+			<x1-m>2.7879</x1-m>
+			<y1-m>-0.5424</y1-m>
+			<z1-m>0.2219</z1-m>
+			<x2-m>2.8097</x2-m>
+			<y2-m>-0.5424</y2-m>
+			<z2-m>0.2211</z2-m>
+		</axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>Window_L_Latch2</object-name>		
+        <property alias="/params/windows/left"/>
+        <interpolation>
+            <entry>
+                <ind>0.0</ind>
+                <dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>0.2</ind>
+                <dep>158.0</dep>
+            </entry>
+            <entry>
+                <ind>0.5</ind>
+                <dep>158.0</dep>
+            </entry>
+            <entry>
+                <ind>0.7</ind>
+                <dep>178.0</dep>
+            </entry>
+			<entry>
+                <ind>1</ind>
+                <dep>235.0</dep>
+            </entry>
+        </interpolation>
+		<axis>
+			<x1-m>2.7890</x1-m>
+			<y1-m>-0.5200</y1-m>
+			<z1-m>0.2149</z1-m>
+			<x2-m>2.8079</x2-m>
+			<y2-m>-0.5200</y2-m>
+			<z2-m>0.2142</z2-m>
+		</axis>
+    </animation>
+
+    <!-- Right Window -->
+
+    <animation>
+        <type>pick</type>
+        <object-name>Window_R_Latch3</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>nasal</command>
+                <script>c170b.rightWindow.toggle();</script>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>window-handle-r</tooltip-id>
+                <label>Open/Close Right Window</label>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>window_R_arm</object-name>
+        <object-name>right_window_int</object-name>
+        <object-name>right_window_ext</object-name>
+        <object-name>Window_R_Latch3</object-name>
+        <object-name>Window_R_Latch1</object-name>			
+        <object-name>Window_R_Latch5</object-name>		
+        <property alias="/params/windows/right"/>
+        <interpolation>
+            <entry>
+                <ind>0.0</ind>
+                <dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>0.5</ind>
+                <dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>1</ind>
+                <dep>25.0</dep>
+            </entry>
+        </interpolation>
+		<axis>
+			<x1-m>2.4732</x1-m>
+			<y1-m>0.5561</y1-m>
+			<z1-m>0.5529</z1-m>
+			<x2-m>3.2164</x2-m>
+			<y2-m>0.5313</y2-m>
+			<z2-m>0.5348</z2-m>
+		</axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>Window_R_Latch3</object-name>
+        <object-name>Window_R_Latch1</object-name>		
+        <property alias="/params/windows/right"/>
+        <interpolation>
+            <entry>
+                <ind>0.0</ind>
+                <dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>0.2</ind>
+                <dep>-130.0</dep>
+            </entry>
+            <entry>
+                <ind>0.5</ind>
+                <dep>-130.0</dep>
+            </entry>
+            <entry>
+                <ind>0.7</ind>
+                <dep>-130.0</dep>
+            </entry> 
+            <entry>
+                <ind>1</ind>
+                <dep>-100.0</dep>
+            </entry>
+        </interpolation>
+		<axis>
+			<x1-m>2.7870</x1-m>
+			<y1-m>0.5432</y1-m>
+			<z1-m>0.2217</z1-m>
+			<x2-m>2.8088</x2-m>
+			<y2-m>0.5432</y2-m>
+			<z2-m>0.2212</z2-m>
+		</axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>Window_R_Latch2</object-name>		
+        <property alias="/params/windows/right"/>
+        <interpolation>
+            <entry>
+                <ind>0.0</ind>
+                <dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>0.2</ind>
+                <dep>-158.0</dep>
+            </entry>
+            <entry>
+                <ind>0.5</ind>
+                <dep>-158.0</dep>
+            </entry>
+            <entry>
+                <ind>0.7</ind>
+                <dep>-178.0</dep>
+            </entry>
+			<entry>
+                <ind>1</ind>
+                <dep>-235.0</dep>
+            </entry>
+        </interpolation>
+		<axis>
+			<x1-m>2.7884</x1-m>
+			<y1-m>0.5207</y1-m>
+			<z1-m>0.2146</z1-m>
+			<x2-m>2.8073</x2-m>
+			<y2-m>0.5207</y2-m>
+			<z2-m>0.2142</z2-m>
+		</axis>
+    </animation>
+
 
     <!-- Pilot, co-pilot, and passengers -->
     <model>
         <name>Pilot</name>
         <path>Human/female-pilot.xml</path>
         <offsets>
-            <x-m> 2.8 </x-m>
+            <x-m> 2.70 </x-m>
             <y-m> -0.27 </y-m>
             <z-m> -1.16 </z-m>
         </offsets>
@@ -672,7 +1344,7 @@
         <name>Copilot</name>
         <path>Human/male-copilot.xml</path>
         <offsets>
-            <x-m> 2.8 </x-m>
+            <x-m> 2.70 </x-m>
             <y-m> 0.251 </y-m>
             <z-m> -1.16 </z-m>
         </offsets>
@@ -907,7 +1579,32 @@
         <z-m>-0.39036</z-m>
     </center>
 </animation>
-
+    <animation>
+        <type>slider</type>
+        <object-name>Flaps_Handle</object-name>
+        <visible>true</visible>
+        <drag-direction>vertical</drag-direction>
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/flight/flaps</property>
+                <factor>0.25</factor>
+                <min>0</min>
+                <max>1</max>
+                <wrap>0</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <label>flaps pos: %3d%%</label>
+                <measure-text>Flaps Position: 100%</measure-text>
+                <tooltip-id>flapspos</tooltip-id>
+                <mapping>percent</mapping>
+                <property>controls/flight/flaps</property>
+            </binding>
+        </hovered>
+    </animation>
 
 <!-- Landing Gear -->
 
@@ -1086,6 +1783,28 @@
    </binding>
    </hovered>
 </animation>
+
+<!-- Ground Equipment -->
+
+    <model>
+        <name>coneL</name>
+        <path>Exterior/safety-cone/safety-cone_L.xml</path>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.0</y-m>
+            <z-m>0.0</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>coneR</name>
+        <path>Exterior/safety-cone/safety-cone_R.xml</path>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.0</y-m>
+            <z-m>0.0</z-m>
+        </offsets>
+    </model>
 
     <model>
         <name>chocks</name>
@@ -1322,201 +2041,6 @@
 			</params>
 		</overlay>
 	</model>
-
-    <!-- Landing Light 
-    <animation>
-        <type>select</type>
-        <object-name>landinglight</object-name>
-        <nopreview/>
-        <condition>
-            <and>
-                <property>/sim/model/c170b/lighting/landing</property>
-                <not>
-                    <property>sim/rendering/rembrandt/enabled</property>
-                </not>
-            </and>
-        </condition>
-    </animation> -->
-
-    <!-- Taxi Light 
-    <animation>
-        <type>select</type>
-        <object-name>taxilight</object-name>
-        <nopreview/>
-        <condition>
-            <and>
-                <property>/sim/model/c170b/lighting/taxi</property>
-                <not>
-                    <property>sim/rendering/rembrandt/enabled</property>
-                </not>
-            </and>
-        </condition>
-    </animation> -->
-
-    <!-- Landing Light 
-    <animation>
-        <type>flash</type>
-        <object-name>landinglight</object-name>
-        <center>
-            <x-m> 2.175</x-m>
-            <y-m>-3.5169</y-m>
-            <z-m> 0.8615</z-m>
-        </center>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-        <power>8</power>
-        <factor>6</factor>
-        <offset>0</offset>
-        <two-sides type="bool">false</two-sides>
-        <min>0.5</min>
-        <max>80</max>
-    </animation> -->
-
-    <!--Taxi Light 
-    <animation>
-        <type>flash</type>
-        <object-name>taxilight</object-name>
-        <center>
-            <x-m> 2.1005</x-m>
-            <y-m>-3.4070</y-m>
-            <z-m> 0.8564</z-m>
-        </center>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-        <power>8</power>
-        <factor>5</factor>
-        <offset>0</offset>
-        <two-sides type="bool">false</two-sides>
-        <min>0.5</min>
-        <max>80</max>
-    </animation> 
-
-   <animation>
-        <type>noshadow</type>
-        <object-name>landinglight</object-name>
-        <object-name>taxilight</object-name>
-    </animation> -->
-
-	<!-- Procedural Taxi Light -->
-    <animation>
-        <type>select</type>
-        <object-name>TaxiLightc170</object-name>
-        <nopreview/>
-        <condition>
-            <property>/sim/model/c170b/lighting/taxi</property>
-        </condition>
-    </animation>
-	<light>
-		<name>TaxiLightc170</name>
-		<type>spot</type>
-		<position>
-			<x-m>-0.059</x-m>
-			<y-m>-3.565</y-m>
-			<z-m> 0.063</z-m>
-		</position>
-		<direction>
-			<lookat-x-m>-19    </lookat-x-m>
-			<lookat-y-m>  5    </lookat-y-m>
-			<lookat-z-m>  0.063</lookat-z-m>
-		</direction>
-		<ambient>
-			<r>0.95</r>
-			<g>0.95</g>
-			<b>0.95</b>
-			<a>1</a>
-		</ambient>
-		<diffuse>
-			<r>0.95</r>
-			<g>0.95</g>
-			<b>0.95</b>
-			<a>1</a>
-		</diffuse>
-		<specular>
-			<r>0.95</r>
-			<g>0.95</g>
-			<b>0.95</b>
-			<a>1</a>
-		</specular>
-		<attenuation>
-			<c>1.0</c>
-			<l>0.07</l>
-			<q>0.017</q>
-		</attenuation>
-		<spot-exponent>15</spot-exponent>
-		<spot-cutoff>60</spot-cutoff>
-		<range-m>60</range-m>
-		<debug-color>
-			<r>1</r>
-			<g>1</g>
-			<b>1</b>
-			<a>1</a>
-		</debug-color>
-	</light>
-	
-	<!-- Procedural Landing Light -->
-    <animation>
-        <type>select</type>
-		<object-name>LandingLightc170</object-name>
-        <nopreview/>
-        <condition>
-			<property>/sim/model/c170b/lighting/landing</property>
-        </condition>
-    </animation>
-	<light>
-		<name>LandingLightc170</name>
-		<type>spot</type>
-		<position>
-			<x-m>-0.125</x-m>
-			<y-m>-3.694</y-m>
-			<z-m> 0.071</z-m>
-		</position>
-		<direction>
-			<lookat-x-m>-19    </lookat-x-m>
-			<lookat-y-m>  0   </lookat-y-m>
-			<lookat-z-m>  0.071</lookat-z-m>
-		</direction>
-		<ambient>
-			<r>0.95</r>
-			<g>0.95</g>
-			<b>0.95</b>
-			<a>1</a>
-		</ambient>
-		<diffuse>
-			<r>0.95</r>
-			<g>0.95</g>
-			<b>0.95</b>
-			<a>1</a>
-		</diffuse>
-		<specular>
-			<r>0.95</r>
-			<g>0.95</g>
-			<b>0.95</b>
-			<a>1</a>
-		</specular>
-		<attenuation>
-			<c>1.0</c>
-			<l>0.014</l>
-			<q>0.0007</q>
-		</attenuation>
-		<spot-exponent>15</spot-exponent>
-		<spot-cutoff>60</spot-cutoff>
-		<range-m>325</range-m>
-		<debug-color>
-			<r>1</r>
-			<g>1</g>
-			<b>1</b>
-			<a>1</a>
-		</debug-color>
-	</light> 
-
-
-
 
     <!-- Beacon light -->
 	<model>
@@ -1757,6 +2281,7 @@
   <type>translate</type>
   <object-name>Yoke_L</object-name>
   <object-name>Yoke_L_1</object-name>
+  <object-name>Yoke_L_2</object-name>
   <property>controls/flight/elevator</property>
   <factor>-0.06</factor>
   <axis>
@@ -1770,6 +2295,7 @@
   <type>rotate</type>
   <object-name>Yoke_L</object-name>
   <object-name>Yoke_L_1</object-name>
+  <object-name>Yoke_L_2</object-name>  
   <property>controls/flight/aileron</property>
   <factor>-35.0</factor>
   <axis>
@@ -1788,6 +2314,7 @@
    <type>select</type>
   <object-name>Yoke_L</object-name>
   <object-name>Yoke_L_1</object-name>
+  <object-name>Yoke_L_2</object-name>  
    <condition>
      <not>
        <property>sim/model/hide-yoke-L</property>
@@ -1821,6 +2348,7 @@
   <type>translate</type>
   <object-name>Yoke_R</object-name>
   <object-name>Yoke_R_1</object-name>
+  <object-name>Yoke_R_2</object-name>  
   <property>controls/flight/elevator</property>
   <factor>-0.06</factor>
   <axis>
@@ -1834,6 +2362,7 @@
   <type>rotate</type>
   <object-name>Yoke_R</object-name>
   <object-name>Yoke_R_1</object-name>
+  <object-name>Yoke_R_2</object-name>  
   <property>controls/flight/aileron</property>
   <factor>-35.0</factor>
   <axis>
@@ -1852,6 +2381,7 @@
    <type>select</type>
   <object-name>Yoke_R</object-name>
   <object-name>Yoke_R_1</object-name>
+  <object-name>Yoke_R_2</object-name>  
    <condition>
      <not>
        <property>sim/model/hide-yoke-R</property>
