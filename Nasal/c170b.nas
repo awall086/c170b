@@ -1,3 +1,8 @@
+# =============================== DEFINITIONS ===========================================
+# set the update period
+
+var UPDATE_PERIOD = 0.3;
+
 ##########################################
 # Autostart
 ##########################################
@@ -88,61 +93,6 @@ var ident_light_timer = maketimer(0.1, func {
 });
 ident_light_timer.start();
 
-############################################
-# Static objects: left and right safety cone
-############################################
-
-var StaticModel = {
-    new: func (name, file) {
-        var m = {
-            parents: [StaticModel],
-            model: nil,
-            model_file: file,
-        object_name: name
-        };
-
-        setlistener("/sim/" ~ name ~ "/enable", func (node) {
-            if (node.getBoolValue()) {
-                m.add();
-            }
-            else {
-                m.remove();
-            }
-        });
-
-        return m;
-    },
-
-    add: func {
-        var manager = props.globals.getNode("/models", 1);
-        var i = 0;
-        for (; 1; i += 1) {
-            if (manager.getChild("model", i, 0) == nil) {
-                break;
-            }
-        }
-        var position = geo.aircraft_position().set_alt(getprop("/position/ground-elev-m"));
-        if (me.object_name == "anchorbuoy") {
-            me.model = geo.put_model(me.model_file, getprop("/fdm/jsbsim/mooring/anchor-lat"), getprop("/fdm/jsbsim/mooring/anchor-lon"), getprop("/position/ground-elev-m"), getprop("/orientation/heading-deg"));
-        } else {
-            me.model = geo.put_model(me.model_file, position, getprop("/orientation/heading-deg"));
-        }
-    },
-
-    remove: func {
-        if (me.model != nil) {
-            me.model.remove();
-            me.model = nil;
-        }
-    }
-};
-
-StaticModel.new("coneR", "Aircraft/c170b/Models/Exterior/safety-cone/safety-cone_R.xml");
-StaticModel.new("coneL", "Aircraft/c170b/Models/Exterior/safety-cone/safety-cone_L.xml");
-
-
-
-
 ##########################################
 # Click Sounds
 ##########################################
@@ -162,18 +112,58 @@ var click = func (name, timeout=0.1, delay=0) {
     }, delay);
 };
 
+
+var flapsDown = func(step) {
+    if(step == 0) return;
+    if(props.globals.getNode("/sim/flaps") != nil) {
+        stepProps("/controls/flight/flaps", "/sim/flaps", step);
+        return;
+    }
+    # Hard-coded flaps movement in 4 equal steps:
+    var val = 0.25 * step + getprop("/controls/flight/flaps");
+    setprop("/controls/flight/flaps", val > 1 ? 1 : val < 0 ? 0 : val);
+}
+
+
+# ========== primer stuff ======================
+
+# Toggles the state of the primer
+var pumpPrimer = func {
+    var push = getprop("/controls/engines/engine/primer-lever") or 0;
+
+    if (push) {
+        var pump = getprop("/controls/engines/engine/primer") or 0;
+        setprop("/controls/engines/engine/primer", pump + 1);
+        setprop("/controls/engines/engine/primer-lever", 0);
+    }
+    else {
+        setprop("/controls/engines/engine/primer-lever", 1);
+    }
+};
+
+# Mixture will be calculated using the primer during 5 seconds AFTER the pilot used the starter
+# This prevents the engine to start just after releasing the starter: the propeller will be running
+# thanks to the electric starter, but carburator has not yet enough mixture
+var primerTimer = maketimer(5, func {
+    setprop("/controls/engines/engine/use-primer", 0);
+    # Reset the number of times the pilot used the primer only AFTER using the starter
+    setprop("/controls/engines/engine/primer", 0);
+    print("Primer reset to 0");
+    primerTimer.stop();
+});
+
 setlistener("/pax/co-pilot/present", update_pax, 0, 0);
 setlistener("/pax/left-passenger/present", update_pax, 0, 0);
 setlistener("/pax/right-passenger/present", update_pax, 0, 0);
 setlistener("/pax/pilot/present", update_pax, 0, 0);
 update_pax();
 
-    setlistener("/engines/engine/running", func (node) {
-        var autostart = getprop("/engines/engine/auto-start");
-        var cranking  = getprop("/engines/engine/cranking");
-        if (autostart and cranking and node.getBoolValue()) {
-            setprop("/controls/engines/engine/starter", 0);
-            setprop("/engines/engine/auto-start", 0);
-        }
-    }, 0, 0);
+setlistener("/engines/engine/running", func (node) {
+    var autostart = getprop("/engines/engine/auto-start");
+    var cranking  = getprop("/engines/engine/cranking");
+    if (autostart and cranking and node.getBoolValue()) {
+        setprop("/controls/engines/engine/starter", 0);
+        setprop("/engines/engine/auto-start", 0);
+    }
+}, 0, 0);
 

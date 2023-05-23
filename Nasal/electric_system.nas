@@ -5,12 +5,14 @@ var electricsystem=func{
 	var battery_status = getprop("/systems/c170b/electrical/battery-status");
 	var new_battery_status = battery_status;
 	var external_volts = 0;
+	var external_amps = 0;
 
 	# external power source connected
     if (getprop("/controls/electric/external-power"))
     {
-        external_volts = 12;
-    }
+        external_volts = 14;
+        external_amps = 35; 
+ }
 	
 	var engine_rpm = getprop("/engines/engine/rpm");
 	var ideal_rpm = 720;	
@@ -48,8 +50,9 @@ var electricsystem=func{
 		bus_load += alternator_amps;
         power_source = "alternator";
     }
-    if ( external_volts > bus_volts ) {
+    if ( master_bat and (external_volts > bus_volts ) ) {
         bus_volts = external_volts;
+		bus_load += external_amps;
         power_source = "external";
     }
 
