@@ -16,13 +16,13 @@
                 </binding>
             </item>
 
-<!--            <item>
+            <item>
                 <label>Select Livery</label>
                 <binding>
                     <command>nasal</command>
                     <script>aircraft.livery.dialog.toggle()</script>
                 </binding>
-            </item> -->
+            </item>
 
             <item>
                 <label>Aircraft Options</label>

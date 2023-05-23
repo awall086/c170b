@@ -32,7 +32,7 @@
 
 
         <button>
-            <legend/>
+            <legend>X</legend>
             <key>Esc</key>
             <pref-width>16</pref-width>
             <pref-height>16</pref-height>
@@ -50,7 +50,7 @@
 		<halign>left</halign>
 		<label>Place left safety cone</label>
 		<live>true</live>
-        <property>/sim/coneL/enable</property>
+        <property>/sim/model/c170b/cone_L</property>
         <enable>
             <less-than>
                 <property>velocities/groundspeed-kt</property>
@@ -59,7 +59,7 @@
         </enable>
         <binding>
             <command>property-toggle</command>
-            <property>/sim/coneL/enable</property>
+            <property>/sim/model/c170b/cone_L</property>
         </binding>
         <binding>
             <command>dialog-update</command>
@@ -70,7 +70,7 @@
         <halign>left</halign>
         <label>Place right safety cone</label>
         <live>true</live>
-        <property>/sim/coneR/enable</property>
+        <property>/sim/model/c170b/cone_R</property>
         <enable>
             <less-than>
                 <property>velocities/groundspeed-kt</property>
@@ -79,7 +79,7 @@
         </enable>
         <binding>
             <command>property-toggle</command>
-            <property>/sim/coneR/enable</property>
+            <property>/sim/model/c170b/cone_R</property>
         </binding>
         <binding>
             <command>dialog-update</command>
@@ -111,7 +111,7 @@
 	<padding>6</padding>
 	<checkbox>
                 <halign>left</halign>
-                <label>Show/Hide External power</label>
+                <label>Conect external power unit</label>
                     <property>/controls/electric/external-power</property>
                 <live>true</live>
                 <binding>
