@@ -12,15 +12,19 @@
  </fileheader>
 
 <!--
+  1.32 CG corrections
   1.31 AeroPR to 25%MAC, CG corrected (reference to be checked), ground effect, custom rudder effectiveness
   1.30 Ysop edit Nov.2024
   - flight dynamics update reference: http://doc.gnu-darwin.org/cessna172/nonlinear.html (+CL changed)
 -->
 
 <!-- to do 
-flaps40, beta einführen
-fairings einbauen
+flaps40beta pitch
+fairings drag correction
 Iyz
+performance check
+propeller
+...and a few other items
 --> 
 
 
@@ -62,17 +66,17 @@ Iyz
    <vtailarea unit="FT2">    16.60 </vtailarea>
    <vtailarm  unit="FT" >   0.50 </vtailarm>
    <location name="AERORP" unit="IN">
-     <x> 89.5 </x>
+     <x> 90.88 </x> <!-- 25% MAC=40.96inch aft POH datum. POH datum 49.92 aft FDM datum --> 
      <y>   0.00 </y>
-     <z>   -8.00 </z>
+     <z>   0 </z>
    </location>
    <location name="EYEPOINT" unit="IN">
-     <x>  89.50 </x>
+     <x>  96.75 </x>
      <y>   0.00 </y>
-     <z>  29.20 </z>
+     <z>  20 </z>
    </location>
    <location name="VRP" unit="IN">
-     <x>0</x>
+     <x>-10.52</x>
      <y>0</y>
      <z>0</z>
    </location>
@@ -84,7 +88,7 @@ Iyz
    <izz unit="SLUG*FT2">      1600 </izz>
    <emptywt unit="LBS" >      1308 </emptywt>
    <location name="CG" unit="IN">
-    <x> 91.55 </x> <!-- 1308lbs@38.05inch, firewall assumed 53.5inch from datum-->
+     <x> 87.97 </x> <!-- 1308lbs@38.05inch, firewall assumed 49.92inch from datum-->
      <y>   0.00 </y>
      <z>  -9.0 </z>
    </location>
@@ -92,7 +96,7 @@ Iyz
         <pointmass name="Pilot">
             <weight unit="LBS"> 180 </weight>
             <location name="POINTMASS" unit="IN">
-                <x> 103 </x>
+                <x> 97.77 </x>
                 <y> -10.20 </y>
                 <z> -6.30 </z>
             </location>
@@ -101,7 +105,7 @@ Iyz
         <pointmass name="Co-Pilot">
             <weight unit="LBS"> 0 </weight>
             <location name="POINTMASS" unit="IN">
-                <x> 103 </x>
+                <x> 97.77 </x>
                 <y> 10.20 </y>
                 <z> -6.30 </z>
             </location>
@@ -110,7 +114,7 @@ Iyz
         <pointmass name="Left Passenger">
             <weight unit="LBS"> 0 </weight>
             <location name="POINTMASS" unit="IN">
-                <x> 135 </x>
+                <x> 120.3 </x>
                 <y> -10.20 </y>
                 <z> -9.16 </z>
             </location>
@@ -119,7 +123,7 @@ Iyz
         <pointmass name="Right Passenger">
             <weight unit="LBS"> 0 </weight>
             <location name="POINTMASS" unit="IN">
-                <x> 135 </x>
+                <x> 120.3 </x>
                 <y> 10.20 </y>
                 <z> -9.16 </z>
             </location>
@@ -128,7 +132,7 @@ Iyz
         <pointmass name="Baggage">
             <weight unit="LBS"> 0 </weight>
             <location name="POINTMASS" unit="IN">
-                <x> 152 </x>
+                <x> 144.7 </x>
                 <y>  0 </y>
                 <z> -14 </z>
             </location>
@@ -139,7 +143,7 @@ Iyz
 
   <contact type="BOGEY" name="LEFT_MAIN">
    <location unit="IN">
-     <x> 79.52 </x>
+     <x> 69 </x>
      <y> -45.27 </y>
      <z> -62.40 </z>
    </location>
@@ -156,7 +160,7 @@ Iyz
 
   <contact type="BOGEY" name="RIGHT_MAIN">
    <location unit="IN">
-     <x> 79.52 </x>
+     <x> 69 </x>
      <y>  45.27 </y>
      <z> -62.40 </z>
    </location>
@@ -173,7 +177,7 @@ Iyz
 
   <contact type="BOGEY" name="TAIL">
    <location unit="IN">
-     <x> 328.34 </x>
+     <x> 317.54 </x>
      <y>   0.00 </y>
      <z> -24.86 </z>
    </location>
@@ -190,7 +194,7 @@ Iyz
 
   <contact type="STRUCTURE" name="LEFT_WING">
     <location unit="IN">
-     <x> 144.00 </x>
+     <x> 134.00 </x>
      <y> -18.00 </y>
      <z>  -7.50 </z>
     </location>
@@ -202,7 +206,7 @@ Iyz
 
   <contact type="STRUCTURE" name="RIGHT_WING">
     <location unit="IN">
-     <x> 144.00 </x>
+     <x> 134.00 </x>
      <y>  18.00 </y>
      <z>  -7.50 </z>
     </location>
@@ -249,7 +253,7 @@ Iyz
 
 		<tank type="FUEL" number="1">
 			<location unit="IN">
-				<x> 114.56 </x>
+				<x> 96.75 </x>
 				<y> -39.37 </y>
 				<z>  21.50 </z>
 			</location>
@@ -260,7 +264,7 @@ Iyz
 
 		<tank type="FUEL" number="2">
 			<location unit="IN">
-				<x> 114.56 </x>
+				<x> 96.75 </x>
 				<y>  39.37 </y>
 				<z>  21.50 </z>
 			</location>
@@ -371,6 +375,7 @@ Iyz
 
    <summer name="Rudder Command Sum">
       <input>fcs/rudder-cmd-norm</input>
+      <input>aero/tune/rudder-tap</input>
       <input>fcs/yaw-trim-cmd-norm</input>
       <clipto>
         <min> -1 </min>
@@ -430,19 +435,19 @@ Iyz
                     </setting>
                     <setting>
                         <position>10</position>
-                        <time>1.0</time>
+                        <time>0.5</time>
                     </setting>
                     <setting>
                         <position>20</position>
-                        <time>1.0</time>
+                        <time>0.5</time>
                     </setting>
                     <setting>
                         <position>30</position>
-                        <time>1.2</time>
+                        <time>0.5</time>
                     </setting>
                     <setting>
                         <position>40</position>
-                        <time>1.5</time>
+                        <time>0.5</time>
                     </setting>
                 </traverse>
      <output>fcs/flap-pos-deg</output>
@@ -469,6 +474,66 @@ Iyz
  </flight_control>
 
  <aerodynamics>
+
+
+        <function name="aero/function/pitchdown_flap">
+            <description>trigger for neg Cmm with full flaps and sideslip</description>
+		<product>
+	            <table>
+	            <independentVar>fcs/flap-pos-deg</independentVar>
+	                <tableData>
+	                      0.0000    0
+	                      35    0
+	                      40    1
+	                  </tableData>
+	            </table>
+                    <table>
+                        <independentVar lookup="row">aero/beta-deg</independentVar>
+                        <independentVar lookup="column">aero/alpha-deg</independentVar>
+			<independentVar lookup="table">velocities/u-fps</independentVar>
+			<tableData breakPoint="80">
+				-24 -16 -12 -11 0 11 12 16 24
+				0 0 0 0 0 0 0 0 0 0
+				3 1 1 1 1 1 1 1 1 1
+				4 1 1 1 1 1 1 1 1 1
+				8 0 0 0 0 0 0 0 0 0
+                        </tableData>
+			<tableData breakPoint="100">
+				-24 -16 -12 -11 0 11 12 16 24
+				0 0 0 0 0 0 0 0 0 0
+				3 1 1 1 1 1 1 1 1 1
+				4 1 1 1 1 1 1 1 1 1
+				8 0 0 0 0 0 0 0 0 0                        
+			</tableData>
+			<tableData breakPoint="120">
+				-24 -16 -12 -11 0 11 12 16 24
+				0 0 0 0 0 0 0 0 0 0
+				3 1 1 1 1 1 1 1 1 1
+				4 1 1 1 1 1 1 1 1 1
+				8 0 0 0 0 0 0 0 0 0                        
+			</tableData>
+                    </table>
+		</product>
+        </function>
+
+    <function name="aero/function/velocity-induced-fps">
+        <description> velocity including the propulsion induced velocity.</description>
+        <sum>
+            <property>velocities/u-aero-fps</property>
+            <property>propulsion/engine/prop-induced-velocity_fps</property>
+        </sum>
+    </function>
+
+    <function name="aero/function/qbar-induced-psf">
+        <description> q bar including the propulsion induced velocity</description>
+        <product>
+            <property>aero/function/velocity-induced-fps</property>
+            <property>aero/function/velocity-induced-fps</property>
+            <property>atmosphere/rho-slugs_ft3</property>
+            <value>0.5</value>
+        </product>
+    </function>
+
 
         <function name="aero/function/kCDge">
             <description>Change_in_drag_due_to_ground_effect</description>
@@ -514,11 +579,14 @@ Iyz
             </table>
         </function>
 
-
-
     <function name="aero/tune/wing-rig">
        <description>tuning factor</description>
-           <value>0.001</value>
+           <value>0.0016</value>
+    </function> 
+
+   <function name="aero/tune/rudder-tap">
+       <description>fixed trim</description>
+           <value>-0.0009</value>
     </function>
 
 
@@ -610,9 +678,17 @@ Iyz
          <product>
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
-           <property>fcs/flap-pos-deg</property>
            <property>aero/function/kCDge</property>
-           <value> 0.00300 </value>
+          <table>
+            <independentVar lookup="row">fcs/flap-pos-deg</independentVar>
+            <tableData> 
+		0 0
+		10 0.005
+		20 0.015
+		30 0.035
+		40 0.06
+            </tableData>
+          </table>
          </product>
     </function>
 
@@ -756,7 +832,8 @@ Cy_r 0,21
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
            <property>metrics/cbarw-ft</property>
-           <value>-0.015</value>
+           <value>0.035</value>
+<!--           <value>-0.015</value> -->
        </product>
     </function>
 
@@ -807,6 +884,21 @@ Cy_r 0,21
            <value>-5.2</value>
        </product>
     </function>
+
+
+    <function name="aero/moment/pitchdown_flap40sideslip">
+       <description>Pitch moment due to elevator</description>
+       <product>
+          <property>aero/qbar-psf</property>
+          <property>metrics/Sw-sqft</property>
+          <property>metrics/cbarw-ft</property>
+          <property>aero/function/pitchdown_flap</property>
+          <value>-1</value>
+       </product>
+    </function>
+
+
+
 
   </axis>
 
