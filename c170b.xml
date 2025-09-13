@@ -227,6 +227,7 @@ propeller
     
 			<thruster file="HZ-C2YR-1BF">
 				<sense> 1 </sense>
+ 				<p_factor> 59 </p_factor>
 				<location unit="IN">
 					<x>  13.00 </x>
 					<y>   0.00 </y>

@@ -1483,7 +1483,11 @@
                 <not-equals>
                     <property>/sim/current-view/name</property>
                     <value>IFR Training View</value>
+                <not-equals>
+                    <property>/sim/current-view/name</property>
+                    <value>start view</value>
                 </not-equals>
+		</not-equals>
                 <not>
                     <property>/sim/walker/outside</property>
                 </not>
