@@ -20,8 +20,8 @@
 
     <path>kx170b.ac</path>
 
-	<animation>
-		<type>material</type>
+    <animation>
+        <type>material</type>
             <object-name>CommUseFixed</object-name>
             <object-name>CommUse10M</object-name>
             <object-name>CommUse1M</object-name>
@@ -34,13 +34,13 @@
             <object-name>NavUse100K</object-name>
             <object-name>NavUse10K</object-name>
             <object-name>NavDot</object-name>
-		<emission>
-			<red>0.20</red>
-			<green>0.06</green>
-			<blue>0.0</blue>
-			<factor-prop>/controls/lighting/int-lights</factor-prop>
-		</emission>
-	</animation>
+        <emission>
+            <red>0.98</red>
+            <green>0.89</green>
+            <blue>0.60</blue>
+            <factor-prop>/sim/model/c170b/lighting/radio</factor-prop>
+        </emission>
+    </animation>
 
 	<!-- Comm part -->
 	<animation>

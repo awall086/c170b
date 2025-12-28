@@ -2,19 +2,20 @@
 <PropertyList>
 
    <path>rt359a.ac</path>
-	<animation>
-		<type>material</type>
+
+    <animation>
+        <type>material</type>
             <object-name>Digit_1000</object-name>
             <object-name>Digit_100</object-name>
             <object-name>Digit_10</object-name>
             <object-name>Digit_1</object-name>
-		<emission>
-			<red>0.10</red>
-			<green>0.02</green>
-			<blue>0.0</blue>
-			<factor-prop>/controls/lighting/int-lights</factor-prop>
-		</emission>
-	</animation>
+        <emission>
+            <red>0.98</red>
+            <green>0.89</green>
+            <blue>0.60</blue>
+            <factor-prop>/sim/model/c170b/lighting/radio</factor-prop>
+        </emission>
+    </animation>
 
 	<!--    Active Frequency   -->
     <animation>
