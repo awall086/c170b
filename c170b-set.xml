@@ -21,7 +21,7 @@
         <author>awall86 (Adrian Fernandez Gomez), wlbragg (Wayne Bragg), TheEagle, david.megginson (David Megginson), ysopflying. A special thanks to Octal450 (Josh Davidson) for his excelent Aircraft Config Center Utility</author>
         <status>alpha</status>
         <aircraft-version>2024.12.0A</aircraft-version>
-        <minimum-fg-version>2020.3.17</minimum-fg-version>
+        <minimum-fg-version>2024.1.3</minimum-fg-version>
  
         <multiplay>
             <generic>
