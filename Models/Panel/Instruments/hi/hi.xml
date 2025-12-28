@@ -4,14 +4,20 @@
 
     <path>hi.ac</path>
 
-    <effect>
-        <inherits-from>Aircraft/c170b/Models/Effects/interior/c170b-interior-compartment-1</inherits-from>
+	<animation>
+		<type>material</type>
         <object-name>Front</object-name>
         <object-name>Front2</object-name>
         <object-name>HdgBug</object-name>
         <object-name>OBS-Knob</object-name>
         <object-name>HDG-Knob</object-name>
-    </effect>
+		<emission>
+			<red>0.10</red>
+			<green>0.02</green>
+			<blue>0.0</blue>
+			<factor-prop>/controls/lighting/int-lights</factor-prop>
+		</emission>
+	</animation>
 
     <animation>
         <type>rotate</type>
@@ -52,8 +58,7 @@
         </axis>
     </animation>
 
-    <!--             Heading Offset             -->
-   
+    <!-- Heading Offset --> 
     <animation>
         <type>knob</type>
         <object-name>OBS-Knob</object-name>
@@ -97,8 +102,7 @@
         </center>
     </animation>
 
-    <!--             Heading Bug             -->
-   
+    <!-- Heading Bug --> 
     <animation>
         <type>knob</type>
         <object-name>HDG-Knob</object-name>

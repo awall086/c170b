@@ -1,5 +1,5 @@
 ﻿c170b
-====
+=====
 
 A high detailed version of the Cessna 170b aircraft for FlightGear.
 

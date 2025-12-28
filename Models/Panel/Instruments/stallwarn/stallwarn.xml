@@ -3,4 +3,31 @@
 
     <path>stallwarn.ac</path>
 
+	<animation>
+		<object-name>Stall_Warning_light</object-name>
+		<type>select</type>
+		<condition>
+			<and>
+                <greater-than>
+                    <property>/systems/electrical/volts</property>
+                    <value>10</value>
+                </greater-than>
+                <greater-than>
+					<property>/fdm/jsbsim/sounds/stall-horn-volume-actual</property>
+					<value>0</value>
+                </greater-than>
+			</and>
+		</condition>
+	</animation>
+
+	<animation> 
+		<type>material</type> 
+		<object-name>Stall_Warning_light</object-name>
+		<emission>
+			<red>1.0</red>
+			<green>0.2</green>
+			<blue>0.2</blue>
+		</emission>
+	</animation>
+	
 </PropertyList>

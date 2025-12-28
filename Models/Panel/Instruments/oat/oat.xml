@@ -4,7 +4,18 @@
 
     <path>oat.ac</path>
 
-
+	<animation>
+		<type>material</type>
+		<object-name>oat</object-name>
+		<object-name>needle</object-name>
+		<emission>
+			<red>0.12</red>
+			<green>0.04</green>
+			<blue>0.0</blue>
+			<factor-prop>/controls/lighting/int-lights</factor-prop>
+		</emission>
+	</animation>
+	
     <animation>
         <type>rotate</type>
         <object-name>needle</object-name>
@@ -25,4 +36,5 @@
             <z>0</z>
         </axis>
     </animation>
+	
 </PropertyList>

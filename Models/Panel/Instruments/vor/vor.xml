@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PropertyList>
 
- <params>
-  <nav-to-flag>/instrumentation/nav/to-flag</nav-to-flag>
-  <nav-from-flag>/instrumentation/nav/from-flag</nav-from-flag>
-  <nav-radial-selected>/instrumentation/nav/radials/selected-deg</nav-radial-selected>
-  <nav-heading-needle-deflection>/instrumentation/nav/filtered-cdiNAV0-deflection</nav-heading-needle-deflection>
-  <nav-in-range>/instrumentation/nav/in-range</nav-in-range>
- </params>
+	<params>
+		<nav-to-flag>/instrumentation/nav/to-flag</nav-to-flag>
+		<nav-from-flag>/instrumentation/nav/from-flag</nav-from-flag>
+		<nav-radial-selected>/instrumentation/nav/radials/selected-deg</nav-radial-selected>
+		<nav-heading-needle-deflection>/instrumentation/nav/filtered-cdiNAV0-deflection</nav-heading-needle-deflection>
+		<nav-in-range>/instrumentation/nav/in-range</nav-in-range>
+	</params>
 
     <path>vor.ac</path>
-
-    <effect>
-        <inherits-from>Aircraft/c170b/Models/Effects/interior/c170b-interior-compartment-1</inherits-from>
-        <object-name>face_UV</object-name>
-        <object-name>ring_UV</object-name>
+	<animation>
+		<type>material</type>
+        <object-name>face</object-name>
+        <object-name>ring</object-name>
         <object-name>needle</object-name>
         <object-name>nav_off</object-name>
         <object-name>to</object-name>
@@ -22,137 +21,109 @@
         <object-name>to</object-name>
         <object-name>pointer1</object-name>
         <object-name>pointer2</object-name>
-    </effect>
-
-    <effect>
-        <inherits-from>Aircraft/c170b/Models/Effects/interior/c170b-interior-compartment</inherits-from>
-        <object-name>dial</object-name>
+		<object-name>dial</object-name>
         <object-name>NAV1</object-name>
-        <object-name>face</object-name>
-        <object-name>ring</object-name>
-    </effect> 
-
-	<animation>
-		<type>select</type>
-		<object-name>face</object-name>
-		<object-name>ring</object-name>
-		<condition>
-			<equals>
-				<property>sim/rendering/als-secondary-lights/use-flashlight</property>
-				<value>0</value>
-			</equals>
-		</condition>
+		<emission>
+			<red>0.10</red>
+			<green>0.02</green>
+			<blue>0.0</blue>
+			<factor-prop>/controls/lighting/int-lights</factor-prop>
+		</emission>
 	</animation>
 
 	<animation>
-		<type>select</type>
-		<object-name>face_UV</object-name>
-		<object-name>ring_UV</object-name>
-		<condition>
-			<equals>
-				<property>sim/rendering/als-secondary-lights/use-flashlight</property>
-				<value>1</value>
-			</equals>
-		</condition>
+		<name>LocalizerNeedle</name>
+		<type>rotate</type>
+		<object-name>needle</object-name>
+		<property alias="../../params/nav-heading-needle-deflection"/>
+		<factor>3.2</factor>
+		<center>
+			<x-m> 0.004503</x-m>
+			<y-m>-0.000400</y-m>
+			<z-m>-0.022104</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y> 0</y>
+			<z> 0</z>
+		</axis>
 	</animation>
-
- <animation>
-  <name>LocalizerNeedle</name>
-  <type>rotate</type>
-  <object-name>needle</object-name>
-  <property alias="../../params/nav-heading-needle-deflection"/>
-  <factor>3.2</factor>
-  <center>
-   <x-m>0.004503</x-m>
-   <y-m>-0.0004</y-m>
-   <z-m>-0.022104</z-m>
-  </center>
-  <axis>
-   <x>-1</x>
-   <y>0</y>
-   <z>0</z>
-  </axis>
- </animation>
  
- <animation>
-  <type>select</type>
-  <object-name>nav_off</object-name>
-  <condition>
-   <not>
-    <property alias="../../../../params/nav-in-range"/>
-   </not>
-  </condition>
- </animation>
+	<animation>
+		<type>select</type>
+		<object-name>nav_off</object-name>
+		<condition>
+			<not>
+				<property alias="../../../../params/nav-in-range"/>
+			</not>
+		</condition>
+	</animation>
 
- <animation>
-  <type>select</type>
-  <object-name>to</object-name>
-  <condition>
-   <property alias="../../../params/nav-to-flag"/>
-  </condition>
- </animation>
+	<animation>
+		<type>select</type>
+		<object-name>to</object-name>
+		<condition>
+			<property alias="../../../params/nav-to-flag"/>
+		</condition>
+	</animation>
 
- <animation>
-  <type>select</type>
-  <object-name>from</object-name>
-  <condition>
-   <property alias="../../../params/nav-from-flag"/>
-  </condition>
- </animation>
+	<animation>
+		<type>select</type>
+		<object-name>from</object-name>
+		<condition>
+			<property alias="../../../params/nav-from-flag"/>
+		</condition>
+	</animation>
 
- <animation>
-  <name>RingTransform</name>
-  <type>rotate</type>
-  <object-name>ring</object-name>
-  <object-name>ring_UV</object-name>
-   <property alias="../../params/nav-radial-selected"/>
-  <factor>1</factor>
-  <axis>
-   <x>1</x>
-   <y>0</y>
-   <z>0</z>
-  </axis>
- </animation>
+	<animation>
+		<name>RingTransform</name>
+		<type>rotate</type>
+		<object-name>ring</object-name>
+		<object-name>ring_UV</object-name>
+		<property alias="../../params/nav-radial-selected"/>
+		<factor>1</factor>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
 
-<animation>
-    <type>knob</type>
-    <object-name>dial</object-name>
-    <property>/instrumentation/nav/radials/selected-deg</property>
-    <factor>-8</factor>
-
-    <axis>
-        <x>1</x>
-        <y>0</y>
-        <z>0</z>
-    </axis>
-    <center>
-        <x-m>0.002103</x-m>
-        <y-m>0.030586</y-m>
-        <z-m>-0.03777</z-m>
-    </center>
-
-    <shift-repeat type="int">5</shift-repeat>
-     
-    <action>
-        <binding>
-            <command>property-adjust</command>
-            <property>/instrumentation/nav/radials/selected-deg</property>
-            <factor>1</factor>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-        </binding>
-    </action>
-    
-    <hovered>
-     <binding>
-       <command>set-tooltip</command>
-       <tooltip-id>nav1-obs</tooltip-id>
-       <label>Nav 1 Radial %3d</label>
-       <mapping>heading</mapping>
-       <property>/instrumentation/nav/radials/selected-deg</property>
-    </binding>
-    </hovered>
- </animation>
+	<animation>
+		<type>knob</type>
+		<object-name>dial</object-name>
+		<property>/instrumentation/nav/radials/selected-deg</property>
+		<factor>-8</factor>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>0.002103</x-m>
+			<y-m>0.030586</y-m>
+			<z-m>-0.03777</z-m>
+		</center>
+		<shift-repeat type="int">5</shift-repeat>    
+		<action>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/nav/radials/selected-deg</property>
+				<factor>1</factor>
+				<min>0</min>
+				<max>360</max>
+				<wrap>1</wrap>
+			</binding>
+		</action>  
+		<hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>nav1-obs</tooltip-id>
+				<label>Nav 1 Radial %3d</label>
+				<mapping>heading</mapping>
+				<property>/instrumentation/nav/radials/selected-deg</property>
+			</binding>
+		</hovered>
+	</animation>
 
 </PropertyList>

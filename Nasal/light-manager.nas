@@ -294,6 +294,6 @@ setlistener("/sim/rendering/als-secondary-lights/use-taxi-light-int", func (node
     light_manager.enable_or_disable(node.getValue(), 3);
 }, 1, 0);
 
-setlistener("/sim/model/pa-18/lighting/nav-lights", func (node) {
+setlistener("/sim/model/c170b/lighting/nav-lights", func (node) {
     light_manager.enable_or_disable(node.getValue(), 4);
 }, 1, 0);

@@ -2,15 +2,12 @@
 
 <PropertyList>
 
-    <path>safety-cone_L.ac</path>
+    <path>safety-cone.ac</path>
     <nopreview/>
 
-	<animation>
-		<type>select</type>
-		<object-name>safety-cone.L</object-name>
-		<condition>
-			<property>sim/model/c170b/cone_L</property>
-		</condition>
-	</animation>
+    <offsets>
+        <x-m>3.00745</x-m>
+        <y-m>-6.85523</y-m>
+    </offsets>
 
 </PropertyList>

@@ -4,49 +4,40 @@
 
  <path>fuelq.ac</path>
 
-    <effect>
-        <inherits-from>Aircraft/c170b/Models/Effects/interior/c170b-interior-compartment-1</inherits-from>
+	<animation>
+		<type>material</type>
         <object-name>face</object-name>
         <object-name>old_needle</object-name>
-    </effect>
+		<emission>
+			<red>0.12</red>
+			<green>0.04</green>
+			<blue>0.0</blue>
+			<factor-prop>/controls/lighting/int-lights</factor-prop>
+		</emission>
+	</animation>
 
- <animation>
-  <type>rotate</type>
-  <object-name>old_needle</object-name>
-  <property>consumables/fuel/tank[2]/level-gal_us</property>
-  <interpolation>
-   <entry>
-    <ind>0</ind>
-    <dep>-151</dep>
-   </entry>
-   <entry>
-    <ind>5.75</ind>
-    <dep>-62</dep>
-   </entry>
-   <entry>
-    <ind>11.5</ind>
-    <dep>0</dep>
-   </entry>
-   <entry>
-    <ind>17.25</ind>
-    <dep>62</dep>
-   </entry>
-   <entry>
-    <ind>21.0</ind>
-    <dep>150</dep>
-   </entry>
-  </interpolation>
-  <center>
-   <x-m>0</x-m>
-   <y-m>0</y-m>
-   <z-m>0</z-m>
-  </center>
-  <axis>
-   <x>-1</x>
-   <y>0</y>
-   <z>0</z>
-  </axis>
- </animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>old_needle</object-name>
+		<property>consumables/fuel/tank[2]/level-gal_us</property>
+		<interpolation>
+			<entry><ind> 0.00</ind><dep>-151</dep></entry>
+			<entry><ind> 5.75</ind><dep> -62</dep></entry>
+			<entry><ind>11.50</ind><dep>  0</dep></entry>
+			<entry><ind>17.25</ind><dep>  62</dep></entry>
+			<entry><ind>21.00</ind><dep> 150</dep></entry>
+		</interpolation>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
 
 </PropertyList>
 

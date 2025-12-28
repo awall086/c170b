@@ -33,12 +33,11 @@
 				propulsion/tank[0]/priority EQ 1
 				accelerations/Nz GE 0
 			</test>
-                	<test logic="OR">
-                	    /controls/fuel/fuel-selector EQ 3
-                	    /controls/fuel/fuel-selector EQ 2
-                	</test>
-		</test>
-
+                <test logic="OR">
+                	/controls/fuel/fuel-selector EQ 3
+                	/controls/fuel/fuel-selector EQ 2
+                </test>
+			</test>
 		</switch>
 		
 		<!-- from Tank 1 (to Collector Tank 0) -->
@@ -60,12 +59,11 @@
 				propulsion/tank[0]/priority EQ 1
 				accelerations/Nz GE 0
 			</test>
-                	<test logic="OR">
-                	    /controls/fuel/fuel-selector EQ 1
-                	    /controls/fuel/fuel-selector EQ 2
-                	</test>
-		</test>
-
+                <test logic="OR">
+                	/controls/fuel/fuel-selector EQ 1
+                	/controls/fuel/fuel-selector EQ 2
+                </test>
+			</test>
 		</switch>
 	</channel>
 	

@@ -13,9 +13,15 @@
 				<y>0.0</y>
 				<z>0.0</z>
 			</position>
-			<volume>
-				<offset>0.4</offset>
-			</volume>
+            <volume>
+                <factor>0.7143</factor>
+                <property>/sim/model/c170b/sound/volume-boost-doors</property>
+            </volume>
+            <volume>
+                <offset>0.72</offset>
+            </volume>
+            <reference-dist>5.0</reference-dist>
+            <max-dist>200.0</max-dist>
 		</crank>
 
 		<crank>
@@ -33,135 +39,336 @@
 				<y>0.0</y>
 				<z>0.0</z>
 			</position>
-			<volume>
-				<offset>0.5</offset>
-			</volume>
+            <volume>
+                <factor>0.7143</factor>
+                <property>/sim/model/c170b/sound/volume-boost-doors</property>
+            </volume>
+            <volume>
+                <offset>0.07</offset>
+            </volume>
+            <reference-dist>5.0</reference-dist>
+            <max-dist>200.0</max-dist>
 		</crank>
 
-		<crank>
-			<name>cough</name>
-			<path>Sounds/coughing.wav</path>
-			<property>engines/engine/running</property>
-			<position>
-				<x>-1.0</x>
-				<y>0.0</y>
-				<z>0.0</z>
-			</position>
-			<volume>
-				<offset>0.3</offset>
-			</volume>
-		</crank>
+        <crank>
+            <name>cough</name>
+            <path>Sounds/coughing.wav</path>
+            <property>/engines/engine/running</property>
+            <position>
+                <x>-1.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </position>
+            <volume>
+                <factor>0.7143</factor>
+                <property>/sim/model/c170b/sound/volume-boost-doors</property>
+            </volume>
+            <volume>
+                <offset>0.0592</offset>
+            </volume>
+            <reference-dist>5.0</reference-dist>
+            <max-dist>200.0</max-dist>
+        </crank>
+
+        <crank>
+            <name>killed</name>
+            <path>Sounds/coughing.wav</path>
+            <property>/sim/model/c170b/sound/click-coughing-engine-sound</property>
+            <position>
+                <x>-1.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </position>
+            <volume>
+                <factor>0.7143</factor>
+                <property>/sim/model/c170b/sound/volume-boost-doors</property>
+            </volume>
+            <volume>
+                <offset>0.0592</offset>
+            </volume>
+            <reference-dist>5.0</reference-dist>
+            <max-dist>200.0</max-dist>
+        </crank>
 
 		<engine>
 			<name>engine</name>
 			<mode>looped</mode>
-			<path>/Aircraft/c170b/Sounds/Sounds_Engine_Continental-O200A.wav</path>
+			<path>/Sounds/Sounds_Engine_Continental-O200A.wav</path>
 			<property>/engines/engine/running</property>
-			<volume>
-				<property>/engines/engine/mp-osi</property>
-				<factor>0.027777</factor> 
-				<!-- these values of min and max are unlikely to be relevant,
-				because the MAP is unlikely to go below 5" or above 28".
-				Also note that propeller noise is additional to engine
-				noise, rather like an <offset>.
-				-->
-				<min>0.30</min>
-				<max>2.0</max>
-			</volume>
-			<pitch>
-				<property>/engines/engine/rpm</property>
-				<factor>0.0010</factor>
-				<min>0.0</min>
-				<max>2.5</max>
-				<offset>0.01</offset>
-			</pitch>
+            <volume>
+                <property>/sim/model/c170b/sound/volume-boost-doors</property>
+            </volume>
+            <volume>
+                <property>/sim/model/c170b/sound/volume-ramp-engine-start</property>
+            </volume>
+            <volume>
+                <property>/engines/engine[0]/rpm</property>
+                <factor>0.002794118</factor>
+                <!-- <offset>0.01882353</offset> -->
+                <min>0.3</min>
+                <max>2.0</max>
+            </volume>
+            <pitch>
+                <property>/engines/engine[0]/rpm</property>
+                <factor>0.001434783</factor>
+                <min>0.0</min>
+                <max>2.5</max>
+                <offset>0.01</offset>
+            </pitch>
+            <reference-dist>5.0</reference-dist>
+            <max-dist>200.0</max-dist>
 		</engine>
 
-  <propeller>
-    <name>propeller</name>
-    <mode>looped</mode>
-    <path>Sounds/prop.wav</path>
-    <condition>
-      <greater-than>
-        <property>/engines/engine/rpm</property>
-        <value>10</value>
-      </greater-than>
-    </condition>
-    <volume>
-      <property>/engines/engine/rpm</property>
-      <factor>0.0001</factor>
-      <max>0.25</max>
-    </volume>
-    <pitch>
-      <property>/engines/engine/rpm</property>
-      <factor>0.0015</factor>
-      <min>0.0</min>
-      <max>2.0</max>
-      <offset>0.01</offset>
-    </pitch>
-  </propeller>
+		<propeller>
+			<name>propeller</name>
+			<mode>looped</mode>
+			<path>Sounds/prop.wav</path>
+			<condition>
+				<greater-than>
+					<property>/engines/engine/rpm</property>
+					<value>10</value>
+				</greater-than>
+			</condition>
+            <volume>
+                <property>/sim/model/c170b/sound/volume-boost-doors</property>
+            </volume>
+            <volume>
+                <property>/engines/engine[0]/rpm</property>
+                <factor>0.000194118</factor>
+                <!--<offset>0.305882353</offset>-->
+                <min>0.0</min>
+                <max>0.25</max>
+            </volume>
+            <pitch>
+                <property>/engines/engine[0]/rpm</property>
+                <factor>0.001534783</factor>
+                <min>0.0</min>
+                <max>2.0</max>
+                <offset>0.01</offset>
+            </pitch>
+            <reference-dist>5.0</reference-dist>
+            <max-dist>200.0</max-dist>
+		</propeller>
 
-  <rumble>
-   <name>rumble</name>
-   <mode>looped</mode>
-   <path>Sounds/rumble.wav</path>
-   <condition>
-    <or>
-     <property>gear/gear[0]/wow</property>
-     <property>gear/gear[1]/wow</property>
-     <property>gear/gear[2]/wow</property>
-    </or>
-    <!-- <property>sim/current-view/internal</property> -->
-   </condition>
-   <position>
-    <x>1.0</x>
-    <y>0.0</y>
-    <z>-1.5</z>
-   </position>
-   <volume>
-    <property>velocities/groundspeed-kt</property>
-    <type>log</type>
-    <factor>0.25</factor>
-   </volume>
-  </rumble>
+        <engine-cut>
+            <name>engine-cut</name>
+            <mode>once</mode>
+            <path>Sounds/engine-cut.wav</path>
+            <condition>
+                <and>
+                    <not>
+                        <property>/engines/engine/running</property>
+                    </not>
+                    <greater-than>
+                        <property>/engines/engine/egt-degf</property>
+                        <value>800</value>
+                    </greater-than>
+                </and>
+            </condition>
+            <volume>
+                <property>/sim/model/c170b/sound/volume-boost-doors</property>
+            </volume>
+            <reference-dist>5.0</reference-dist>
+            <max-dist>200.0</max-dist>
+        </engine-cut>
 
-  <squeal>
-   <name>squeal</name>
-   <path>Sounds/squeal.wav</path>
-   <condition>
-    <and>
-     <or>
-      <property>gear/gear[0]/wow</property>
-      <property>gear/gear[1]/wow</property>
-      <property>gear/gear[2]/wow</property>
-     </or>
-     <less-than>
-      <property>velocities/vertical-speed-fps</property>
-      <value>-0.05</value>
-     </less-than>
-    </and>
-   </condition>
-   <position>
-    <x>1.0</x>
-    <y>0.0</y>
-    <z>-1.5</z>
-   </position>
-   <volume>
-    <property>velocities/groundspeed-kt</property>
-    <factor>0.01</factor>
-    <max>1.0</max>
-   </volume>
-   <volume>
-    <internal>dt_stop</internal>
-    <factor>0.1</factor>
-    <max>1.0</max>
-   </volume>
-   <pitch>
-    <property>velocities/groundspeed-kt</property>
-    <factor>0.0025</factor>
-    <offset>1.2</offset>
-   </pitch>
-  </squeal>
+		<rumble>
+			<name>rumble</name>
+			<mode>looped</mode>
+			<path>Sounds/rumble.wav</path>
+			<condition>
+				<or>
+					<property>gear/gear[0]/wow</property>
+					<property>gear/gear[1]/wow</property>
+					<property>gear/gear[2]/wow</property>
+				</or>
+			<!-- <property>sim/current-view/internal</property> -->
+			</condition>
+			<position>
+				<x>1.0</x>
+				<y>0.0</y>
+				<z>-1.5</z>
+			</position>
+			<volume>
+				<property>velocities/groundspeed-kt</property>
+				<type>log</type>
+				<factor>0.25</factor>
+			</volume>
+		</rumble>
+
+		<squeal>
+			<name>squeal</name>
+			<path>Sounds/squeal.wav</path>
+			<condition>
+				<and>
+					<or>
+						<property>gear/gear[0]/wow</property>
+						<property>gear/gear[1]/wow</property>
+						<property>gear/gear[2]/wow</property>
+					</or>
+					<less-than>
+						<property>velocities/vertical-speed-fps</property>
+						<value>-0.05</value>
+					</less-than>
+				</and>
+			</condition>
+			<position>
+				<x>1.0</x>
+				<y>0.0</y>
+				<z>-1.5</z>
+			</position>
+			<volume>
+				<property>velocities/groundspeed-kt</property>
+				<factor>0.01</factor>
+				<max>1.0</max>
+			</volume>
+			<volume>
+				<internal>dt_stop</internal>
+				<factor>0.1</factor>
+				<max>1.0</max>
+			</volume>
+			<pitch>
+				<property>velocities/groundspeed-kt</property>
+				<factor>0.0025</factor>
+				<offset>1.2</offset>
+			</pitch>
+		</squeal>
+
+        <pavement-roll>
+            <name>pavement-roll</name>
+            <mode>looped</mode>
+            <path>Sounds/tires-rolling-asphalt.wav</path>
+            <condition>
+                <and>
+                    <property>/fdm/jsbsim/gear/on-pavement</property>
+                    <or>
+                        <property>gear/gear[0]/wow</property>
+                        <property>gear/gear[1]/wow</property>
+                        <property>gear/gear[2]/wow</property>
+                    </or>
+                    <or>
+                        <greater-than>
+                            <property>/gear/gear[0]/rollspeed-ms</property>
+                            <value>5</value>
+                        </greater-than>
+                        <greater-than>
+                            <property>/gear/gear[1]/rollspeed-ms</property>
+                            <value>5</value>
+                        </greater-than>
+                        <greater-than>
+                            <property>/gear/gear[2]/rollspeed-ms</property>
+                            <value>5</value>
+                        </greater-than>
+                    </or>
+                </and>
+            </condition>
+            <position>
+                <x>0.5</x>
+                <y>0.0</y>
+                <z>-1.15</z>
+            </position>
+            <volume>
+                <property>velocities/groundspeed-kt</property>
+                <type>log</type>
+                <factor>0.25</factor>
+            </volume>
+            <volume>
+                <property>/sim/model/c170b/sound/volume-boost-doors</property>
+            </volume>
+            <reference-dist>2.5</reference-dist>
+            <max-dist>200.0</max-dist>
+        </pavement-roll>
+
+        <gravel-roll>
+            <name>gravel-roll</name>
+            <mode>looped</mode>
+            <path>Sounds/tires-rolling-gravel.wav</path>
+            <condition>
+                <and>
+                    <not>
+                        <property>/fdm/jsbsim/gear/on-pavement</property>
+                    </not>
+                    <or>
+                        <property>gear/gear[0]/wow</property>
+                        <property>gear/gear[1]/wow</property>
+                        <property>gear/gear[2]/wow</property>
+                    </or>
+                    <or>
+                        <greater-than>
+                            <property>/gear/gear[0]/rollspeed-ms</property>
+                            <value>5</value>
+                        </greater-than>
+                        <greater-than>
+                            <property>/gear/gear[1]/rollspeed-ms</property>
+                            <value>5</value>
+                        </greater-than>
+                        <greater-than>
+                            <property>/gear/gear[2]/rollspeed-ms</property>
+                            <value>5</value>
+                        </greater-than>
+                    </or>
+                </and>
+            </condition>
+            <position>
+                <x>0.5</x>
+                <y>0.0</y>
+                <z>-1.15</z>
+            </position>
+            <volume>
+                <property>velocities/groundspeed-kt</property>
+                <type>log</type>
+                <factor>0.25</factor>
+            </volume>
+            <volume>
+                <property>/sim/model/c170b/sound/volume-boost-doors</property>
+            </volume>
+            <reference-dist>2.5</reference-dist>
+            <max-dist>200.0</max-dist>
+        </gravel-roll>
+
+        <gear-screech>
+            <name>gear-screech</name>
+            <mode>looped</mode>
+            <path>Sounds/tires-screech-asphalt.wav</path>
+            <condition>
+                <greater-than>
+                    <property>/fdm/jsbsim/gear/gear-screech</property>
+                    <value>1</value>
+                </greater-than>
+            </condition>
+            <position>
+                <x>0.5</x>
+                <y>0.0</y>
+                <z>-1.15</z>
+            </position>
+            <volume>
+                <property>/sim/model/c170b/sound/volume-boost-doors</property>
+            </volume>
+            <reference-dist>2.5</reference-dist>
+            <max-dist>200.0</max-dist>
+        </gear-screech>
+
+        <gear-drag>
+            <name>gear-drag</name>
+            <mode>once</mode>
+            <path>Sounds/tires-screech-gravel-oneshot.wav</path>
+            <condition>
+                <greater-than>
+                    <property>/fdm/jsbsim/gear/gear-drag</property>
+                    <value>1</value>
+                </greater-than>
+            </condition>
+            <position>
+                <x>0.5</x>
+                <y>0.0</y>
+                <z>-1.15</z>
+            </position>
+            <volume>
+                <property>/sim/model/c170b/sound/volume-boost-doors</property>
+            </volume>
+            <reference-dist>2.5</reference-dist>
+            <max-dist>200.0</max-dist>
+        </gear-drag>
  
         <flap>
             <name>flaps</name>
@@ -179,6 +386,82 @@
             <reference-dist>10.0</reference-dist>
             <max-dist>20.0</max-dist>
         </flap>
+
+        <left-door-opening>
+            <name>left-door-opening</name>
+            <mode>once</mode>
+            <path>Sounds/door-opening.wav</path>
+            <condition>
+                <greater-than>
+                    <property>/sim/model/door-positions/leftDoor/position-norm</property>
+                    <value>0.02</value>
+                </greater-than>
+            </condition>
+            <position>
+                <x>0.75</x>
+                <y>0.6</y>
+                <z>-0.35</z>
+            </position>
+            <reference-dist>1.5</reference-dist>
+            <max-dist>50.0</max-dist>
+        </left-door-opening>
+
+        <left-door-closing>
+            <name>left-door-closing</name>
+            <mode>once</mode>
+            <path>Sounds/door-closing.wav</path>
+            <condition>
+                <less-than>
+                    <property>/sim/model/door-positions/leftDoor/position-norm</property>
+                    <value>0.50</value>
+                </less-than>
+            </condition>
+            <position>
+                <x>0.75</x>
+                <y>0.6</y>
+                <z>-0.35</z>
+            </position>
+            <reference-dist>1.5</reference-dist>
+            <max-dist>50.0</max-dist>
+        </left-door-closing>
+
+        <right-door-opening>
+            <name>right-door-opening</name>
+            <mode>once</mode>
+            <path>Sounds/door-opening.wav</path>
+            <condition>
+                <greater-than>
+                    <property>/sim/model/door-positions/rightDoor/position-norm</property>
+                    <value>0.02</value>
+                </greater-than>
+            </condition>
+            <position>
+                <x>0.75</x>
+                <y>-0.6</y>
+                <z>-0.35</z>
+            </position>
+            <reference-dist>1.5</reference-dist>
+            <max-dist>50.0</max-dist>
+        </right-door-opening>
+
+        <right-door-closing>
+            <name>right-door-closing</name>
+            <mode>once</mode>
+            <path>Sounds/door-closing.wav</path>
+            <condition>
+                <less-than>
+                    <property>/sim/model/door-positions/rightDoor/position-norm</property>
+                    <value>0.50</value>
+                </less-than>
+            </condition>
+            <position>
+                <x>0.75</x>
+                <y>-0.6</y>
+                <z>-0.35</z>
+            </position>
+            <reference-dist>1.5</reference-dist>
+            <max-dist>50.0</max-dist>
+        </right-door-closing>
  
         <left-window-opening>
             <name>left-window-opening</name>
@@ -284,8 +567,7 @@
             <max-dist>5.0</max-dist>
         </switch>
 
-
-        <switch>
+		<switch>
             <name>click-taxi-landing</name>
             <mode>once</mode>
             <path>Sounds/click.wav</path>
@@ -438,33 +720,77 @@
             </volume>
         </switch>
 
-  <stall>
-   <name>stall</name>
-   <mode>looped</mode>
-   <type>avionics</type>
-   <path>Sounds/stall2.wav</path>
-   <condition>
-    <and>
-     <property>sim/alarms/stall-warning</property>
-     <greater-than>
-       <property>velocities/airspeed-kt</property>
-       <value>10</value>
-     </greater-than>
-     <not>
-       <property>gear/gear[0]/wow</property>
-       <property>gear/gear[1]/wow</property>
-       <property>gear/gear[2]/wow</property>
-     </not>
-    </and>
-   </condition>
-   <volume>
-    <property>sim/alarms/stall-warning</property>
-    <max>1.0</max>
-   </volume>
-   <reference-dist>10.0</reference-dist>
-   <max-dist>20.0</max-dist>
-  </stall>
+        <switch>
+            <name>click-primer-out</name>
+            <mode>once</mode>
+            <path>Sounds/primer-out.wav</path>
+            <condition>
+                <property>/controls/engines/engine/primer-lever</property>
+            </condition>
+            <volume>
+                <factor>3.32</factor>
+            </volume>
+            <position>
+                <x>-0.3660</x>
+                <y>0.3700</y>
+                <z>-0.3500</z>
+            </position>
+            <reference-dist>0.2</reference-dist>
+            <max-dist>5.0</max-dist>
+        </switch>
+
+        <switch>
+            <name>click-primer-in</name>
+            <mode>once</mode>
+            <path>Sounds/primer-in.wav</path>
+            <condition>
+                <not>
+                    <property>/controls/engines/engine/primer-lever</property>
+                </not>
+            </condition>
+            <volume>
+                <factor>3.32</factor>
+            </volume>
+            <position>
+                <x>-0.3660</x>
+                <y>0.3700</y>
+                <z>-0.3500</z>
+            </position>
+            <reference-dist>0.2</reference-dist>
+            <max-dist>5.0</max-dist>
+        </switch>
+
+        <stall>
+            <name>stall</name>
+            <mode>looped</mode>
+            <path>Sounds/stall2.wav</path>
+            <condition>
+                <and>
+                    <greater-than>
+                        <property>velocities/airspeed-kt</property>
+                        <value>10</value>
+                    </greater-than>
+                    <not>
+                        <property>gear/gear[0]/wow</property>
+                    </not>
+                </and>
+            </condition>
+            <position>
+                <x>-0.0360</x>
+                <y>0.5174</y>
+                <z>0.4831</z>
+            </position>
+            <volume>
+                <property>/fdm/jsbsim/sounds/stall-horn-volume-actual</property>
+            </volume>
+            <pitch>
+                <property>/fdm/jsbsim/sounds/stall-horn-pitch-actual</property>
+                <offset>0.0</offset>
+            </pitch>
+            <reference-dist>0.5</reference-dist>
+            <max-dist>50.0</max-dist>
+        </stall>
  
-</fx>
+	</fx>
  
 </PropertyList>

@@ -2,7 +2,7 @@
 var electricsystem=func{
     var master_bat = getprop("/controls/switches/master-bat");
     var master_alt = getprop("/controls/switches/master-alt");
-	var battery_status = getprop("/systems/c170b/electrical/battery-status");
+	var battery_status = getprop("/systems/electrical/battery-status");
 	var new_battery_status = battery_status;
 	var external_volts = 0;
 	var external_amps = 0;
@@ -67,113 +67,113 @@ var electricsystem=func{
 		
     # Comm-Nav
     if ( getprop("/controls/circuit-breakers/radio1") ) {
-        setprop("/systems/c170b/electrical/outputs/comm[0]", bus_volts);
-        setprop("/systems/c170b/electrical/outputs/nav", bus_volts);
-        setprop("/systems/c170b/electrical/outputs/audio-panel", bus_volts);
+        setprop("/systems/electrical/outputs/comm[0]", bus_volts);
+        setprop("/systems/electrical/outputs/nav", bus_volts);
+        setprop("/systems/electrical/outputs/audio-panel", bus_volts);
     } else {
-        setprop("/systems/c170b/electrical/outputs/comm[0]", 0.0);
-        setprop("/systems/c170b/electrical/outputs/nav", 0.0);
-        setprop("/systems/c170b/electrical/outputs/audio-panel", 0.0);
+        setprop("/systems/electrical/outputs/comm[0]", 0.0);
+        setprop("/systems/electrical/outputs/nav", 0.0);
+        setprop("/systems/electrical/outputs/audio-panel", 0.0);
     }
 
     # Transponder
     if ( getprop("/controls/circuit-breakers/flaps") ) {
-        setprop("/systems/c170b/electrical/outputs/transponder", bus_volts);
+        setprop("/systems/electrical/outputs/transponder", bus_volts);
     } else {
-        setprop("/systems/c170b/electrical/outputs/transponder", 0.0);
+        setprop("/systems/electrical/outputs/transponder", 0.0);
     }
 
     # Instrument Power: ignition, fuel, oil temperature
     if ( getprop("/controls/circuit-breakers/instr") ) {
-        setprop("/systems/c170b/electrical/outputs/instr-ignition-switch", bus_volts);
-        if ( bus_volts > 8 ) {
-            # starter
-            if ( getprop("controls/switches/starter") ) {
-                setprop("systems/electrical/outputs/starter", bus_volts);
-            } else {
-                setprop("systems/electrical/outputs/starter", 0.0);
+        setprop("/systems/electrical/outputs/instr-ignition-switch", bus_volts);
+    } else {
+        setprop("/systems/electrical/outputs/instr-ignition-switch", 0.0);
+    }
+ 
+	# starter
+    if ( bus_volts > 8 ) {
+		if ( getprop("controls/switches/starter") ) {
+			setprop("systems/electrical/outputs/starter", bus_volts);
+        } else {
+            setprop("systems/electrical/outputs/starter", 0.0);
             }
         } else {
             setprop("systems/electrical/outputs/starter", 0.0);
-        }
-    } else {
-        setprop("/systems/c170b/electrical/outputs/instr-ignition-switch", 0.0);
-        setprop("/systems/c170b/electrical/outputs/starter", 0.0);
-    }
-    
+	}
+	
     # Interior lights
     if ( getprop("/controls/circuit-breakers/instr_lt") ) {
-        setprop("/systems/c170b/electrical/outputs/instrument-lights", bus_volts);
-        setprop("/systems/c170b/electrical/outputs/cabin-lights", bus_volts);
+        setprop("/systems/electrical/outputs/instrument-lights", bus_volts);
+        setprop("/systems/electrical/outputs/cabin-lights", bus_volts);
     } else {
-        setprop("/systems/c170b/electrical/outputs/instrument-lights", 0.0);
-        setprop("/systems/c170b/electrical/outputs/cabin-lights", 0.0);
+        setprop("/systems/electrical/outputs/instrument-lights", 0.0);
+        setprop("/systems/electrical/outputs/cabin-lights", 0.0);
     }    
 
     # Autopilot Power
     if ( getprop("/controls/circuit-breakers/autopilot") ) {
-        setprop("/systems/c170b/electrical/outputs/autopilot", bus_volts);
+        setprop("/systems/electrical/outputs/autopilot", bus_volts);
     } else {
-        setprop("/systems/c170b/electrical/outputs/autopilot", 0.0 );
+        setprop("/systems/electrical/outputs/autopilot", 0.0 );
     }
 
     # Landing Light Power
     if ( getprop("/controls/circuit-breakers/landing_lt") ) {
-        setprop("/systems/c170b/electrical/outputs/landing-light", bus_volts);
+        setprop("/systems/electrical/outputs/landing-light", bus_volts);
     } else {
-        setprop("/systems/c170b/electrical/outputs/landing-light", 0.0 );
+        setprop("/systems/electrical/outputs/landing-light", 0.0 );
     }    
         
     # Taxi Lights Power
     # Notice taxi lights also use landing lights breaker. It is not a bug.
     if ( getprop("/controls/circuit-breakers/landing_lt") ) {
-        setprop("/systems/c170b/electrical/outputs/taxi-light", bus_volts); 
+        setprop("/systems/electrical/outputs/taxi-light", bus_volts); 
  } else {
-        setprop("/systems/c170b/electrical/outputs/taxi-light", 0.0);
+        setprop("/systems/electrical/outputs/taxi-light", 0.0);
     }
 
     # Beacon Power
     if ( getprop("/controls/circuit-breakers/beacon") ) {
-        setprop("/systems/c170b/electrical/outputs/beacon-light", bus_volts);		
+        setprop("/systems/electrical/outputs/beacon-light", bus_volts);		
 		if ( getprop("/controls/lighting/beacon-switch") ) {
 			bus_load -= bus_volts / 2.4;
 		}
 	} else {
-        setprop("/systems/c170b/electrical/outputs/beacon-light", 0.0);
+        setprop("/systems/electrical/outputs/beacon-light", 0.0);
     }
     
     # Nav Lights Power
     if ( getprop("/controls/circuit-breakers/nav_lt") ) {
-        setprop("/systems/c170b/electrical/outputs/nav-lights", bus_volts);
+        setprop("/systems/electrical/outputs/nav-lights", bus_volts);
 		if ( getprop("/controls/lighting/nav-lights-switch") ) {
 			bus_load -= bus_volts / 2.4;
 		}
     } else {
-        setprop("/systems/c170b/electrical/outputs/nav-lights", 0.0);
+        setprop("/systems/electrical/outputs/nav-lights", 0.0);
     }
 
     # Strobe Lights Power
     if ( getprop("/controls/circuit-breakers/strobe_lt") ) {
-        setprop("/systems/c170b/electrical/outputs/strobe-lights", bus_volts); 
+        setprop("/systems/electrical/outputs/strobe-lights", bus_volts); 
  } else {
-        setprop("/systems/c170b/electrical/outputs/strobe-lights", 0.0);
+        setprop("/systems/electrical/outputs/strobe-lights", 0.0);
     }
 
     # Turn Coordinator and directional gyro Power
     if ( getprop("/controls/circuit-breakers/turn-coordinator") ) {
-        setprop("/systems/c170b/electrical/outputs/turn-coordinator", bus_volts);
-        setprop("/systems/c170b/electrical/outputs/DG", bus_volts);
+        setprop("/systems/electrical/outputs/turn-coordinator", bus_volts);
+        setprop("/systems/electrical/outputs/DG", bus_volts);
     } else {
-        setprop("/systems/c170b/electrical/outputs/turn-coordinator", 0.0);
-        setprop("/systems/c170b/electrical/outputs/DG", 0.0);
+        setprop("/systems/electrical/outputs/turn-coordinator", 0.0);
+        setprop("/systems/electrical/outputs/DG", 0.0);
     }
 
-	setprop("/systems/c170b/electrical/suppliers/battery", battery_volts);
-	setprop("/systems/c170b/electrical/suppliers/alternator", alternator_volts);
-	setprop("/systems/c170b/electrical/amps", alternator_amps);
-	setprop("/systems/c170b/electrical/bus_load", bus_load);
-	setprop("/systems/c170b/electrical/volts", bus_volts);
-	setprop("/systems/c170b/electrical/battery-status", new_battery_status);
+	setprop("/systems/electrical/suppliers/battery", battery_volts);
+	setprop("/systems/electrical/suppliers/alternator", alternator_volts);
+	setprop("/systems/electrical/amps", alternator_amps);
+	setprop("/systems/electrical/bus_load", bus_load);
+	setprop("/systems/electrical/volts", bus_volts);
+	setprop("/systems/electrical/battery-status", new_battery_status);
 
 	settimer(electricsystem, 0);
 }

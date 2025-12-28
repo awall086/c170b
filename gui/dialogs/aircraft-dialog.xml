@@ -39,88 +39,170 @@
             <binding>
                 <command>dialog-close</command>
             </binding>
-	</button>
+		</button>
 	</group>
+
 	<hrule/>
 
-<group>
-	<layout>hbox</layout>
-	<padding>6</padding>
-    <checkbox>
-		<halign>left</halign>
-		<label>Place left safety cone</label>
-		<live>true</live>
-        <property>/sim/model/c170b/cone_L</property>
-        <enable>
-            <less-than>
-                <property>velocities/groundspeed-kt</property>
-                <value>0.1</value>
-            </less-than>
-        </enable>
-        <binding>
-            <command>property-toggle</command>
-            <property>/sim/model/c170b/cone_L</property>
-        </binding>
-        <binding>
-            <command>dialog-update</command>
-        </binding>
-    </checkbox>	
-
-    <checkbox>
-        <halign>left</halign>
-        <label>Place right safety cone</label>
-        <live>true</live>
-        <property>/sim/model/c170b/cone_R</property>
-        <enable>
-            <less-than>
-                <property>velocities/groundspeed-kt</property>
-                <value>0.1</value>
-            </less-than>
-        </enable>
-        <binding>
-            <command>property-toggle</command>
-            <property>/sim/model/c170b/cone_R</property>
-        </binding>
-        <binding>
-            <command>dialog-update</command>
-        </binding>
-    </checkbox>
-</group>
-<hrule/>
-
-<group>
-	<layout>vbox</layout>
-	<padding>6</padding>
-	<checkbox>
+		<group>
+			<layout>hbox</layout>
+			<padding>6</padding>
+            <checkbox>
                 <halign>left</halign>
-                <label>Show/Hide Chocks</label>
-                    <property>/sim/model/c170b/chocks</property>
+                <label>Place left safety cone</label>
+                <live>true</live>
+                <property>/sim/coneL/enable</property>
+                <enable>
+                    <less-than>
+                        <property>velocities/groundspeed-kt</property>
+                        <value>0.1</value>
+                    </less-than>
+                </enable>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>/sim/coneL/enable</property>
+                </binding>
+                <binding>
+                    <command>dialog-update</command>
+                </binding>
+            </checkbox>
+
+            <checkbox>
+                <halign>left</halign>
+                <label>Place right safety cone</label>
+                <live>true</live>
+                <property>/sim/coneR/enable</property>
+                <enable>
+                    <less-than>
+                        <property>velocities/groundspeed-kt</property>
+                        <value>0.1</value>
+                    </less-than>
+                </enable>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>/sim/coneR/enable</property>
+                </binding>
+                <binding>
+                    <command>dialog-update</command>
+                </binding>
+            </checkbox>
+	</group>	
+    
+    <hrule/>
+	
+	<group>
+		<layout>hbox</layout>
+		<padding>6</padding>
+	
+		<checkbox>
+            <halign>center</halign>
+            <label>Place left wheel chock</label>
+            <live>true</live>
+			<property>/sim/chocks001/enable</property>
+			<enable>
+                <less-than>
+                    <property>velocities/groundspeed-kt</property>
+                    <value>0.1</value>
+                </less-than>
+			</enable>
+            <binding>
+                <command>property-toggle</command>
+				<property>/sim/chocks001/enable</property>
+            </binding>
+			<binding>
+                <command>dialog-update</command>
+            </binding>
+		</checkbox>
+	
+		<checkbox>
+            <halign>right</halign>
+            <label>Place right wheel chock</label>
+			<live>true</live>
+			<property>/sim/chocks002/enable</property>
+			<enable>
+                <less-than>
+                <property>velocities/groundspeed-kt</property>
+                <value>0.1</value>
+                </less-than>
+			</enable>
+            <binding>
+                <command>property-toggle</command>
+				<property>/sim/chocks002/enable</property>
+            </binding>
+			<binding>
+				<command>dialog-update</command>
+            </binding>
+		</checkbox>
+	</group>	
+	
+    <hrule/>
+ 
+	<group>
+		<layout>hbox</layout>
+		<padding>6</padding>
+            <checkbox>
+                <halign>left</halign>
+                <label>Place Ground Power Unit</label>
+                <live>true</live>
+                <property>/sim/gpu/enable</property>
+                <enable>
+                    <and>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>0.1</value>
+                        </less-than>
+                        <not>
+                            <property>/controls/electric/external-power</property>
+                        </not>
+                    </and>
+                </enable>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>/sim/gpu/enable</property>
+                </binding>
+                <binding>
+                    <command>dialog-update</command>
+                </binding>
+            </checkbox>
+			<checkbox>
+				<halign>left</halign>
+				<label>Connect GPU to aircraft</label>
+				<live>true</live>
+				<property>/controls/electric/external-power</property>
+				<enable>
+					<property>/sim/gpu/enable</property>
+				</enable>
+				<binding>
+					<command>property-toggle</command>
+					<property>/controls/electric/external-power</property>
+				</binding>
+				<binding>
+					<command>dialog-update</command>
+				</binding>
+			</checkbox> 										
+	</group>
+
+		<hrule/>
+
+		<group>	
+			<layout>vbox</layout>
+			<padding>6</padding> 
+			 <text>
+                <label>Panel options</label>
+                <halign>center</halign>
+            </text>
+        <hrule/>				
+
+            <checkbox>
+                <halign>left</halign>
+                <label>Show/Hide Garmin GPSMap 196</label>
+                <property>/sim/model/c170b/garmin196-visible</property>
                 <live>true</live>
                 <binding>
                     <command>property-toggle</command>
-                    <property>/sim/model/c170b/chocks</property>
+                    <property>/sim/model/c170b/garmin196-visible</property>
                 </binding>
-	<binding>
-                    <command>dialog-update</command>
-                </binding>
-	</checkbox>
-</group>
-        <hrule/>
-<group>
-	<layout>vbox</layout>
-	<padding>6</padding>
-	<checkbox>
-                <halign>left</halign>
-                <label>Conect external power unit</label>
-                    <property>/controls/electric/external-power</property>
-                <live>true</live>
-                <binding>
-                    <command>property-toggle</command>
-                    <property>/controls/electric/external-power</property>
-                </binding>
-	<binding>
-                    <command>dialog-update</command>
-                </binding>
-	</checkbox>
-</group>
+            </checkbox>
+
+        </group>
 </PropertyList>

@@ -27,9 +27,8 @@
             <generic>
                 <float n="0" alias="/sim/model/door-positions/rightDoor/position-norm-effective"/>
                 <float n="1" alias="/sim/model/door-positions/leftDoor/position-norm-effective"/>
-                <float n="2" alias="/sim/model/door-positions/baggageDoor/position-norm-effective"/>
-                <float n="3" alias="/sim/model/door-positions/leftWindow/position-norm"/>
-                <float n="4" alias="/sim/model/door-positions/rightWindow/position-norm"/>
+                <float n="2" alias="/sim/model/door-positions/leftWindow/position-norm"/>
+                <float n="3" alias="/sim/model/door-positions/rightWindow/position-norm"/>
             </generic>
         </multiplay>
   
@@ -44,7 +43,7 @@
         <aero archive="y">c170b</aero>
 
         <model>
-            <path archive="y">Aircraft/c170b/Models/c170b.xml</path>
+            <path archive="y">Models/c170b.xml</path>
 
             <!-- Default livery 
             <livery>
@@ -56,6 +55,7 @@
                 <pitot-cover type="bool">true</pitot-cover>
 				<sun_visor_l type="double">0.0</sun_visor_l>
 				<sun_visor_r type="double">0.0</sun_visor_r>
+				<garmin196-visible type="bool">false</garmin196-visible>
                  <!-- Event sounds -->
                 <sound>
                     <click-master-bat type="bool">false</click-master-bat>
@@ -108,8 +108,6 @@
 
         <menubar include="gui/dialogs/c170b-menu.xml"/>
 
-
-
         <!-- Splash screens. One is randomly chosen when FlightGear starts -->
         <previews>
             <preview>
@@ -137,21 +135,67 @@
                 <path>Previews/c170b-preview4.jpg</path>
                 <splash type="bool">true</splash>
             </preview>			
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c170b-preview5.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>	
+            <preview>
+                <type>interior</type>
+                <path>Previews/c170b-preview6.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c170b-preview7.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c170b-preview8.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>interior</type>
+                <path>Previews/c170b-preview9.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c170b-preview10.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>interior</type>
+                <path>Previews/c170b-preview11.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
         </previews>
 
         <systems>           
             <property-rule n="100">
-                <path archive="y">Aircraft/c170b/Systems/engine.xml</path>
+                <path archive="y">Systems/engine.xml</path>
             </property-rule>
+
             <property-rule n="101">
-                <path archive="y">Aircraft/c170b/Systems/lights.xml</path>
+                <path archive="y">Systems/lights.xml</path>
             </property-rule>            
+
             <property-rule n="102">
-                <path archive="y">Aircraft/c170b/Systems/pax.xml</path>
+                <path archive="y">Systems/pax.xml</path>
             </property-rule>
+
             <property-rule n="103">
                 <name>FiltersOnly</name>
                 <path>Systems/instruments.xml</path>
+            </property-rule>
+
+            <property-rule n="104">
+                <path>Systems/ground-effects.xml</path>
+            </property-rule>
+
+            <property-rule n="105">
+                <path>Systems/sounds.xml</path>
             </property-rule>
         </systems>
 
@@ -160,19 +204,9 @@
         </sound>
 
         <!-- Position the pilot viewpoint and angle -->
-        <view>
-            <internal type="bool" archive="y">true</internal>
-            <config>
-                <x-offset-m archive="y" type="double">-0.16</x-offset-m>
-                <y-offset-m archive="y" type="double">0.520</y-offset-m>
-                <z-offset-m archive="y" type="double">2.66</z-offset-m>
-                <pitch-offset-deg type="double">-12</pitch-offset-deg>
-                <default-field-of-view-deg>75</default-field-of-view-deg>
-            </config>
-        </view>
 
-	<view>
-            <name>pilot view</name>
+		<view>
+            <name>Pilot View</name>
             <type>lookfrom</type>
             <internal type="bool" archive="y">true</internal>
             <config>
@@ -188,6 +222,20 @@
             </config>
         </view>
 
+		<view>
+			<name>Exterior View</name>
+			<type>lookat</type>
+			<config>
+				<from-model type="bool">true</from-model>
+				<from-model-idx type="int">0</from-model-idx>
+				<at-model type="bool">true</at-model>
+				<at-model-idx type="int">0</at-model-idx>
+				<x-offset-m type="double">0</x-offset-m>
+				<y-offset-m type="double">10</y-offset-m>
+				<z-offset-m type="double">-15</z-offset-m>
+			</config>
+		</view>
+ 
         <view n="100">
             <name>Fuel Selector</name>
             <type>lookfrom</type>
@@ -353,6 +401,9 @@
                 <master-bat type="bool">false</master-bat>
                 <master-alt type="bool">true</master-alt>
                 <mixture type="double">0</mixture>
+				<primer type="int">0</primer>
+				<use-primer type="double">0.0</use-primer>
+				<carb-heat type="double">0.0</carb-heat>
             </engine>   
         </engines>
 
@@ -368,6 +419,7 @@
             <master-bat type="bool">false</master-bat>
             <master-alt type="bool">true</master-alt>
             <magnetos type="double">0</magnetos>
+			<starter type="bool">false</starter>
         </switches>
 
         <lighting>
@@ -414,10 +466,25 @@
         </fuel>
     </consumables>
 
+    <engines>
+        <engine n="0">
+            <rpm type="double">0</rpm>
+            <magnetos type="int">0</magnetos>
+            <mixture type="double">0</mixture>
+            <running type="bool">false</running>
+			<kill-engine type="bool">false</kill-engine>
+            <carb_ice type="double">0.0</carb_ice>
+            <carb_icing_rate type="double">0.0</carb_icing_rate>
+            <carb_icing_allowed type="bool">true</carb_icing_allowed>
+			<carb_temp type="double">0.0</carb_temp>
+        </engine>
+	</engines>
+	
     <nasal>
         <c170b>
             <file>Nasal/c170b.nas</file>
             <file>Nasal/liveries.nas</file>
+			<file>Nasal/engine.nas</file>
             <file>Nasal/views.nas</file>
             <file>Nasal/doors.nas</file>
 			<file>Nasal/af394a.nas</file> 
@@ -428,11 +495,11 @@
         </electrical>
 
         <acconfig>
-            <file>Aircraft/c170b/AircraftConfig/acconfig.nas</file>
+            <file>AircraftConfig/acconfig.nas</file>
         </acconfig>
 
         <garmin196>
-            <file>Aircraft/c170b/Models/panel/instruments/garmin196/garmin196.nas</file>
+            <file>Models/panel/instruments/garmin196/garmin196.nas</file>
         </garmin196>
 
         <light-manager>
@@ -442,11 +509,9 @@
     </nasal>
 
     <systems>
-        <c170b>
-            <electrical>
-                <battery-status type="double">100.0</battery-status>
-            </electrical>
-        </c170b>
+        <electrical>
+            <battery-status type="double">100.0</battery-status>
+        </electrical>
     </systems>
 
     <instrumentation>
@@ -468,7 +533,7 @@
         </comm>
 
         <garmin196>
-            <texture-file>Aircraft/c170b/Models/panel/instruments/garmin196/coque.png</texture-file>
+            <texture-file>Models/panel/instruments/garmin196/coque.png</texture-file>
         </garmin196>
 
     </instrumentation>

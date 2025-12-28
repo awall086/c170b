@@ -80,4 +80,40 @@
         </output>
     </filter>
 
+    <filter>
+        <name>Stall Horn Volume</name>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <not>
+                    <property>/sim/freeze/replay-state</property>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <property>/fdm/jsbsim/sounds/stall-horn-volume</property>
+        </input>
+        <output>
+            <property>/fdm/jsbsim/sounds/stall-horn-volume-actual</property>
+        </output>
+    </filter>
+
+    <filter>
+        <name>Stall Horn Pitch</name>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <not>
+                    <property>/sim/freeze/replay-state</property>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <property>/fdm/jsbsim/sounds/stall-horn-pitch</property>
+        </input>
+        <output>
+            <property>/fdm/jsbsim/sounds/stall-horn-pitch-actual</property>
+        </output>
+    </filter>
+
 </PropertyList>

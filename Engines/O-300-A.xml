@@ -17,7 +17,7 @@
   <displacement unit="IN3"> 300.00 </displacement>
   <maxhp>        145.00 </maxhp>
   <cycles>         4.0 </cycles>
-  <idlerpm>      300.0 </idlerpm>
+  <idlerpm>      450.0 </idlerpm>
   <maxrpm>      2700.0 </maxrpm>
   <sparkfaildrop>  0.1 </sparkfaildrop>
   <volumetric-efficiency> 0.85 </volumetric-efficiency>

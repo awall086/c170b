@@ -87,5 +87,44 @@
             <property>/fdm/jsbsim/propulsion/tank[2]/collector-valve</property>
         </output>
     </logic>
-	
+
+    <logic>
+        <name>Engine Starter</name>
+        <input>
+            <and>
+                <less-than>
+                    <property>/systems/electrical/outputs/starter</property>
+                    <value>15.5</value>
+                </less-than>
+                <greater-than>
+                    <property>/systems/electrical/outputs/starter</property>
+                    <value>8.0</value>
+                </greater-than>
+				<property>/controls/switches/starter</property>
+            </and>
+        </input>
+        <output>
+            <property>/controls/engines/engine[0]/starter</property>
+        </output>
+    </logic>
+
+    <filter>
+        <name>Controls Primer Lever</name>
+        <type>noise-spike</type>
+        <max-rate-of-change>1.1</max-rate-of-change>
+        <enable>
+            <condition>
+                <not>
+                    <property>/sim/freeze/replay-state</property>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <property>/controls/engines/engine/primer-lever</property>
+        </input>
+        <output>
+            <property>/sim/model/c170b/cockpit/primer-lever-animation</property>
+        </output>
+    </filter>
+
 </PropertyList>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+    <sim>
+        <model>
+            <livery>
+                <name type="string">N4055J</name>
+                <index type="int">4</index>
+                <texture>Liveries\N4055J\c170b-1.png</texture>
+                <texture2>Liveries\N4055J\c170b-2.png</texture2>
+                <texture3>Liveries\N4055J\c170b-3.png</texture3>
+                <prop-texture>prop.png</prop-texture> 
+				<reflection-correction>0.18</reflection-correction>
+				<ambient-correction>-0.01</ambient-correction>
+				<fresnel>0.1</fresnel>
+			</livery>
+        </model>
+    </sim>
+</PropertyList>

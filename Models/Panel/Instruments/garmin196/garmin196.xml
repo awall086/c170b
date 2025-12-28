@@ -178,7 +178,7 @@
     </emission>
   </animation>
 
-  <!-- interior effects  -->
+  <!-- interior effects  
   <effect>
     <inherits-from>Aircraft/c172p/Models/Effects/interior/lm-gps</inherits-from>
     <object-name>coque</object-name>
@@ -205,7 +205,7 @@
     <object-name>coque.inter</object-name>
     <object-name>ecran.off</object-name>
     <object-name>GPSMount</object-name>
-  </effect>
+  </effect> 
 
     <animation>
         <type>material</type>
@@ -245,7 +245,7 @@
             <green-prop>/sim/model/c172p/lighting/rgb-ra-g-factor</green-prop>
             <blue-prop>/sim/model/c172p/lighting/rgb-ra-b-factor</blue-prop>
         </emission>
-    </animation>
+    </animation> -->
 
   <animation>
     <type>material</type>

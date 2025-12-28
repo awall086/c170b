@@ -7,11 +7,11 @@
         <input>
             <and>
                 <less-than>
-                    <property>/systems/c170b/electrical/outputs/landing-light</property>
+                    <property>/systems/electrical/outputs/landing-light</property>
                     <value>14.5</value>
                 </less-than>
                 <greater-than>
-                    <property>/systems/c170b/electrical/outputs/landing-light</property>
+                    <property>/systems/electrical/outputs/landing-light</property>
                     <value>10.0</value>
                 </greater-than>
 				<greater-than>
@@ -30,11 +30,11 @@
         <input>
             <and>
                 <less-than>
-                    <property>/systems/c170b/electrical/outputs/taxi-light</property>
+                    <property>/systems/electrical/outputs/taxi-light</property>
                     <value>14.5</value>
                 </less-than>
                 <greater-than>
-                    <property>/systems/c170b/electrical/outputs/taxi-light</property>
+                    <property>/systems/electrical/outputs/taxi-light</property>
                     <value>10.0</value>
                 </greater-than>
 				<greater-than>
@@ -111,7 +111,7 @@
         <input>
             <condition>
                 <greater-than> 
-                    <property>/systems/c170b/electrical/outputs/nav-lights</property>
+                    <property>/systems/electrical/outputs/nav-lights</property>
                     <value>10</value>
                 </greater-than>
             </condition>
@@ -128,7 +128,7 @@
         <input>
             <condition>
                 <greater-than> 
-                    <property>/systems/c170b/electrical/outputs/beacon-light</property>
+                    <property>/systems/electrical/outputs/beacon-light</property>
                     <value>11</value>
                 </greater-than>
             </condition>
@@ -206,7 +206,7 @@
         <input>
             <condition>
                 <greater-than> 
-                    <property>/systems/c170b/electrical/outputs/strobe-lights</property>
+                    <property>/systems/electrical/outputs/strobe-lights</property>
                     <value>10</value>
                 </greater-than>
             </condition>
@@ -223,7 +223,7 @@
         <input>
             <condition>
                 <greater-than> 
-                    <property>/systems/c170b/electrical/outputs/instrument-lights</property>
+                    <property>/systems/electrical/outputs/instrument-lights</property>
                     <value>10</value>
                 </greater-than>
             </condition>
@@ -233,6 +233,5 @@
             <property>/sim/model/c170b/lighting/radio</property>
         </output>
     </filter>
-
 
 </PropertyList>

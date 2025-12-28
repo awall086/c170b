@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <path>carbtemp.ac</path>
+
+	<animation>
+		<type>material</type>
+        <object-name>face</object-name>
+		<object-name>face_2</object-name>
+        <object-name>airspeed_needle</object-name>
+		<emission>
+			<red>0.10</red>
+			<green>0.02</green>
+			<blue>0.0</blue>
+			<factor-prop>/controls/lighting/int-lights</factor-prop>
+		</emission>
+	</animation>
+
+	<animation> 
+		<type>rotate</type>
+		<object-name>needle</object-name>
+		<property>engines/engine[0]/carb_temp</property>
+		<interpolation>
+			<entry><ind> -30</ind><dep> -64</dep></entry>
+			<entry><ind> -20</ind><dep> -44</dep></entry>
+			<entry><ind> -10</ind><dep> -23</dep></entry>
+			<entry><ind>   0</ind><dep>   0</dep></entry>
+			<entry><ind>  10</ind><dep>  23</dep></entry>
+			<entry><ind>  20</ind><dep>  44</dep></entry>
+			<entry><ind>  30</ind><dep>  64</dep></entry>
+		</interpolation>
+		<axis> 
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>  
+		</center>
+	</animation>
+	
+</PropertyList>

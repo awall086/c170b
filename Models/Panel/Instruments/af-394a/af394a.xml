@@ -4,22 +4,10 @@
 
   <path>af394a.ac</path>
 
-    <effect>
-        <inherits-from>Aircraft/c170b/Models/Effects/interior/c170b-interior-compartment</inherits-from>
-		<object-name>Chassis</object-name>
-		<object-name>knob_roll_sel</object-name>
-		<object-name>knob_roll_sel_mode</object-name>
-		<object-name>hdg_sel</object-name>
+	<animation>
+		<type>rotate</type>
 		<object-name>lever</object-name>
-		<object-name>ap_on</object-name>	
-		<object-name>switch_nav_base</object-name>
-		<object-name>switch_ap_base</object-name>
-    </effect>
-
-  <animation>
-    <type>rotate</type>
-    <object-name>lever</object-name>
-    <property>/controls/flight/aileron-trim</property>
+		<property>/controls/flight/aileron-trim</property>
 		<factor>15</factor>
 		<axis>
 			<x>-1.0</x>
@@ -31,44 +19,44 @@
 			<y-m>-0.000423</y-m>
 			<z-m>-0.024703</z-m>
 		</center>
-  </animation> 
+	</animation> 
 
-  <animation>
-    <type>knob</type>
-	<visible>true</visible>
-    <object-name>lever</object-name>
-    <condition>
-		<equals>
-			<property>/autopilot/AF394A/locks/ap-on</property>
-			<value>1</value>
-		</equals>
-	</condition>	
-    <action>
-		<binding>
-			<command>property-adjust</command>
-			<property>/controls/flight/aileron-trim</property>
-			<factor>0.05</factor>
-			<max>1</max>
-			<min>-1</min>
-			<wrap>0</wrap>
-		</binding>
-    </action>
-	<hovered>
-		<binding>
-			<command>set-tooltip</command>
-			<tooltip-id>trim_setting</tooltip-id>
-			<label>aileron trim: %d</label>
-			<property>/controls/flight/aileron-trim</property>
-			<mapping>percent</mapping> 
-		</binding>
-	</hovered>
-  </animation>
+	<animation>
+		<type>knob</type>
+		<visible>true</visible>
+		<object-name>lever</object-name>
+		<condition>
+			<equals>
+				<property>/autopilot/AF394A/locks/ap-on</property>
+				<value>1</value>
+			</equals>
+		</condition>	
+		<action>
+			<binding>
+				<command>property-adjust</command>
+				<property>/controls/flight/aileron-trim</property>
+				<factor>0.05</factor>
+				<max>1</max>
+				<min>-1</min>
+				<wrap>0</wrap>
+			</binding>
+		</action>
+		<hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>trim_setting</tooltip-id>
+				<label>aileron trim: %d</label>
+				<property>/controls/flight/aileron-trim</property>
+				<mapping>percent</mapping> 
+			</binding>
+		</hovered>
+	</animation>
 
-  <animation>
-    <type>rotate</type>
-    <object-name>knob_roll_sel</object-name>
-    <object-name>knob_roll_sel_mode</object-name>
-    <property>/autopilot/settings/target-roll-deg</property>
+	<animation>
+		<type>rotate</type>
+		<object-name>knob_roll_sel</object-name>
+		<object-name>knob_roll_sel_mode</object-name>
+		<property>/autopilot/settings/target-roll-deg</property>
 		<factor>2</factor>
 		<axis>
 			<x>-1.0</x>
@@ -80,44 +68,44 @@
 			<y-m>-0.000423</y-m>
 			<z-m>-0.024812</z-m>
 		</center>
-  </animation>
+	</animation>
 
-  <animation>
-    <type>knob</type>
-	<visible>true</visible>
-    <object-name>knob_roll_sel</object-name>
-    <condition>
-		<equals>
-			<property>/autopilot/AF394A/locks/ap-mode</property>
-			<value>1</value>
-		</equals>
-	</condition>	
-    <action>
-		<binding>
-			<command>property-adjust</command>
-			<property>/autopilot/settings/target-roll-deg</property>
-			<factor>1</factor>
-			<max>15</max>
-			<min>-15</min>
-			<wrap>0</wrap>
-		</binding>
-    </action>
-	<hovered>
-		<binding>
-			<command>set-tooltip</command>
-			<tooltip-id>ap-roll-switch</tooltip-id>
-			<label>Autopilot roll: %d</label>
-			<property>/autopilot/settings/target-roll-deg</property>
-			<mapping>percent</mapping> 
-		</binding>
-	</hovered>
-  </animation>
+	<animation>
+		<type>knob</type>
+		<visible>true</visible>
+		<object-name>knob_roll_sel</object-name>
+		<condition>
+			<equals>
+				<property>/autopilot/AF394A/locks/ap-mode</property>
+				<value>1</value>
+			</equals>
+		</condition>	
+		<action>
+			<binding>
+				<command>property-adjust</command>
+				<property>/autopilot/settings/target-roll-deg</property>
+				<factor>1</factor>
+				<max>15</max>
+				<min>-15</min>
+				<wrap>0</wrap>
+			</binding>
+		</action>
+		<hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>ap-roll-switch</tooltip-id>
+				<label>Autopilot roll: %d</label>
+				<property>/autopilot/settings/target-roll-deg</property>
+				<mapping>percent</mapping> 
+			</binding>
+		</hovered>
+	</animation>
 
-  <animation>
-    <type>translate</type>
-    <object-name>knob_roll_sel</object-name>
-    <object-name>knob_roll_sel_mode</object-name>
-    <property>/autopilot/AF394A/locks/ap-mode</property>
+	<animation>
+		<type>translate</type>
+		<object-name>knob_roll_sel</object-name>
+		<object-name>knob_roll_sel_mode</object-name>
+		<property>/autopilot/AF394A/locks/ap-mode</property>
 		<factor>0.005</factor>
 		<axis>
 			<x>1.0</x>
@@ -129,12 +117,12 @@
 			<y-m>-0.000423</y-m>
 			<z-m>-0.024812</z-m>
 		</center>
-  </animation>
+	</animation>
 
-  <animation>
-    <type>pick</type>
-    <visible>true</visible>
-    <object-name>knob_roll_sel_mode</object-name>
+	<animation>
+		<type>pick</type>
+		<visible>true</visible>
+		<object-name>knob_roll_sel_mode</object-name>
 		<visible>true</visible>
 		<action>
 			<button>1</button>
@@ -152,40 +140,40 @@
 				<script>c170b.click("master-bat")</script>
 			</binding>
 		</action>
-   <hovered>
-    <binding>
-      <command>set-tooltip</command>
-      <tooltip-id>ap-mode-switch</tooltip-id>
-      <label>Autopilot mode: %s</label>
-      <mapping>nasal</mapping>
-      <script>
-        var modes = ['Auto', 'Manual'];
-        return modes[arg[0]];
-      </script>
-      <property>/autopilot/AF394A/locks/ap-mode</property>
-   </binding>
-   </hovered>
-  </animation>
+		<hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>ap-mode-switch</tooltip-id>
+				<label>Autopilot mode: %s</label>
+				<mapping>nasal</mapping>
+				<script>
+					var modes = ['Auto', 'Manual'];
+					return modes[arg[0]];
+				</script>
+				<property>/autopilot/AF394A/locks/ap-mode</property>
+			</binding>
+		</hovered>
+	</animation>
 
-  <animation>
-    <type>rotate</type>
-    <object-name>hdg_sel</object-name>
-    <property>/autopilot/AF394A/locks/nav-mode</property>
-    <factor>-30</factor>
-    <axis>
-        <x1-m>0.007223</x1-m>
-        <y1-m>0.04144</y1-m>
-        <z1-m>-0.024555</z1-m>
-        <x2-m>0.007223</x2-m>
-        <y2-m>0.053052</y2-m>
-        <z2-m>-0.024555</z2-m>
-    </axis>
-  </animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>hdg_sel</object-name>
+		<property>/autopilot/AF394A/locks/nav-mode</property>
+		<factor>-30</factor>
+		<axis>
+			<x1-m>0.007223</x1-m>
+			<y1-m>0.04144</y1-m>
+			<z1-m>-0.024555</z1-m>
+			<x2-m>0.007223</x2-m>
+			<y2-m>0.053052</y2-m>
+			<z2-m>-0.024555</z2-m>
+		</axis>
+	</animation>
 
-  <animation>
-    <type>pick</type>
-    <visible>true</visible>
-    <object-name>hdg_sel</object-name>
+	<animation>
+		<type>pick</type>
+		<visible>true</visible>
+		<object-name>hdg_sel</object-name>
 		<visible>true</visible>
 		<action>
 			<button>0</button>
@@ -199,35 +187,36 @@
 				<script>c170b.click("master-bat")</script>
 			</binding>
 		</action>
-   <hovered>
-    <binding>
-      <command>set-tooltip</command>
-      <tooltip-id>nav-mode-switch</tooltip-id>
-      <label>Heading mode: %s</label>
-      <mapping>nasal</mapping>
-      <script>
-        var modes = ['Heading', 'Omni'];
-        return modes[arg[0]];
-      </script>
-      <property>/autopilot/AF394A/locks/nav-mode</property>
-   </binding>
-   </hovered>
-  </animation>
+		<hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>nav-mode-switch</tooltip-id>
+				<label>Heading mode: %s</label>
+				<mapping>nasal</mapping>
+				<script>
+					var modes = ['Heading', 'Omni'];
+					return modes[arg[0]];
+				</script>
+				<property>/autopilot/AF394A/locks/nav-mode</property>
+			</binding>
+		</hovered>
+	</animation>
 
 	<animation>
 		<type>rotate</type>
 		<object-name>ap_on</object-name>
 		<property>/autopilot/AF394A/locks/ap-on</property>
-    <factor>-30</factor>
-    <axis>
-        <x1-m>0.007223</x1-m>
-        <y1-m>-0.054052</y1-m>
-        <z1-m>-0.024555</z1-m>
-        <x2-m>0.007223</x2-m>
-        <y2-m>-0.04244</y2-m>
-        <z2-m>-0.024555</z2-m>
-    </axis>
+		<factor>-30</factor>
+		<axis>
+			<x1-m>0.007223</x1-m>
+			<y1-m>-0.054052</y1-m>
+			<z1-m>-0.024555</z1-m>
+			<x2-m>0.007223</x2-m>
+			<y2-m>-0.04244</y2-m>
+			<z2-m>-0.024555</z2-m>
+		</axis>
 	</animation>
+
 	<animation>
 		<type>pick</type>
 		<object-name>ap_on</object-name>
