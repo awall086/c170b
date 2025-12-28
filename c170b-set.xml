@@ -104,6 +104,8 @@
             <path>/sim/model/c170b/pitot-cover</path>
         </aircraft-data>
 
+		<help include="c170b-help.xml"/>
+		
         <gui n="0" include="gui/c170b-gui.xml"/>
 
         <menubar include="gui/dialogs/c170b-menu.xml"/>

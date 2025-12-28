@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <title>Cessna 170b Help</title>
+
+    <key>
+        <name>y</name>
+        <desc>Toggle yokes hidden/visible</desc>
+    </key>
+    <key>
+        <name>F</name>
+        <desc>Select Fuel Selector View</desc>
+    </key>
+    <key>
+        <name>R</name>
+        <desc>Select Radio and Lower Panel View</desc>
+    </key>
+    <key>
+        <name>N</name>
+        <desc>Select Navigation and GPS View</desc>
+    </key>
+    <key>
+        <name>E</name>
+        <desc>Select Engine Instruments View</desc>
+    </key>
+
+    <key>
+        <name>Q</name>
+        <desc>Reset to Default Cockpit View</desc>
+    </key>
+
+    <line/>
+    <line/>
+    <line>Takeoff: Flaps 20 (Second notch), full throttle, rotate at 65 MPH</line>
+    <line>Climbout: no flaps, full throttle, best rate of climb 88 MPH</line>
+    <line>Cruise: Throttle 65%, Mixture rich of peak</line>
+    <line>Landing: full flaps, 75 MPH</line>
+    <line/>
+    <line>_________V Speeds_________</line>
+    <line>Vs0: 52 MPH</line>
+    <line>Vs1: 58 MPH</line>
+    <line>Vx: 62 MPH</line>
+    <line>Vy: 88 MPH</line>
+    <line>Va: 99kts</line>
+    <line>Vfe: 100 MPH</line>
+    <line>Vno: 143 MPH</line>
+    <line>Vne: 160 MPH</line>
+
+
+</PropertyList>
