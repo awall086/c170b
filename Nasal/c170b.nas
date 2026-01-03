@@ -258,21 +258,6 @@ setlistener("/engines/engine[0]/killed", func (node) {
     };
 });
 
-############################################
-# Flaps movement in 4 steps
-############################################
-
-var flapsDown = func(step) {
-    if(step == 0) return;
-    if(props.globals.getNode("/sim/flaps") != nil) {
-        stepProps("/controls/flight/flaps", "/sim/flaps", step);
-        return;
-    }
-    # Hard-coded flaps movement in 4 equal steps:
-    var val = 0.25 * step + getprop("/controls/flight/flaps");
-    setprop("/controls/flight/flaps", val > 1 ? 1 : val < 0 ? 0 : val);
-}
-
 # Saved aircraft data is not reliable so save it here as well
 aircraft.data.add("/sim/model/c170b/pitot-cover");
 

@@ -118,12 +118,12 @@
 		<desc>Decrease flaps</desc>
 		<binding>
 			<command>nasal</command>
-			<script>c170b.flapsDown(-1)</script>
+			<script>controls.flapsDown(-1)</script>
 		</binding>
 		<mod-up>
 			<binding>
 				<command>nasal</command>
-				<script>c170b.flapsDown(0)</script>
+				<script>controls.flapsDown(0)</script>
 			</binding>
 		</mod-up>
 	</key>
@@ -133,12 +133,29 @@
 		<desc>Increase flaps</desc>
 		<binding>
 			<command>nasal</command>
-			<script>c170b.flapsDown(1)</script>
+			<script>controls.flapsDown(1)</script>
 		</binding>
 		<mod-up>
 			<binding>
 				<command>nasal</command>
-				<script>c170b.flapsDown(0)</script>
+				<script>controls.flapsDown(0)</script>
+			</binding>
+		</mod-up>
+	</key>
+
+	<key n="115">
+		<name>s</name>
+		<desc>Fire Starter on Selected Engine(s)</desc>
+		<binding>
+			<command>property-assign</command>
+			<property>controls/switches/starter</property>
+			<value>1</value>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>controls/switches/starter</property>
+				<value>0</value>
 			</binding>
 		</mod-up>
 	</key>

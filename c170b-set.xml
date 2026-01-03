@@ -19,7 +19,7 @@
         </tags>
   
         <author>awall86 (Adrian Fernandez Gomez), wlbragg (Wayne Bragg), TheEagle, david.megginson (David Megginson), ysopflying. A special thanks to Octal450 (Josh Davidson) for his excelent Aircraft Config Center Utility</author>
-        <status>alpha</status>
+        <status>beta</status>
         <aircraft-version>2025.12.1B</aircraft-version>
         <minimum-fg-version>2024.1.3</minimum-fg-version>
  
@@ -306,6 +306,14 @@
             </config>
         </view>
 
+		<flaps>
+			<setting>0.0</setting>
+			<setting>0.25</setting>
+			<setting>0.5</setting>
+			<setting>0.75</setting>
+			<setting>1.0</setting>
+		</flaps>
+
     </sim>
 
     <input>
@@ -444,7 +452,8 @@
             <radio1 type="bool">true</radio1>
             <autopilot type="bool">true</autopilot>
         </circuit-breakers>
-    </controls>
+	
+	</controls>
 
     <consumables>
         <fuel>
