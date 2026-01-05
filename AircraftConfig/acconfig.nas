@@ -6,7 +6,7 @@
 # Adapted to Cessna 170b by Adrian Fernandez (awall86)
 
 var CONFIG = {
-	noUpdateCheck: 0, # Disable ACCONFIG update checks
+	noUpdateCheck: 1, # Disable ACCONFIG update checks
 };
 
 var spinning = maketimer(0.10, func {
@@ -46,18 +46,17 @@ setprop("/systems/acconfig/out-of-date", 0);
 setprop("/systems/acconfig/mismatch-reason", "XX");
 setprop("/systems/acconfig/options/revision", "NONE");
 
-var aircraft_dir = getprop("/sim/aircraft-dir");
-var init_dlg = gui.Dialog.new("/sim/gui/dialogs/acconfig/init/dialog", aircraft_dir ~ "/AircraftConfig/init.xml");
-var update_dlg = gui.Dialog.new("/sim/gui/dialogs/acconfig/update/dialog", aircraft_dir ~ "/AircraftConfig/update.xml");
-var updated_dlg = gui.Dialog.new("/sim/gui/dialogs/acconfig/updated/dialog", aircraft_dir ~ "/AircraftConfig/updated.xml");
-var error_mismatch = gui.Dialog.new("/sim/gui/dialogs/acconfig/error/mismatch/dialog", aircraft_dir ~ "/AircraftConfig/error-mismatch.xml");
 
+var init_dlg = gui.Dialog.new("/sim/gui/dialogs/acconfig/init/dialog", "Aircraft/c170b/AircraftConfig/init.xml");
+var update_dlg = gui.Dialog.new("/sim/gui/dialogs/acconfig/update/dialog", "Aircraft/c170b/AircraftConfig/update.xml");
+var updated_dlg = gui.Dialog.new("/sim/gui/dialogs/acconfig/updated/dialog", "Aircraft/c170b/AircraftConfig/updated.xml");
+var error_mismatch = gui.Dialog.new("/sim/gui/dialogs/acconfig/error/mismatch/dialog", "Aircraft/c170b/AircraftConfig/error-mismatch.xml");
 spinning.start();
 init_dlg.open();
 if (!CONFIG.noUpdateCheck) {
 	http.load("https://raw.githubusercontent.com/awall086/c170b/master/revision.txt").done(func(r) setprop("/systems/acconfig/new-revision", r.response));
 }
-var revisionFile = aircraft_dir ~ "/revision.txt";
+var revisionFile = (getprop("/sim/aircraft-dir") ~ "/revision.txt");
 var current_revision = io.readfile(revisionFile);
 setprop("/systems/acconfig/revision", current_revision);
 

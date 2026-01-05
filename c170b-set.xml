@@ -43,7 +43,7 @@
         <aero archive="y">c170b</aero>
 
         <model>
-            <path archive="y">Models/c170b.xml</path>
+            <path archive="y">Aircraft/c170b/Models/c170b.xml</path>
 
             <!-- Default livery -->
             <livery>
@@ -81,13 +81,13 @@
 
             <crew>
                 <pilot n="0">
-                    <pose include="Models/Human/pose-pilot.xml"/>
+                    <pose include="Aircraft/c170b/Models/Human/pose-pilot.xml"/>
                     <character>0</character>
                     <outfit>0</outfit>
                     <equipment>0</equipment>
                 </pilot>
                 <pilot n="1">
-                    <pose include="Models/Human/pose-copilot.xml"/>
+                    <pose include="Aircraft/c170b/Models/Human/pose-copilot.xml"/>
                     <character>0</character>
                     <outfit>0</outfit>
                     <equipment>0</equipment>
@@ -176,15 +176,15 @@
 
         <systems>           
             <property-rule n="100">
-                <path archive="y">Systems/engine.xml</path>
+                <path archive="y">Aircraft/c170b/Systems/engine.xml</path>
             </property-rule>
 
             <property-rule n="101">
-                <path archive="y">Systems/lights.xml</path>
+                <path archive="y">Aircraft/c170b/Systems/lights.xml</path>
             </property-rule>            
 
             <property-rule n="102">
-                <path archive="y">Systems/pax.xml</path>
+                <path archive="y">Aircraft/c170b/Systems/pax.xml</path>
             </property-rule>
 
             <property-rule n="103">
@@ -193,11 +193,11 @@
             </property-rule>
 
             <property-rule n="104">
-                <path>Systems/ground-effects.xml</path>
+                <path>Aircraft/c170b/Systems/ground-effects.xml</path>
             </property-rule>
 
             <property-rule n="105">
-                <path>Systems/sounds.xml</path>
+                <path>Aircraft/c170b/Systems/sounds.xml</path>
             </property-rule>
         </systems>
 
@@ -506,11 +506,11 @@
         </electrical>
 
         <acconfig>
-            <file>AircraftConfig/acconfig.nas</file>
+            <file>Aircraft/c170b/AircraftConfig/acconfig.nas</file>
         </acconfig>
 
         <garmin196>
-            <file>Models/panel/instruments/garmin196/garmin196.nas</file>
+            <file>Aircraft/c170b/Models/panel/instruments/garmin196/garmin196.nas</file>
         </garmin196>
 
         <light-manager>
@@ -544,7 +544,7 @@
         </comm>
 
         <garmin196>
-            <texture-file>Models/panel/instruments/garmin196/coque.png</texture-file>
+            <texture-file>Aircraft/c170b/Models/panel/instruments/garmin196/coque.png</texture-file>
         </garmin196>
 
     </instrumentation>

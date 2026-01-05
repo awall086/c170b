@@ -93,7 +93,7 @@
 		<engine>
 			<name>engine</name>
 			<mode>looped</mode>
-			<path>/Sounds/Sounds_Engine_Continental-O200A.wav</path>
+			<path>Aircraft/c170b/Sounds/Sounds_Engine_Continental-O200A.wav</path>
 			<property>/engines/engine/running</property>
             <volume>
                 <property>/sim/model/c170b/sound/volume-boost-doors</property>

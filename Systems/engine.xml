@@ -127,4 +127,19 @@
         </output>
     </filter>
 
+    <!-- ============================================================== -->
+    <!-- Carburetor Icing drops RPM                                     -->
+    <!-- ============================================================== -->
+
+    <filter>
+        <name>Carb Icing Factor</name>
+        <type>gain</type>
+        <input>
+            <property>/engines/engine[0]/volumetric-efficiency-factor</property>
+        </input>
+        <output>
+            <property>/fdm/jsbsim/propulsion/engine[0]/volumetric-efficiency</property>
+        </output>
+    </filter>
+
 </PropertyList>
