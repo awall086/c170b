@@ -25,10 +25,8 @@
                 pilot.setBoolValue(bits.test(state, 3));
             }, 1, 0);
 
-            var liveryDir = (getprop("/sim/aircraft-dir") ~ "/Models/Liveries");
-			
-			var livery_update = aircraft.livery_update.new(
-            liveryDir, 10,
+            var livery_update = aircraft.livery_update.new(
+            "Aircraft/c170b/Models/Liveries", 10,
             func { print("c170b livery update") });
 
         </load>
