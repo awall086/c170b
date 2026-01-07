@@ -6,9 +6,9 @@
             <livery>
                 <name type="string">N44188</name>
                 <index type="int">2</index>
-                <texture>Liveries\N44188\c170b-1.png</texture>
-                <texture2>Liveries\N44188\c170b-2.png</texture2>
-                <texture3>Liveries\N44188\c170b-3.png</texture3>
+                <texture>Liveries/N44188/c170b-1.png</texture>
+                <texture2>Liveries/N44188/c170b-2.png</texture2>
+                <texture3>Liveries/N44188/c170b-3.png</texture3>
                 <prop-texture>prop.png</prop-texture> 
 				<reflection-correction>-1.0</reflection-correction>
 				<ambient-correction>0.0</ambient-correction>

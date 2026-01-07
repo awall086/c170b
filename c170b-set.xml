@@ -29,6 +29,7 @@
                 <float n="1" alias="/sim/model/door-positions/leftDoor/position-norm-effective"/>
                 <float n="2" alias="/sim/model/door-positions/leftWindow/position-norm"/>
                 <float n="3" alias="/sim/model/door-positions/rightWindow/position-norm"/>
+				<bool n="1" alias="/sim/model/c170b/mw_fairing"/>
             </generic>
         </multiplay>
   
@@ -510,7 +511,7 @@
         </acconfig>
 
         <garmin196>
-            <file>Aircraft/c170b/Models/panel/instruments/garmin196/garmin196.nas</file>
+            <file>Aircraft/c170b/Models/Panel/Instruments/garmin196/garmin196.nas</file>
         </garmin196>
 
         <light-manager>
@@ -544,7 +545,7 @@
         </comm>
 
         <garmin196>
-            <texture-file>Aircraft/c170b/Models/panel/instruments/garmin196/coque.png</texture-file>
+            <texture-file>Aircraft/c170b/Models/Panel/Instruments/garmin196/coque.png</texture-file>
         </garmin196>
 
     </instrumentation>

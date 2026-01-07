@@ -2123,7 +2123,7 @@
 		<object-name>fairing_l</object-name>
 		<object-name>fairing_r</object-name>
 		<condition>
-			<property>sim/model/c170b/mw_fairing</property>
+			<property>sim/multiplay/generic/bool[1]</property>
 		</condition>
 	</animation>
 
