@@ -25,8 +25,8 @@
             <right>/sim/multiplay/generic/float[0]</right>
         </doors>
         <windows>
-            <left>/sim/multiplay/generic/float[3]</left>
-            <right>/sim/multiplay/generic/float[4]</right>
+            <left>/sim/multiplay/generic/float[2]</left>
+            <right>/sim/multiplay/generic/float[3]</right>
         </windows>
     </params>
 

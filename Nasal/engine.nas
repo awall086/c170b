@@ -83,12 +83,6 @@ var carb_icing_function = maketimer(1.0, func {
 	var eng_rpm = getprop("/engines/engine[0]/rpm");
 	var cht_degf = getprop("/engines/engine[0]/cht-degf");
     var airtempF = getprop("/environment/temperature-degf");
-
-	if ( eng_rpm > 0 ) 
-		var carb_temp = ((((airtempF - (66 - (eng_rpm/100))) + (cht_degf/20) + (15 * carb_heat)) - 32) * 5) / 9;
-	else
-		var carb_temp = 0.0;
-	setprop("/engines/engine[0]/carb_temp", carb_temp);
 	
     if (getprop("/engines/engine[0]/carb_icing_allowed")) {
         var rpm = getprop("/engines/engine[0]/rpm");

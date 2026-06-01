@@ -20,7 +20,7 @@
 	<animation> 
 		<type>rotate</type>
 		<object-name>needle</object-name>
-		<property>engines/engine[0]/carb_temp</property>
+		<property>engines/engine[0]/carb-temp-degc-ind</property>
 		<interpolation>
 			<entry><ind> -30</ind><dep> -64</dep></entry>
 			<entry><ind> -20</ind><dep> -44</dep></entry>

@@ -127,6 +127,48 @@
         </output>
     </filter>
 
+	<filter>
+		<name>Carburetor Temperature Logic</name>
+		<type>gain</type>
+		<input>
+		<expression>
+			<sum>
+				<property>/environment/temperature-degc</property>
+				<product>
+					<property>/engines/engine[0]/fuel-flow-gph</property>
+					<value>-1.15</value>
+				</product>
+				<product>
+					<property>/controls/engines/engine[0]/carb-heat</property>
+					<value>38.0</value>
+				</product>
+				<product>
+					<table>
+						<property>/engines/engine[0]/rpm</property>
+						<entry><ind>0</ind><dep>0.0</dep></entry>
+						<entry><ind>600</ind><dep>8.0</dep></entry>
+						<entry><ind>2400</ind><dep>2.0</dep></entry>
+					</table>
+					<table>
+						<property>/velocities/airspeed-kt</property>
+						<entry><ind>0</ind><dep>1.0</dep></entry>
+						<entry><ind>80</ind><dep>0.2</dep></entry>
+					</table>
+				</product>
+			</sum>
+		</expression>
+		</input>
+		<output>/engines/engine[0]/carb-temp-degc</output>
+	</filter>
+
+    <filter>
+        <name>Carb Temp Smoothing</name>
+        <type>exponential</type>
+        <filter-time>2.5</filter-time>
+        <input>/engines/engine[0]/carb-temp-degc</input>
+        <output>/engines/engine[0]/carb-temp-degc-ind</output>
+    </filter>
+	
     <!-- ============================================================== -->
     <!-- Carburetor Icing drops RPM                                     -->
     <!-- ============================================================== -->
@@ -141,5 +183,5 @@
             <property>/fdm/jsbsim/propulsion/engine[0]/volumetric-efficiency</property>
         </output>
     </filter>
-
+	
 </PropertyList>

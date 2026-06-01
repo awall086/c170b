@@ -106,7 +106,7 @@
             <binding>
                 <command>property-adjust</command>
                 <property>instrumentation/transponder/inputs/digit[3]</property>
-                <factor>-1.0</factor>
+                <factor>1.0</factor>
                 <min>0</min>
                 <max>8</max>
                 <wrap>true</wrap>
@@ -162,7 +162,7 @@
 		<binding>
         <command>property-adjust</command>
         <property>instrumentation/transponder/inputs/digit[2]</property>
-            <factor>-1.0</factor>
+            <factor>1.0</factor>
             <min>0</min>
             <max>8</max>
             <wrap>true</wrap>
@@ -218,7 +218,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>instrumentation/transponder/inputs/digit[1]</property>
-                <factor>-1.0</factor>
+                <factor>1.0</factor>
                 <min>0</min>
                 <max>8</max>
                 <wrap>true</wrap>
@@ -274,7 +274,7 @@
 		<binding>
 			<command>property-adjust</command>
 			<property>instrumentation/transponder/inputs/digit[0]</property>
-			<factor>-1.0</factor>
+			<factor>1.0</factor>
 			<min>0</min>
 			<max>8</max>
 			<wrap>true</wrap>
