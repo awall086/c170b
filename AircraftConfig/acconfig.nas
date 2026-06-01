@@ -6,7 +6,7 @@
 # Adapted to Cessna 170b by Adrian Fernandez (awall86)
 
 var CONFIG = {
-	noUpdateCheck: 1, # Disable ACCONFIG update checks
+	noUpdateCheck: 0, # Disable ACCONFIG update checks
 };
 
 var spinning = maketimer(0.10, func {
