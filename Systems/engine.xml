@@ -93,11 +93,11 @@
         <input>
             <and>
                 <less-than>
-                    <property>/systems/electrical/outputs/starter</property>
+                    <property>/systems/c170b/electrical/outputs/starter</property>
                     <value>15.5</value>
                 </less-than>
                 <greater-than>
-                    <property>/systems/electrical/outputs/starter</property>
+                    <property>/systems/c170b/electrical/outputs/starter</property>
                     <value>8.0</value>
                 </greater-than>
 				<property>/controls/switches/starter</property>

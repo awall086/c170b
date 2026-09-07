@@ -179,8 +179,6 @@
 		<type>material</type>
 		<object-name>cone</object-name>
 		<object-name>cone_slow</object-name>
-		<object-name>Yoke_L_1</object-name>
-		<object-name>Yoke_R_1</object-name>
 		<shininess>128</shininess>
 		<specular>
 			<red>0.5</red>
@@ -2727,6 +2725,16 @@
 	<!-- Yokes -->
 
 	<!-- Left Yoke -->
+    <animation>
+        <type>material</type>
+		<object-name>Yoke_L</object-name>
+		<object-name>Yoke_L_1</object-name>
+		<object-name>Yoke_L_2</object-name>
+        <transparency>
+            <alpha-prop>sim/model/hide-yoke-alphaL</alpha-prop>
+        </transparency>
+    </animation>
+
 	<animation>
 		<type>translate</type>
 		<object-name>Yoke_L</object-name>
@@ -2760,7 +2768,7 @@
 		</center>
 	</animation>
 
-	<animation>
+<!--	<animation>
 		<type>select</type>
 		<object-name>Yoke_L</object-name>
 		<object-name>Yoke_L_1</object-name>
@@ -2770,7 +2778,8 @@
 				<property>sim/model/hide-yoke-L</property>
 			</not>
 		</condition>
-	</animation>
+	</animation> -->
+
 
 	<animation>
 		<type>pick</type>
@@ -2781,7 +2790,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>sim/model/hide-yoke-L</property>
+				<property>sim/model/hide-yokeL</property>
 			</binding>
 		</action>
 		<hovered>
@@ -2827,7 +2836,7 @@
 		</center>
 	</animation>
 
-	<animation>
+<!--	<animation>
 		<type>select</type>
 		<object-name>Yoke_R</object-name>
 		<object-name>Yoke_R_1</object-name>
@@ -2837,7 +2846,17 @@
 				<property>sim/model/hide-yoke-R</property>
 			</not>
 		</condition>
-	</animation>
+	</animation> -->
+	
+    <animation>
+        <type>material</type>
+		<object-name>Yoke_R</object-name>
+		<object-name>Yoke_R_1</object-name>
+		<object-name>Yoke_R_2</object-name>
+        <transparency>
+            <alpha-prop>sim/model/hide-yoke-alphaR</alpha-prop>
+        </transparency>
+    </animation>	
 
 	<animation>
 		<type>pick</type>
@@ -2848,7 +2867,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>sim/model/hide-yoke-R</property>
+				<property>sim/model/hide-yokeR</property>
 			</binding>
 		</action>
 		<hovered>

@@ -18,10 +18,8 @@
                 <property>/sim/model/c170b/sound/volume-boost-doors</property>
             </volume>
             <volume>
-                <offset>0.72</offset>
+                <offset>0.4</offset>
             </volume>
-            <reference-dist>5.0</reference-dist>
-            <max-dist>200.0</max-dist>
 		</crank>
 
 		<crank>
@@ -44,10 +42,8 @@
                 <property>/sim/model/c170b/sound/volume-boost-doors</property>
             </volume>
             <volume>
-                <offset>0.07</offset>
+                <offset>0.5</offset>
             </volume>
-            <reference-dist>5.0</reference-dist>
-            <max-dist>200.0</max-dist>
 		</crank>
 
         <crank>
@@ -95,28 +91,20 @@
 			<mode>looped</mode>
 			<path>Aircraft/c170b/Sounds/Sounds_Engine_Continental-O200A.wav</path>
 			<property>/engines/engine/running</property>
-            <volume>
+			<volume>
+                <factor>0.7143</factor>
                 <property>/sim/model/c170b/sound/volume-boost-doors</property>
             </volume>
-            <volume>
-                <property>/sim/model/c170b/sound/volume-ramp-engine-start</property>
-            </volume>
-            <volume>
-                <property>/engines/engine[0]/rpm</property>
-                <factor>0.002794118</factor>
-                <!-- <offset>0.01882353</offset> -->
-                <min>0.3</min>
-                <max>2.0</max>
-            </volume>
-            <pitch>
-                <property>/engines/engine[0]/rpm</property>
-                <factor>0.001434783</factor>
-                <min>0.0</min>
-                <max>2.5</max>
-                <offset>0.01</offset>
-            </pitch>
-            <reference-dist>5.0</reference-dist>
-            <max-dist>200.0</max-dist>
+			<volume>
+				<offset>0.5857</offset>
+			</volume>
+			<pitch>
+				<property>/engines/engine/rpm</property>
+				<factor>0.0010</factor>
+				<min>0.0</min>
+				<max>2.5</max>
+				<offset>0.01</offset>
+			</pitch>
 		</engine>
 
 		<propeller>
@@ -129,25 +117,22 @@
 					<value>10</value>
 				</greater-than>
 			</condition>
-            <volume>
+			<volume>
+				<property>/engines/engine/rpm</property>
+				<factor>0.0001</factor>
+				<max>0.25</max>
+			</volume>
+			<volume>
+                <factor>0.7143</factor>
                 <property>/sim/model/c170b/sound/volume-boost-doors</property>
             </volume>
-            <volume>
-                <property>/engines/engine[0]/rpm</property>
-                <factor>0.000194118</factor>
-                <!--<offset>0.305882353</offset>-->
-                <min>0.0</min>
-                <max>0.25</max>
-            </volume>
-            <pitch>
-                <property>/engines/engine[0]/rpm</property>
-                <factor>0.001534783</factor>
-                <min>0.0</min>
-                <max>2.0</max>
-                <offset>0.01</offset>
-            </pitch>
-            <reference-dist>5.0</reference-dist>
-            <max-dist>200.0</max-dist>
+			<pitch>
+				<property>/engines/engine/rpm</property>
+				<factor>0.0004</factor>
+				<min>0.0</min>
+				<max>2.0</max>
+				<offset>0.01</offset>
+			</pitch>
 		</propeller>
 
         <engine-cut>
@@ -165,8 +150,12 @@
                     </greater-than>
                 </and>
             </condition>
-            <volume>
+			<volume>
+                <factor>0.7143</factor>
                 <property>/sim/model/c170b/sound/volume-boost-doors</property>
+            </volume>
+            <volume>
+                <offset>0.3</offset>
             </volume>
             <reference-dist>5.0</reference-dist>
             <max-dist>200.0</max-dist>
@@ -383,8 +372,8 @@
             <volume>
                 <factor>0.8</factor>
             </volume>
-            <reference-dist>10.0</reference-dist>
-            <max-dist>20.0</max-dist>
+            <reference-dist>20.2</reference-dist>
+            <max-dist>50.0</max-dist>
         </flap>
 
         <left-door-opening>
@@ -402,7 +391,7 @@
                 <y>0.6</y>
                 <z>-0.35</z>
             </position>
-            <reference-dist>1.5</reference-dist>
+            <reference-dist>20.2</reference-dist>
             <max-dist>50.0</max-dist>
         </left-door-opening>
 
@@ -421,7 +410,7 @@
                 <y>0.6</y>
                 <z>-0.35</z>
             </position>
-            <reference-dist>1.5</reference-dist>
+            <reference-dist>20.2</reference-dist>
             <max-dist>50.0</max-dist>
         </left-door-closing>
 
@@ -459,7 +448,7 @@
                 <y>-0.6</y>
                 <z>-0.35</z>
             </position>
-            <reference-dist>1.5</reference-dist>
+            <reference-dist>20.2</reference-dist>
             <max-dist>50.0</max-dist>
         </right-door-closing>
  
@@ -481,7 +470,7 @@
             <volume>
                 <factor>0.7</factor>
             </volume>
-            <reference-dist>0.2</reference-dist>
+            <reference-dist>20.2</reference-dist>
             <max-dist>50.0</max-dist>
         </left-window-opening>
 
@@ -503,7 +492,7 @@
             <volume>
                 <factor>0.55</factor>
             </volume>
-            <reference-dist>0.2</reference-dist>
+            <reference-dist>20.2</reference-dist>
             <max-dist>50.0</max-dist>
         </left-window-closing>
 
@@ -525,7 +514,7 @@
             <volume>
                 <factor>0.7</factor>
             </volume>
-            <reference-dist>0.2</reference-dist>
+            <reference-dist>20.2</reference-dist>
             <max-dist>50.0</max-dist>
         </right-window-opening>
 
@@ -547,7 +536,7 @@
             <volume>
                 <factor>0.55</factor>
             </volume>
-            <reference-dist>0.2</reference-dist>
+            <reference-dist>20.2</reference-dist>
             <max-dist>50.0</max-dist>
         </right-window-closing>
  
@@ -563,8 +552,8 @@
                 <y>0.3350</y>
                 <z>-0.3500</z>
             </position>
-            <reference-dist>0.2</reference-dist>
-            <max-dist>5.0</max-dist>
+            <reference-dist>20.2</reference-dist>
+            <max-dist>50.0</max-dist>
         </switch>
 
 		<switch>
@@ -579,8 +568,8 @@
                 <y>0.3350</y>
                 <z>-0.3500</z>
             </position>
-            <reference-dist>0.2</reference-dist>
-            <max-dist>5.0</max-dist>
+            <reference-dist>20.2</reference-dist>
+            <max-dist>50.0</max-dist>
         </switch>
 
         <switch>
@@ -595,8 +584,8 @@
                 <y>0.3350</y>
                 <z>-0.3500</z>
             </position>
-            <reference-dist>0.2</reference-dist>
-            <max-dist>5.0</max-dist>
+            <reference-dist>20.2</reference-dist>
+            <max-dist>50.0</max-dist>
         </switch>
 
         <switch>
@@ -611,8 +600,8 @@
                 <y>0.3350</y>
                 <z>-0.3500</z>
             </position>
-            <reference-dist>0.2</reference-dist>
-            <max-dist>5.0</max-dist>
+            <reference-dist>20.2</reference-dist>
+            <max-dist>50.0</max-dist>
         </switch>
 
         <switch>
@@ -627,8 +616,8 @@
                 <y>0.3350</y>
                 <z>-0.3500</z>
             </position>
-            <reference-dist>0.2</reference-dist>
-            <max-dist>5.0</max-dist>
+            <reference-dist>20.2</reference-dist>
+            <max-dist>50.0</max-dist>
         </switch>
 
         <switch>
@@ -643,8 +632,8 @@
                 <y>0.3350</y>
                 <z>-0.3500</z>
             </position>
-            <reference-dist>0.2</reference-dist>
-            <max-dist>5.0</max-dist>
+            <reference-dist>20.2</reference-dist>
+            <max-dist>50.0</max-dist>
         </switch>
 
         <switch>
@@ -659,8 +648,8 @@
                 <y>-0.1200</y>
                 <z>-0.0300</z>
             </position>
-            <reference-dist>0.2</reference-dist>
-            <max-dist>5.0</max-dist>
+            <reference-dist>20.2</reference-dist>
+            <max-dist>50.0</max-dist>
         </switch>
 
         <dial>
@@ -675,11 +664,8 @@
                 <y>-0.1200</y>
                 <z>-0.0300</z>
             </position>
-            <reference-dist>0.2</reference-dist>
-            <max-dist>5.0</max-dist>
-            <volume>
-                <factor>1.0</factor>
-            </volume>
+            <reference-dist>20.2</reference-dist>
+            <max-dist>50.0</max-dist>
         </dial>
 
         <switch>
@@ -694,11 +680,8 @@
                 <y>0.0090</y>
                 <z>0.0340</z>
             </position>
-            <reference-dist>0.9</reference-dist>
-            <max-dist>5.0</max-dist>
-            <volume>
-                <factor>3.0</factor>
-            </volume> 
+            <reference-dist>20.9</reference-dist>
+            <max-dist>50.0</max-dist>
 		</switch>
 
         <switch>
@@ -713,11 +696,8 @@
                 <y>0.0090</y>
                 <z>0.0340</z>
             </position>
-            <reference-dist>0.9</reference-dist>
-            <max-dist>5.0</max-dist>
-            <volume>
-                <factor>3.0</factor>
-            </volume>
+            <reference-dist>20.9</reference-dist>
+            <max-dist>50.0</max-dist>
         </switch>
 
         <switch>
@@ -735,8 +715,8 @@
                 <y>0.3700</y>
                 <z>-0.3500</z>
             </position>
-            <reference-dist>0.2</reference-dist>
-            <max-dist>5.0</max-dist>
+            <reference-dist>20.2</reference-dist>
+            <max-dist>50.0</max-dist>
         </switch>
 
         <switch>
@@ -756,8 +736,8 @@
                 <y>0.3700</y>
                 <z>-0.3500</z>
             </position>
-            <reference-dist>0.2</reference-dist>
-            <max-dist>5.0</max-dist>
+            <reference-dist>20.2</reference-dist>
+            <max-dist>50.0</max-dist>
         </switch>
 
         <stall>
@@ -787,7 +767,7 @@
                 <property>/fdm/jsbsim/sounds/stall-horn-pitch-actual</property>
                 <offset>0.0</offset>
             </pitch>
-            <reference-dist>0.5</reference-dist>
+            <reference-dist>20.5</reference-dist>
             <max-dist>50.0</max-dist>
         </stall>
  

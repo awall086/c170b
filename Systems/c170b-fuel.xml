@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+
+<!-- Cessna 170 Fuel System, based on C140/C172P fuel system-->
+
+<system name="c170b-fuel">	
+	<!-- *********************************************************************************** -->
+	<!-- Main tanks: 1 (left) and 2 (right)                                                  -->
+	<!-- Collector Tanks: 0		 constant-level intermediate float chambers              -->
+	<!-- Fuel Flow Rates in pounds per second                                                -->
+	<!-- /controls/fuel/fuel-selector 0=off  1=left 2=both 3=right                            -->
+	<!-- *********************************************************************************** -->
+	
+	<!-- ****************************************************** -->
+	<!-- Collector Tank 0 level-maintenance                     -->
+	<!-- ****************************************************** -->
+	<channel name="To Tank0">
+		<!-- from Tank 1 (to Collector Tank 0) -->
+		<fcs_function name="propulsion/tank[0]/contents-volume-gal">
+			<function>
+				<quotient>
+					<p> propulsion/tank[1]/contents-lbs </p>
+					<p> propulsion/tank[1]/density-lbs_per_gal </p>
+				</quotient>
+			</function>
+		</fcs_function>
+		<switch name="fuel/from-tank2-to-tank0">
+			<default value="0"/>
+			<test logic="AND" value="0.1">
+			<test logic="AND">
+				propulsion/tank[2]/priority EQ 1 
+				propulsion/tank[2]/contents-lbs GT 4 <!-- propulsion/tank[2]/unusable-volume-gal -->
+				/consumables/fuel/tank[0]/level-lbs LT 0.05
+				propulsion/tank[0]/priority EQ 1
+				accelerations/Nz GE 0
+			</test>
+                <test logic="OR">
+                	/controls/fuel/fuel-selector EQ 3
+                	/controls/fuel/fuel-selector EQ 2
+                </test>
+			</test>
+		</switch>
+		
+		<!-- from Tank 1 (to Collector Tank 0) -->
+		<fcs_function name="propulsion/tank[1]/contents-volume-gal">
+			<function>
+				<quotient>
+					<p> propulsion/tank[1]/contents-lbs </p>
+					<p> propulsion/tank[1]/density-lbs_per_gal </p>
+				</quotient>
+			</function>
+		</fcs_function>
+		<switch name="fuel/from-tank1-to-tank0">
+			<default value="0"/>
+			<test logic="AND" value="0.1">
+			<test logic="AND">
+				propulsion/tank[1]/priority EQ 1 
+				propulsion/tank[1]/contents-lbs GT 4 <!-- propulsion/tank[1]/unusable-volume-gal -->
+				/consumables/fuel/tank[0]/level-lbs LT 0.05
+				propulsion/tank[0]/priority EQ 1
+				accelerations/Nz GE 0
+			</test>
+                <test logic="OR">
+                	/controls/fuel/fuel-selector EQ 1
+                	/controls/fuel/fuel-selector EQ 2
+                </test>
+			</test>
+		</switch>
+	</channel>
+	
+	<!-- Total from Tank 0 and Tank 1 to Collector Tank 2 -->
+	<channel name="Total flow rate into tank 2">
+		<summer name="tank1 and 2 to tank0">
+			<input>fuel/from-tank1-to-tank0</input>
+			<input>fuel/from-tank2-to-tank0</input>
+			<output>propulsion/tank[0]/external-flow-rate-pps</output>
+		</summer>
+	</channel>
+	
+	<!-- ****************************************************** -->
+	<!-- FLOW RATE from each MAIN TANK (consumption)            -->
+	<!-- ****************************************************** -->
+	
+	<channel name="Total flow rates">
+		<summer name="fuel/tank1-flow-rate">
+			<input>-fuel/from-tank1-to-tank0</input>
+			<output>propulsion/tank[1]/external-flow-rate-pps</output>
+		</summer>
+		
+		<summer name="fuel/tank2-flow-rate">
+			<input>-fuel/from-tank2-to-tank0</input>
+			<output>propulsion/tank[2]/external-flow-rate-pps</output>
+		</summer>
+	</channel>
+	
+	<channel name="fuel-system">
+		<switch name="/engines/engine[0]/already-started-in-session">
+			<default value="0"/>
+			<test logic="AND" value="/engines/engine[0]/already-started-in-session">
+				/engines/engine[0]/already-started-in-session GT 0
+			</test>
+			<test value="1">
+				/fdm/jsbsim/propulsion/engine[0]/set-running GT 0
+			</test>
+			<output>/engines/engine[0]/already-started-in-session</output>
+		</switch>
+	</channel>
+	
+</system>

@@ -15,7 +15,7 @@
         <name>Comm 0 Serviceable</name>
         <input>
             <greater-than>
-                <property>systems/electrical/outputs/comm[0]</property>
+                <property>systems/c170b/electrical/outputs/kx-170b-comm</property>
                 <value>6.0</value>
             </greater-than>
         </input>
@@ -38,10 +38,23 @@
     </logic>
 
     <logic>
+        <name>Nav 0 Serviceable</name>
+        <input>
+            <greater-than>
+                <property>systems/c170b/electrical/outputs/kx-170b-nav</property>
+                <value>6.0</value>
+            </greater-than>
+        </input>
+        <output>
+            <property>instrumentation/nav[0]/serviceable</property>
+        </output>
+    </logic>
+
+    <logic>
         <name>Transponder Serviceable</name>
         <input>
             <greater-than>
-                <property>systems/electrical/outputs/transponder</property>
+                <property>systems/c170b/electrical/outputs/transponder</property>
                 <value>6.0</value>
             </greater-than>
         </input>
@@ -116,4 +129,27 @@
         </output>
     </filter>
 
+	<filter>
+		<name>ammeter-needle-display</name>
+		<type>gain</type>
+		<input>
+			<expression>
+				<sum>
+					<property>/systems/c170b/electrical/amps</property>
+					<product>
+						<value>0.2</value>
+						<sin>
+							<product>
+								<property>/sim/time/elapsed-sec</property>
+								<value>6.0</value>
+							</product>
+						</sin>
+					</product>
+				</sum>
+			</expression>
+		</input>
+		<output>/sim/model/c170b/cockpit/amps-animation</output>
+	</filter>
+
+	
 </PropertyList>

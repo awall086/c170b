@@ -19,7 +19,7 @@
 	<animation> 
 		<type>rotate</type>
 		<object-name>old_needle</object-name>
-		<property>systems/electrical/bus_load</property>
+		<property>sim/model/c170b/cockpit/amps-animation</property>
 		<interpolation>
 			<entry><ind> -30</ind><dep> -32</dep></entry>
 			<entry><ind> -15</ind><dep> -16</dep></entry>

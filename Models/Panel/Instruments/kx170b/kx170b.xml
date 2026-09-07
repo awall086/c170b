@@ -468,6 +468,9 @@
 		<action>
 			<button>0</button>
 			<repeatable>false</repeatable>
+			<condition>
+				<property>instrumentation/nav[0]/serviceable</property>
+			</condition>
 			<binding>
 				<command>property-toggle</command>
 				<property alias="/params/power-nav"/>

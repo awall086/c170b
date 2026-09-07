@@ -143,10 +143,9 @@ var StaticModel = {
     }
 };
 
-var aircraft_dir = getprop("/sim/aircraft-dir");
-StaticModel.new("coneR", aircraft_dir ~ "/Models/Exterior/safety-cone/safety-cone_R.xml");
-StaticModel.new("coneL", aircraft_dir ~ "/Models/Exterior/safety-cone/safety-cone_L.xml");
-StaticModel.new("gpu", aircraft_dir ~ "/Models/Exterior/external-power/external-power.xml");
+StaticModel.new("coneR", "Aircraft/c170b/Models/Exterior/safety-cone/safety-cone_R.xml");
+StaticModel.new("coneL", "Aircraft/c170b/Models/Exterior/safety-cone/safety-cone_L.xml");
+StaticModel.new("gpu", "Aircraft/c170b/Models/Exterior/external-power/external-power.xml");
 
 # external electrical disconnect when groundspeed higher than 0.1ktn (replace later with distance less than 0.01...)
 var ad_timer = maketimer(0.1, func {
@@ -171,8 +170,7 @@ var chocks001_model = {
 		var chocks001 = geo.aircraft_position().set_alt(
 				props.globals.getNode("/position/ground-elev-m").getValue());
 
-		var aircraft_dir = getprop("/sim/aircraft-dir");
-		geo.put_model(aircraft_dir ~ "/Models/Exterior/chocks/LWchocks.ac", chocks001,
+		geo.put_model("Aircraft/c170b/Models/Exterior/chocks/LWchocks.ac", chocks001,
 				props.globals.getNode("/orientation/heading-deg").getValue());
 					 me.index = i;
           },
@@ -206,8 +204,7 @@ var chocks002_model = {
 		var chocks002 = geo.aircraft_position().set_alt(
 				props.globals.getNode("/position/ground-elev-m").getValue());
 
-		var aircraft_dir = getprop("/sim/aircraft-dir");
-		geo.put_model(aircraft_dir ~ "/Models/Exterior/chocks/RWchocks.ac", chocks002,
+		geo.put_model("Aircraft/c170b/Models/Exterior/chocks/RWchocks.ac", chocks002,
 				props.globals.getNode("/orientation/heading-deg").getValue());
 					 me.index = i;
           },
@@ -260,6 +257,30 @@ setlistener("/engines/engine[0]/killed", func (node) {
 
 # Saved aircraft data is not reliable so save it here as well
 aircraft.data.add("/sim/model/c170b/pitot-cover");
+
+###########################
+# Handle Yokes transparency
+###########################
+var updateYokeTransparency = func() {
+    var hideL = getprop("/sim/model/hide-yokeL") or 0;
+	var hideR = getprop("/sim/model/hide-yokeR") or 0;
+    if (hideL == 1) {
+        alphaL = getprop("sim/model/hide-yoke-alpha-cmd");
+    } else {
+        alphaL = 1;
+    }
+    if (hideR == 1) {
+        alphaR = getprop("sim/model/hide-yoke-alpha-cmd");
+    } else {
+        alphaR = 1;
+    }
+
+    setprop("/sim/model/hide-yoke-alphaL", alphaL);
+	setprop("/sim/model/hide-yoke-alphaR", alphaR);
+}
+setlistener("/sim/model/hide-yokeL", updateYokeTransparency, 1, 0);
+setlistener("/sim/model/hide-yokeR", updateYokeTransparency, 1, 0);
+setlistener("/sim/model/hide-yoke-alpha-cmd", updateYokeTransparency, 1, 0);
 
 setlistener("/pax/co-pilot/present", update_pax, 0, 0);
 setlistener("/pax/left-passenger/present", update_pax, 0, 0);

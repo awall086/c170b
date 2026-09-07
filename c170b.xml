@@ -277,8 +277,10 @@ propeller
 
 	</propulsion>
 
-	<system file="fuel"/>
+	<system file="c170b-fuel"/>
+	<system file="c170b-electrical"/>
 	<system file="c170b-stallwarn"/>
+	<system file="c170b-engine"/>
 
 	<flight_control name="FCS: c170b">
 

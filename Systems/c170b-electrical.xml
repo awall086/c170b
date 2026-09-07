@@ -1,0 +1,709 @@
+<?xml version="1.0"?>
+<!-- 
+    Electrical System for Cessna 170b
+    Version: 1.0
+-->
+
+<system name="c170b-electrical">
+
+    <!-- ============================================ -->
+    <!-- BATTERY CHANNEL                              -->
+    <!-- ============================================ -->
+    
+    <channel name="Battery Management">
+
+		<fcs_function name="/systems/c170b/electrical/battery-voltage">
+
+			<function>
+				<difference>
+					<sum>
+						<value>11.6</value>
+
+						<!-- 0.02 * SOC -->
+						<product>
+							<value>0.02</value>
+							<property>/systems/c170b/electrical/battery-charge-pct</property>
+						</product>
+
+						<!-- -0.00005 * SOC^2 -->
+						<product>
+							<value>-0.00005</value>
+							<product>
+								<property>/systems/c170b/electrical/battery-charge-pct</property>
+								<property>/systems/c170b/electrical/battery-charge-pct</property>
+							</product>
+						</product>
+					</sum>
+>
+					<product>
+						<value>0.02</value> 
+						<property>/systems/c170b/electrical/loads/total</property>
+					</product>
+				</difference>
+			</function>
+			<clipto>
+				<min>10.0</min>
+				<max>12.8</max>
+			</clipto>
+		</fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/battery-current">
+            <function>
+                <ifthen>
+                    <eq>
+                        <property>/controls/switches/master-bat</property>
+                        <value>1</value>
+                    </eq>
+                    <product>
+                        <property>/systems/c170b/electrical/loads/total</property>
+                        <difference>
+                            <value>1.0</value>
+                            <ifthen>
+                                <gt>
+                                    <property>/systems/c170b/electrical/alternator-voltage</property>
+                                    <value>13.0</value>
+                                </gt>
+                                <value>0.9</value>
+                                <value>0.0</value>
+                            </ifthen>
+                        </difference>
+                    </product>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+		</fcs_function>
+
+        <!-- Battery charge status (%) -->
+        <fcs_function name="/systems/c170b/electrical/battery-charge-pct">
+            <function>
+                <ifthen>
+                    <eq>
+                        <property>/controls/switches/master-bat</property>
+                        <value>1</value>
+                    </eq>
+                    <!-- Charging or discharging the battery depending on whether the alternator is supplying current -->
+                    <ifthen>
+                        <or>
+							<gt>
+								<property>/systems/c170b/electrical/external-power-voltage</property>
+								<value>13.0</value>
+							</gt>
+							<gt>
+								<property>/systems/c170b/electrical/alternator-voltage</property>
+								<value>13.0</value>
+							</gt>
+						</or>
+                        <!-- Charging the battery with the alternator -->
+                        <sum>
+							<product>
+								<value>0.00082</value>
+								<difference>
+									<value>100.0</value>
+									<property>/systems/c170b/electrical/battery-charge-pct</property>
+								</difference>
+							</product>
+							<property>/systems/c170b/electrical/battery-charge-pct</property>
+						</sum>
+						<!-- Battery discharge based on bus load -->
+                        <sum>
+							<product>
+								<value>-0.00001</value>
+								<property>/systems/c170b/electrical/loads/total</property>
+							</product>
+							<property>/systems/c170b/electrical/battery-charge-pct</property>
+						</sum>
+                    </ifthen>
+                    <property>/systems/c170b/electrical/battery-charge-pct</property>
+                </ifthen>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>100.0</max>
+            </clipto>
+        </fcs_function>
+		
+    </channel>
+
+    <!-- ============================================ -->
+    <!-- ALTERNATOR CHANNEL                           -->
+    <!-- ============================================ -->
+    
+    <channel name="Alternator Management">
+
+        <fcs_function name="/systems/c170b/electrical/engine-rpm-norm">
+            <function>
+                <quotient>
+					<property>/engines/engine[0]/rpm</property>
+                    <value>2600.0</value>
+                </quotient>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+		</fcs_function>
+
+        <!-- Alternator 60A, 14V -->
+        <fcs_function name="/systems/c170b/electrical/alternator-voltage">
+            <function>
+                <ifthen>
+                    <gt>
+						<property>/engines/engine[0]/rpm</property>
+                        <value>500.0</value>
+                    </gt>
+                    <!-- Alternator voltage according to engine RPM -->
+                    <product>
+                        <value>14.2</value>
+                        <ifthen>
+                            <lt>
+                                <property>/systems/c170b/electrical/engine-rpm-norm</property>
+                                <value>0.25</value>
+                            </lt>
+                            <quotient>
+                                <property>/systems/c170b/electrical/engine-rpm-norm</property>
+                                <value>0.25</value>
+                            </quotient>
+                            <value>1.0</value>
+                        </ifthen>
+                    </product>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>14.5</max>
+            </clipto>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/alternator-current">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/alternator-voltage</property>
+                        <value>10.0</value>
+                    </gt>
+                    <min>
+						<property>/systems/c170b/electrical/loads/total</property>
+						<value>25.0</value>
+                    </min>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+    </channel>
+
+    <!-- ============================================ -->
+    <!-- EXTERNAL POWER CHANNEL                       -->
+    <!-- ============================================ -->
+
+    <channel name="External Power Management">
+	
+		<fcs_function name="/systems/c170b/electrical/external-power-voltage">
+			<function>
+				<ifthen>
+					<eq>
+						<property>/controls/electric/external-power</property>
+						<value>1</value>
+					</eq>
+					<value>14.0</value>
+					<value>0.0</value>
+				</ifthen>
+			</function>
+			<clipto>
+				<min>0.0</min>
+				<max>14.0</max>
+			</clipto>
+		</fcs_function>
+
+	</channel>
+
+    <!-- ============================================ -->
+    <!-- MAIN BUS VOLTAGE                             -->
+    <!-- ============================================ -->
+    
+    <channel name="Main Bus">
+
+        <!-- Main bus volts -->
+        <fcs_function name="/systems/c170b/electrical/bus-voltage">
+            <function>
+				<ifthen>
+					<gt>
+						<property>/systems/c170b/electrical/external-power-voltage</property>
+						<value>0.0</value>
+					</gt>
+					<property>/systems/c170b/electrical/external-power-voltage</property>
+					<ifthen>
+						<eq>
+							<property>/controls/switches/master-bat</property>
+							<value>1</value>
+						</eq>
+						<ifthen>
+							<gt>
+								<property>/systems/c170b/electrical/alternator-voltage</property>
+								<value>13.0</value>
+							</gt>
+							<!-- The alternator supplies current -->
+							<property>/systems/c170b/electrical/alternator-voltage</property>
+							<!-- Only Battery supplies current -->
+							<property>/systems/c170b/electrical/battery-voltage</property>
+						</ifthen>
+						<value>0.0</value>
+					</ifthen>
+				</ifthen>
+            </function>
+        </fcs_function>
+
+    </channel>
+
+    <!-- ============================================ -->
+    <!-- OUTPUTS and LOADS                            -->
+    <!-- ============================================ -->
+    
+    <channel name="Electrical Outputs">
+
+        <!-- Starter - Load: ~14A -->
+        <fcs_function name="/systems/c170b/electrical/outputs/starter">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>/systems/c170b/electrical/bus-voltage</property>
+                            <value>8.0</value>
+                        </gt>
+                        <eq>
+                            <property>/controls/switches/starter</property>
+                            <value>1</value>
+                        </eq>
+                    </and>
+                    <property>/systems/c170b/electrical/bus-voltage</property>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/loads/starter">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/outputs/starter</property>
+                        <value>0.0</value>
+                    </gt>
+                    <value>14.0</value>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function> 
+
+		<!-- Nav Lights - Load: ~3A -->
+        <fcs_function name="/systems/c170b/electrical/outputs/nav-lights">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>/systems/c170b/electrical/bus-voltage</property>
+                            <value>8.0</value>
+                        </gt>
+                        <gt>
+                            <property>/controls/lighting/nav-lights-switch</property>
+                            <value>0</value>
+                        </gt>
+                    </and>
+                    <property>/systems/c170b/electrical/bus-voltage</property>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/loads/nav-lights">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/outputs/nav-lights</property>
+                        <value>0.0</value>
+                    </gt>
+                    <value>3.0</value>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <!-- Strobe Lights - Load:~4A  -->
+        <fcs_function name="/systems/c170b/electrical/outputs/strobe-lights">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>/systems/c170b/electrical/bus-voltage</property>
+                            <value>8.0</value>
+                        </gt>
+                        <eq>
+                            <property>/controls/lighting/strobe-switch</property>
+                            <value>1</value>
+                        </eq>
+                    </and>
+                    <property>/systems/c170b/electrical/bus-voltage</property>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/loads/strobe-lights">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/outputs/strobe-lights</property>
+                        <value>0.0</value>
+                    </gt>
+                    <value>4.0</value>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <!-- Beacon Light- Load: ~3.0A -->
+        <fcs_function name="/systems/c170b/electrical/outputs/beacon-light">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>/systems/c170b/electrical/bus-voltage</property>
+                            <value>8.0</value>
+                        </gt>
+                        <eq>
+                            <property>/controls/lighting/beacon-switch</property>
+                            <value>1</value>
+                        </eq>
+                    </and>
+                    <property>/systems/c170b/electrical/bus-voltage</property>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/loads/beacon-light">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/outputs/beacon-light</property>
+                        <value>0.0</value>
+                    </gt>
+                    <value>3.0</value>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <!-- Taxi Light - Load: ~7.0A -->
+        <fcs_function name="/systems/c170b/electrical/outputs/taxi-light">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>/systems/c170b/electrical/bus-voltage</property>
+                            <value>8.0</value>
+                        </gt>
+                        <eq>
+                            <property>/controls/lighting/taxi-landing-switch</property>
+                            <value>1</value>
+                        </eq>
+                    </and>
+                    <property>/systems/c170b/electrical/bus-voltage</property>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/loads/taxi-light">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/outputs/taxi-light</property>
+                        <value>0.0</value>
+                    </gt>
+                    <value>7.0</value>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+		
+        <!-- Landing Light - Load: ~10A -->
+        <fcs_function name="/systems/c170b/electrical/outputs/landing-light">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>/systems/c170b/electrical/bus-voltage</property>
+                            <value>8.0</value>
+                        </gt>
+                        <eq>
+                            <property>/controls/lighting/taxi-landing-switch</property>
+                            <value>2</value>
+                        </eq>
+                    </and>
+                    <property>/systems/c170b/electrical/bus-voltage</property>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/loads/landing-light">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/outputs/landing-light</property>
+                        <value>0.0</value>
+                    </gt>
+                    <value>10.0</value>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <!-- Bendix King KX-170B Comm - Load: ~4.0A -->
+        <fcs_function name="/systems/c170b/electrical/outputs/kx-170b-comm">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>/systems/c170b/electrical/bus-voltage</property>
+                            <value>8.0</value>
+                        </gt>
+                        <eq>
+                            <property>/instrumentation/comm[0]/power-btn</property>
+                            <value>1</value>
+                        </eq>
+                    </and>
+                    <property>/systems/c170b/electrical/bus-voltage</property>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/loads/kx-170b-comm">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/outputs/kx-170b-comm</property>
+                        <value>0.0</value>
+                    </gt>
+                    <value>4.0</value>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+		
+        <!-- Bendix King KX-170B Nav - Load: ~0.8A -->
+        <fcs_function name="/systems/c170b/electrical/outputs/kx-170b-nav">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>/systems/c170b/electrical/bus-voltage</property>
+                            <value>8.0</value>
+                        </gt>
+                        <eq>
+                            <property>/instrumentation/nav[0]/power-btn</property>
+                            <value>1</value>
+                        </eq>
+                    </and>
+                    <property>/systems/c170b/electrical/bus-voltage</property>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/loads/kx-170b-nav">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/outputs/kx-170b-nav</property>
+                        <value>0.0</value>
+                    </gt>
+                    <value>0.8</value>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>		
+		
+		<!-- Transponder - Load: ~2.0A -->
+        <fcs_function name="/systems/c170b/electrical/outputs/transponder">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>/systems/c170b/electrical/bus-voltage</property>
+                            <value>8.0</value>
+                        </gt>
+                        <gt>
+                            <property>/instrumentation/transponder/inputs/knob-mode</property>
+                            <value>1</value>
+                        </gt>
+                    </and>
+                    <property>/systems/c170b/electrical/bus-voltage</property>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/loads/transponder">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/outputs/transponder</property>
+                        <value>0.0</value>
+                    </gt>
+                    <value>2.0</value>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>		
+
+		<!-- Nav-O-Matic - Load: ~3.5A -->
+        <fcs_function name="/systems/c170b/electrical/outputs/nav-o-matic">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>/systems/c170b/electrical/bus-voltage</property>
+                            <value>8.0</value>
+                        </gt>
+                        <gt>
+                            <property>/autopilot/AF394A/locks/ap-on</property>
+                            <value>0</value>
+                        </gt>
+                    </and>
+                    <property>/systems/c170b/electrical/bus-voltage</property>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/loads/nav-o-matic">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/outputs/nav-o-matic</property>
+                        <value>0.0</value>
+                    </gt>
+                    <value>3.5</value>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>	
+
+        <!-- instruments Light - Load: ~2A -->
+        <fcs_function name="/systems/c170b/electrical/outputs/panel-light">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>/systems/c170b/electrical/bus-voltage</property>
+                            <value>8.0</value>
+                        </gt>
+                        <gt>
+                            <property>/controls/lighting/int-lights</property>
+                            <value>0</value>
+                        </gt>
+                    </and>
+                    <property>/systems/c170b/electrical/bus-voltage</property>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/loads/panel-light">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/outputs/panel-light</property>
+                        <value>0.0</value>
+                    </gt>
+                    <value>2.0</value>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+		
+        <!-- Instruments - Load: ~3A -->
+        <fcs_function name="/systems/c170b/electrical/loads/instruments">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/bus-voltage</property>
+                        <value>8.0</value>
+                    </gt>
+                    <value>3.0</value>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+    </channel>
+
+    <!-- ============================================ -->
+    <!-- TOTAL BUS LOAD                               -->
+    <!-- ============================================ -->
+    
+    <channel name="Total Load Calculation">
+
+        <!-- Total loads -->
+        <fcs_function name="/systems/c170b/electrical/loads/total">
+            <function>
+                <sum>
+                    <property>/systems/c170b/electrical/loads/panel-light</property>
+					<property>/systems/c170b/electrical/loads/nav-lights</property>
+                    <property>/systems/c170b/electrical/loads/strobe-lights</property>
+					<property>/systems/c170b/electrical/loads/beacon-light</property>
+                    <property>/systems/c170b/electrical/loads/taxi-light</property>
+                    <property>/systems/c170b/electrical/loads/landing-light</property>
+                    <property>/systems/c170b/electrical/loads/kx-170b-comm</property>
+                    <property>/systems/c170b/electrical/loads/kx-170b-nav</property>
+					<property>/systems/c170b/electrical/loads/transponder</property>
+					<property>/systems/c170b/electrical/loads/nav-o-matic</property>
+                    <property>/systems/c170b/electrical/loads/instruments</property>
+					<property>/systems/c170b/electrical/loads/starter</property>
+                </sum>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>30.0</max>
+            </clipto>
+        </fcs_function>
+
+        <fcs_function name="/systems/c170b/electrical/amps">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>/systems/c170b/electrical/bus-voltage</property>
+                        <value>8.0</value>
+                    </gt>
+                    <difference>
+						<max>
+							<ifthen>
+								<gt>
+									<property>/systems/c170b/electrical/external-power-voltage</property>
+									<value>13.0</value>
+								</gt>
+								<value>30.0</value>
+								<value>0.0</value>
+							</ifthen>
+							<ifthen>
+								<gt>
+									<property>/systems/c170b/electrical/alternator-voltage</property>
+									<value>13.0</value>
+								</gt>
+								<value>25.0</value>
+								<value>0.0</value>
+							</ifthen>
+						</max>
+						<property>/systems/c170b/electrical/loads/total</property>
+                    </difference>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+    </channel>
+
+</system>
